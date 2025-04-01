@@ -22,15 +22,15 @@ const FlipCard: React.FC<FlipCardProps> = ({
   return (
     <div 
       className={cn(
-        "relative w-full h-full perspective-[1000px] cursor-pointer",
+        "relative w-full h-full cursor-pointer [perspective:1000px]",
         className
       )}
       onClick={toggleFlip}
     >
       <div 
         className={cn(
-          "absolute w-full h-full transition-all duration-500 transform-style-3d backface-hidden",
-          isFlipped ? "rotate-y-180" : "rotate-y-0"
+          "absolute w-full h-full transition-all duration-500 [transform-style:preserve-3d] [backface-visibility:hidden]",
+          isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]"
         )}
       >
         <div className="absolute w-full h-full p-4 bg-card border rounded-lg shadow">
@@ -39,8 +39,8 @@ const FlipCard: React.FC<FlipCardProps> = ({
       </div>
       <div 
         className={cn(
-          "absolute w-full h-full transition-all duration-500 transform-style-3d backface-hidden",
-          isFlipped ? "rotate-y-0" : "rotate-y-180"
+          "absolute w-full h-full transition-all duration-500 [transform-style:preserve-3d] [backface-visibility:hidden]",
+          isFlipped ? "[transform:rotateY(0deg)]" : "[transform:rotateY(180deg)]"
         )}
       >
         <div className="absolute w-full h-full p-4 bg-card border rounded-lg shadow">

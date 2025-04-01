@@ -1,6 +1,8 @@
+
 /**
  * Email service utility for sending contact form messages
  */
+import { siteConfig } from "@/config/site";
 
 interface EmailData {
   name: string;

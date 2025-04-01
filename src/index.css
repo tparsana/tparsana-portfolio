@@ -6,15 +6,6 @@
 @tailwind utilities;
 
 @layer utilities {
-  .perspective-[1000px] {
-    perspective: 1000px;
-  }
-  .transform-style-3d {
-    transform-style: preserve-3d;
-  }
-  .backface-hidden {
-    backface-visibility: hidden;
-  }
   .bg-grid-pattern {
     background-image: 
       linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
@@ -85,11 +76,14 @@
 }
 
 .split-flap-char {
-  @apply relative inline-block overflow-hidden perspective-[1000px] align-bottom;
+  @apply relative inline-block overflow-hidden align-bottom;
+  perspective: 1000px;
 }
 
 .split-flap-char .char {
-  @apply block transition-flap duration-300 transform-style-3d;
+  @apply block duration-300;
+  transition-property: transform, opacity;
+  transform-style: preserve-3d;
 }
 
 .split-flap-display {
@@ -107,7 +101,8 @@
 }
 
 .grid-item {
-  @apply transition-all duration-300 transform perspective-[800px];
+  @apply transition-all duration-300 transform;
+  perspective: 800px;
 }
 
 .grid-item:hover {

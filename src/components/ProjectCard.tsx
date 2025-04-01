@@ -37,7 +37,7 @@ const ProjectCard: React.FC<ProjectProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
         <div
           className={cn(
             "absolute inset-0 transition-all duration-500 transform",
@@ -52,31 +52,31 @@ const ProjectCard: React.FC<ProjectProps> = ({
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className="text-sm text-muted-foreground mb-3">{description}</p>
+      <div className="p-3">
+        <h3 className="text-base font-semibold mb-1">{title}</h3>
+        <p className="text-xs text-muted-foreground mb-2">{description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1 mb-3">
           {tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="text-xs">
+            <Badge key={index} variant="secondary" className="text-xs px-1.5 py-0">
               {tag}
             </Badge>
           ))}
         </div>
 
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-2">
           {githubUrl && (
-            <Button size="sm" variant="outline" asChild>
+            <Button size="sm" variant="outline" asChild className="h-7 text-xs">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-1" />
+                <Github className="h-3 w-3 mr-1" />
                 Code
               </a>
             </Button>
           )}
           {liveUrl && (
-            <Button size="sm" variant="default" asChild>
+            <Button size="sm" variant="default" asChild className="h-7 text-xs">
               <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4 mr-1" />
+                <ExternalLink className="h-3 w-3 mr-1" />
                 Live
               </a>
             </Button>

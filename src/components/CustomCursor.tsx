@@ -54,37 +54,22 @@ const CustomCursor = () => {
   if (isHidden) return null;
 
   return (
-    <>
-      {/* Main cursor */}
-      <div
-        className={`fixed pointer-events-none z-50 rounded-full mix-blend-difference transition-transform duration-150 ${
-          isClicking ? "scale-75" : "scale-100"
-        }`}
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <div 
-          className={`w-6 h-6 bg-white rounded-full flex items-center justify-center ${
-            isPointer ? "scale-150" : "scale-100"
-          } transition-transform duration-200`} 
-        />
-      </div>
-      
-      {/* Cursor trail/shadow */}
-      <div
-        className="fixed pointer-events-none z-40 w-12 h-12 rounded-full bg-white/30 blur-sm"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: "translate(-50%, -50%)",
-          transition: "transform 0.2s, left 0.5s, top 0.5s",
-          transitionTimingFunction: "ease-out",
-        }}
+    <div
+      className={`fixed pointer-events-none z-50 rounded-full mix-blend-difference transition-transform duration-150 ${
+        isClicking ? "scale-75" : "scale-100"
+      }`}
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <div 
+        className={`w-4 h-4 bg-white rounded-full flex items-center justify-center ${
+          isPointer ? "scale-150" : "scale-100"
+        } transition-transform duration-200`} 
       />
-    </>
+    </div>
   );
 };
 

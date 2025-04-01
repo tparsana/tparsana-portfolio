@@ -4,11 +4,13 @@ import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SplitFlapText from "./SplitFlapText";
 
 const Navigation = () => {
   const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isHomePage, setIsHomePage] = useState(true);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -21,6 +23,7 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+      setIsHomePage(window.scrollY < window.innerHeight * 0.5);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,7 +50,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="font-mono font-bold text-lg split-flap-display px-2">
-            Portfolio
+            {isHomePage ? "Portfolio" : "Tanish Parsana"}
           </div>
           
           <nav className="hidden md:flex space-x-4">

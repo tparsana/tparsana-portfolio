@@ -1,12 +1,14 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { MapPin } from "lucide-react";
 
 interface TimelineItemProps {
   date: string;
   title: string;
   subtitle: string;
   description: string;
+  location?: string;
   logo?: string;
   className?: string;
 }
@@ -16,6 +18,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   title,
   subtitle,
   description,
+  location,
   logo,
   className,
 }) => {
@@ -83,7 +86,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         )}
       >
         <h3 className="font-semibold text-lg">{title}</h3>
-        <p className="text-sm text-muted-foreground mb-2">{subtitle}</p>
+        <p className="text-sm text-muted-foreground mb-1">{subtitle}</p>
+        
+        {location && (
+          <div className="flex items-center text-xs text-muted-foreground mb-2">
+            <MapPin className="h-3 w-3 mr-1" />
+            <span>{location}</span>
+          </div>
+        )}
+        
         <p className="text-sm">{description}</p>
       </div>
     </div>

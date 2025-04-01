@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
 import PreLoader from "@/components/PreLoader";
-import TechStackChart from "@/components/TechStackChart";
+import TechSkillFlip from "@/components/TechSkillFlip";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
@@ -54,6 +54,7 @@ const experiences = [
     title: "Senior Frontend Developer",
     subtitle: "Tech Innovation Inc.",
     description: "Leading the frontend team in developing cutting-edge web applications using React, TypeScript, and modern CSS frameworks.",
+    location: "San Francisco, CA",
     logo: "https://randomuser.me/api/portraits/men/1.jpg",
   },
   {
@@ -61,13 +62,15 @@ const experiences = [
     title: "Full Stack Developer",
     subtitle: "Digital Solutions Agency",
     description: "Developed and maintained full-stack applications, with a focus on responsive design, performance optimization, and accessibility.",
+    location: "New York, NY",
     logo: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
     date: "May 2023 - May 2023",
     title: "Data Science and AI Intern",
     subtitle: "York IE",
-    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm’s vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization",
+    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm's vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization",
+    location: "Boston, MA",
     logo: "https://randomuser.me/api/portraits/men/2.jpg",
   },
 ];
@@ -78,14 +81,52 @@ const education = [
     title: "Bachelor of Science in Computer Science",
     subtitle: "University of Technology",
     description: "Focused on software engineering, web development, and user experience design. Graduated with honors.",
+    location: "Cambridge, MA",
   },
   {
     date: "2018",
     title: "Advanced React & Redux Certification",
     subtitle: "Frontend Masters",
     description: "Intensive course covering advanced React patterns, Redux state management, and modern frontend development practices.",
+    location: "Online",
   },
 ];
+
+const terminalCommands = {
+  joke: [
+    "Why do programmers prefer dark mode? Because light attracts bugs!",
+    "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
+    "A SQL query walks into a bar, walks up to two tables and asks, 'Can I join you?'",
+    "Why do Java developers wear glasses? Because they don't C#!",
+    "How do you comfort a JavaScript bug? You console it!",
+    "Why was the JavaScript developer sad? Because he didn't know how to 'null' his feelings.",
+    "Why did the developer go broke? Because he used up all his cache!",
+    "What's a programmer's favorite hangout place? The Foo Bar!",
+    "Why don't programmers like nature? It has too many bugs and no debugging tool."
+  ],
+  ascii: {
+    execute: (text: string) => {
+      const largeText = text.split('').join('  ');
+      return `
+ #####  #####  #####  #####  #####
+${largeText.toUpperCase()}
+#####  #####  #####  #####  #####`;
+    }
+  },
+  matrix: {
+    description: "Activates a Matrix-like screen effect"
+  },
+  rickroll: {
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  music: {
+    tracks: [
+      { name: "Chill Lofi Beat", url: "https://example.com/lofi1.mp3" },
+      { name: "Synthwave Cruisin'", url: "https://example.com/synth1.mp3" },
+      { name: "Coding Focus", url: "https://example.com/ambient1.mp3" }
+    ]
+  }
+};
 
 const facts = [
   "I've visited over 20 countries",
@@ -268,7 +309,7 @@ const Index = () => {
                 </h2>
                 
                 <div className="bg-card shadow-lg rounded-xl p-6 overflow-hidden">
-                  <TechStackChart />
+                  <TechSkillFlip />
                 </div>
               </div>
             </section>
@@ -282,7 +323,7 @@ const Index = () => {
                   <SplitFlapText text="My Projects" className="font-mono" />
                 </h2>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {projects.map((project, index) => (
                     <ProjectCard
                       key={index}
@@ -290,8 +331,8 @@ const Index = () => {
                       className={cn(
                         "opacity-0",
                         "animate-fade-in",
-                        { "animation-delay-100": index % 2 === 1 },
-                        { "animation-delay-200": index >= 2 }
+                        { "animation-delay-100": index % 3 === 1 },
+                        { "animation-delay-200": index % 3 === 2 }
                       )}
                     />
                   ))}

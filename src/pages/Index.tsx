@@ -148,7 +148,7 @@ const Index = () => {
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
                   <SplitFlapText
-                    text="John Doe"
+                    text="Tanish Parsana"
                     className="font-mono"
                     onComplete={() => setIntroComplete(true)}
                   />
@@ -158,7 +158,7 @@ const Index = () => {
                   <div className="animate-slide-up">
                     <p className="text-xl md:text-2xl text-muted-foreground mb-8">
                       <SplitFlapText
-                        text="Frontend Developer & UI Designer"
+                        text="Full Stack Developer, Data Science & AI Engineer"
                         delay={200}
                         className="font-mono"
                       />
@@ -249,7 +249,7 @@ const Index = () => {
                     <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
                       <img
                         src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="John Doe"
+                        alt="Tanish Parsana"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -372,19 +372,19 @@ const Index = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center">
                   <div className="mb-4 md:mb-0">
                     <p className="text-sm text-muted-foreground">
-                      © {new Date().getFullYear()} John Doe. All rights reserved.
+                      © {new Date().getFullYear()} Tanish Parsana. All rights reserved.
                     </p>
                   </div>
                   
                   <div className="flex space-x-4">
                     <Button variant="ghost" size="icon" asChild>
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/tparsana" target="_blank" rel="noopener noreferrer">
                         <Github className="h-5 w-5" />
                         <span className="sr-only">GitHub</span>
                       </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.linkedin.com/in/tanish-parsana/" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="h-5 w-5" />
                         <span className="sr-only">LinkedIn</span>
                       </a>

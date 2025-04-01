@@ -63,10 +63,10 @@ const experiences = [
     logo: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
-    date: "2016 - 2019",
-    title: "Frontend Developer",
-    subtitle: "Web Creators Studio",
-    description: "Implemented responsive designs and interactive features for client websites using HTML, CSS, and JavaScript frameworks.",
+    date: "May 2023 - May 2023",
+    title: "Data Science and AI Intern",
+    subtitle: "York IE",
+    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm’s vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization",
     logo: "https://randomuser.me/api/portraits/men/2.jpg",
   },
 ];

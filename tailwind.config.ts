@@ -119,6 +119,11 @@ export default {
 				"terminal-cursor": {
 					"0%, 100%": { opacity: "1" },
 					"50%": { opacity: "0" }
+				},
+				"cursor-pulse": {
+					"0%": { transform: "scale(1)" },
+					"50%": { transform: "scale(1.2)" },
+					"100%": { transform: "scale(1)" }
 				}
 			},
 			animation: {
@@ -129,7 +134,8 @@ export default {
 				"flap-out": "flap-out 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards",
 				"slide-up": "slide-up 0.5s ease-out forwards",
 				"fade-in": "fade-in 0.5s ease-out forwards",
-				"terminal-cursor": "terminal-cursor 1s ease-in-out infinite"
+				"terminal-cursor": "terminal-cursor 1s ease-in-out infinite",
+				"cursor-pulse": "cursor-pulse 2s ease-in-out infinite"
 			},
 			fontFamily: {
 				mono: ["JetBrains Mono", "monospace"],

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
@@ -10,7 +9,9 @@ import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
 import PreLoader from "@/components/PreLoader";
+import TechStackChart from "@/components/TechStackChart";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 const projects = [
   {
@@ -112,7 +113,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -135,7 +135,6 @@ const Index = () => {
         <>
           <Navigation />
           <main className="min-h-screen">
-            {/* Hero Section */}
             <section
               id="home"
               className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden geometric-bg"
@@ -191,7 +190,6 @@ const Index = () => {
               </div>
             </section>
 
-            {/* About Section */}
             <section
               id="about"
               className="py-20 px-4"
@@ -263,7 +261,18 @@ const Index = () => {
               </div>
             </section>
 
-            {/* Projects Section */}
+            <section id="tech-stack" className="py-20 px-4">
+              <div className="container mx-auto max-w-6xl">
+                <h2 className="text-3xl font-bold mb-16 text-center">
+                  <SplitFlapText text="Tech Stack" className="font-mono" />
+                </h2>
+                
+                <div className="bg-card shadow-lg rounded-xl p-6 overflow-hidden">
+                  <TechStackChart />
+                </div>
+              </div>
+            </section>
+
             <section
               id="projects"
               className="py-20 px-4 bg-muted/20"
@@ -290,7 +299,6 @@ const Index = () => {
               </div>
             </section>
 
-            {/* Experience Section */}
             <section
               id="experience"
               className="py-20 px-4"
@@ -318,7 +326,6 @@ const Index = () => {
               </div>
             </section>
 
-            {/* Contact Section */}
             <section
               id="contact"
               className="py-20 px-4 bg-muted/20"
@@ -340,20 +347,26 @@ const Index = () => {
                     <div className="space-y-4">
                       <div className="flex items-center">
                         <Mail className="h-5 w-5 mr-3 text-muted-foreground" />
-                        <a href="mailto:hello@example.com" className="hover:text-primary transition-colors">
-                          hello@example.com
+                        <a href={`mailto:${siteConfig.email}`} className="hover:text-primary transition-colors">
+                          {siteConfig.email}
                         </a>
                       </div>
                       <div className="flex items-center">
                         <Github className="h-5 w-5 mr-3 text-muted-foreground" />
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                          github.com/johndoe
+                        <a href={siteConfig.urls.github} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                          {siteConfig.urls.github.replace("https://", "")}
                         </a>
                       </div>
                       <div className="flex items-center">
                         <Linkedin className="h-5 w-5 mr-3 text-muted-foreground" />
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                          linkedin.com/in/johndoe
+                        <a href={siteConfig.urls.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                          {siteConfig.urls.linkedin.replace("https://", "")}
+                        </a>
+                      </div>
+                      <div className="flex items-center">
+                        <Twitter className="h-5 w-5 mr-3 text-muted-foreground" />
+                        <a href={siteConfig.urls.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                          {siteConfig.urls.twitter.replace("https://", "")}
                         </a>
                       </div>
                     </div>
@@ -366,7 +379,6 @@ const Index = () => {
               </div>
             </section>
 
-            {/* Footer */}
             <footer className="py-8 px-4 border-t">
               <div className="container mx-auto max-w-6xl">
                 <div className="flex flex-col md:flex-row justify-between items-center">
@@ -378,19 +390,19 @@ const Index = () => {
                   
                   <div className="flex space-x-4">
                     <Button variant="ghost" size="icon" asChild>
-                      <a href="https://github.com/tparsana" target="_blank" rel="noopener noreferrer">
+                      <a href={siteConfig.urls.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-5 w-5" />
                         <span className="sr-only">GitHub</span>
                       </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                      <a href="https://www.linkedin.com/in/tanish-parsana/" target="_blank" rel="noopener noreferrer">
+                      <a href={siteConfig.urls.linkedin} target="_blank" rel="noopener noreferrer">
                         <Linkedin className="h-5 w-5" />
                         <span className="sr-only">LinkedIn</span>
                       </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                      <a href={siteConfig.urls.twitter} target="_blank" rel="noopener noreferrer">
                         <Twitter className="h-5 w-5" />
                         <span className="sr-only">Twitter</span>
                       </a>

@@ -73,6 +73,16 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Hide default cursor for custom cursor */
+  .cursor-custom {
+    cursor: none;
+  }
+  
+  /* For elements that should always show cursor (inputs, textareas) */
+  input, textarea, select, button {
+    cursor: auto !important;
+  }
 }
 
 .split-flap-char {

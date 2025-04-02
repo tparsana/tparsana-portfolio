@@ -38,6 +38,9 @@ type Command =
   | SurpriseCommand 
   | MusicCommand;
 
+// Audio element for music playback
+let audioElement: HTMLAudioElement | null = null;
+
 const terminalCommands: Record<string, Command> = {
   joke: {
     type: 'joke',
@@ -56,14 +59,91 @@ const terminalCommands: Record<string, Command> = {
   ascii: {
     type: 'ascii',
     execute: (text: string) => {
-      // Simple ASCII art conversion
+      // Better ASCII art conversion
       if (!text) return "Please provide text to convert!";
       
-      const largeText = text.split('').join('  ');
-      return `
- #####  #####  #####  #####  #####
-${largeText.toUpperCase()}
-#####  #####  #####  #####  #####`;
+      const letters: Record<string, string[]> = {
+        A: [' AAA ', 'A   A', 'AAAAA', 'A   A', 'A   A'],
+        B: ['BBBB ', 'B   B', 'BBBB ', 'B   B', 'BBBB '],
+        C: [' CCC ', 'C   C', 'C    ', 'C   C', ' CCC '],
+        D: ['DDDD ', 'D   D', 'D   D', 'D   D', 'DDDD '],
+        E: ['EEEEE', 'E    ', 'EEE  ', 'E    ', 'EEEEE'],
+        F: ['FFFFF', 'F    ', 'FFF  ', 'F    ', 'F    '],
+        G: [' GGG ', 'G    ', 'G  GG', 'G   G', ' GGG '],
+        H: ['H   H', 'H   H', 'HHHHH', 'H   H', 'H   H'],
+        I: ['IIIII', '  I  ', '  I  ', '  I  ', 'IIIII'],
+        J: ['JJJJJ', '    J', '    J', 'J   J', ' JJJ '],
+        K: ['K   K', 'K  K ', 'KKK  ', 'K  K ', 'K   K'],
+        L: ['L    ', 'L    ', 'L    ', 'L    ', 'LLLLL'],
+        M: ['M   M', 'MM MM', 'M M M', 'M   M', 'M   M'],
+        N: ['N   N', 'NN  N', 'N N N', 'N  NN', 'N   N'],
+        O: [' OOO ', 'O   O', 'O   O', 'O   O', ' OOO '],
+        P: ['PPPP ', 'P   P', 'PPPP ', 'P    ', 'P    '],
+        Q: [' QQQ ', 'Q   Q', 'Q   Q', 'Q  QQ', ' QQQQ'],
+        R: ['RRRR ', 'R   R', 'RRRR ', 'R  R ', 'R   R'],
+        S: [' SSS ', 'S    ', ' SSS ', '    S', ' SSS '],
+        T: ['TTTTT', '  T  ', '  T  ', '  T  ', '  T  '],
+        U: ['U   U', 'U   U', 'U   U', 'U   U', ' UUU '],
+        V: ['V   V', 'V   V', 'V   V', ' V V ', '  V  '],
+        W: ['W   W', 'W   W', 'W W W', 'WW WW', 'W   W'],
+        X: ['X   X', ' X X ', '  X  ', ' X X ', 'X   X'],
+        Y: ['Y   Y', ' Y Y ', '  Y  ', '  Y  ', '  Y  '],
+        Z: ['ZZZZZ', '   Z ', '  Z  ', ' Z   ', 'ZZZZZ'],
+        '0': [' 000 ', '0  00', '0 0 0', '00  0', ' 000 '],
+        '1': ['  1  ', ' 11  ', '  1  ', '  1  ', '11111'],
+        '2': [' 222 ', '2   2', '   2 ', '  2  ', '22222'],
+        '3': ['3333 ', '    3', ' 333 ', '    3', '3333 '],
+        '4': ['   4 ', '  44 ', ' 4 4 ', '44444', '   4 '],
+        '5': ['55555', '5    ', '5555 ', '    5', '5555 '],
+        '6': [' 666 ', '6    ', '6666 ', '6   6', ' 666 '],
+        '7': ['77777', '   7 ', '  7  ', ' 7   ', '7    '],
+        '8': [' 888 ', '8   8', ' 888 ', '8   8', ' 888 '],
+        '9': [' 999 ', '9   9', ' 9999', '    9', ' 999 '],
+        ' ': ['     ', '     ', '     ', '     ', '     '],
+        '!': ['  !  ', '  !  ', '  !  ', '     ', '  !  '],
+        '.': ['     ', '     ', '     ', '     ', '  .  '],
+        ',': ['     ', '     ', '     ', '  ,  ', ' ,   '],
+        '?': [' ??? ', '?   ?', '   ? ', '     ', '  ?  '],
+        ':': ['     ', '  :  ', '     ', '  :  ', '     '],
+        ';': ['     ', '  ;  ', '     ', '  ;  ', ' ;   '],
+        '-': ['     ', '     ', '-----', '     ', '     '],
+        '_': ['     ', '     ', '     ', '     ', '_____'],
+        '+': ['     ', '  +  ', '+++++', '  +  ', '     '],
+        '=': ['     ', '=====', '     ', '=====', '     '],
+        '/': ['    /', '   / ', '  /  ', ' /   ', '/    '],
+        '\\': ['\\    ', ' \\   ', '  \\  ', '   \\ ', '    \\'],
+        '(': ['  (  ', ' (   ', '(    ', ' (   ', '  (  '],
+        ')': ['  )  ', '   ) ', '    )', '   ) ', '  )  '],
+        '[': ['[[[  ', '[    ', '[    ', '[    ', '[[[  '],
+        ']': ['  ]]]', '    ]', '    ]', '    ]', '  ]]]'],
+        '{': ['  {  ', ' {   ', '{{   ', ' {   ', '  {  '],
+        '}': ['  }  ', '   } ', '   }}', '   } ', '  }  '],
+        '|': ['  |  ', '  |  ', '  |  ', '  |  ', '  |  '],
+        '*': ['     ', ' * * ', '  *  ', ' * * ', '     '],
+        '&': [' &&  ', '&  & ', ' &&  ', '&  & ', ' && &'],
+        '^': ['  ^  ', ' ^ ^ ', '^   ^', '     ', '     '],
+        '%': ['%%  %', '%% / ', '  /  ', ' / %%', '%  %%'],
+        '$': ['  $  ', ' $$$$', '$$   ', '   $$', '$$$$ '],
+        '#': [' # # ', '#####', ' # # ', '#####', ' # # '],
+        '@': [' @@@ ', '@   @', '@ @@@', '@    ', ' @@@ '],
+        '~': ['     ', ' ~  ~', '     ', '     ', '     ']
+      };
+      
+      const upperText = text.toUpperCase();
+      let result = '';
+      
+      // Generate each row of the ASCII art
+      for (let row = 0; row < 5; row++) {
+        let line = '';
+        for (let i = 0; i < upperText.length; i++) {
+          const char = upperText[i];
+          const pattern = letters[char] || letters[' '];
+          line += pattern[row] + ' ';
+        }
+        result += line + '\n';
+      }
+      
+      return result;
     }
   },
   matrix: {
@@ -78,9 +158,9 @@ ${largeText.toUpperCase()}
   music: {
     type: 'music',
     tracks: [
-      { name: "Chill Lofi Beat", url: "https://example.com/lofi1.mp3" },
-      { name: "Synthwave Cruisin'", url: "https://example.com/synth1.mp3" },
-      { name: "Coding Focus", url: "https://example.com/ambient1.mp3" }
+      { name: "Chill Lofi Beat", url: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" },
+      { name: "Synthwave Cruisin'", url: "https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3" },
+      { name: "Coding Focus", url: "https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3" }
     ],
     isPlaying: false
   }
@@ -102,9 +182,74 @@ export const generateAsciiArt = (text: string): string => {
 // Execute the matrix effect
 export const triggerMatrixEffect = (callback: () => void): void => {
   const matrixCommand = terminalCommands.matrix as MatrixCommand;
-  // This would typically create a DOM overlay with the matrix effect
-  // For simplicity we're just setting a timeout to simulate the effect
-  setTimeout(callback, matrixCommand.duration || 5000);
+  
+  // Create matrix rain effect
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  if (!ctx) {
+    callback();
+    return;
+  }
+  
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.zIndex = '10000';
+  document.body.appendChild(canvas);
+  
+  // Set canvas size to match window
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Matrix characters
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+  const fontSize = 14;
+  const columns = Math.floor(canvas.width / fontSize);
+  
+  // Array to track y position of each column
+  const drops: number[] = [];
+  for (let i = 0; i < columns; i++) {
+    drops[i] = 1;
+  }
+  
+  // Draw the matrix effect
+  const draw = () => {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#0F0';
+    ctx.font = `${fontSize}px monospace`;
+    
+    for (let i = 0; i < drops.length; i++) {
+      const text = characters.charAt(Math.floor(Math.random() * characters.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      
+      drops[i]++;
+    }
+  };
+  
+  // Run animation
+  let animationId: number;
+  const animate = () => {
+    draw();
+    animationId = requestAnimationFrame(animate);
+  };
+  
+  animate();
+  
+  // Clean up after duration
+  setTimeout(() => {
+    cancelAnimationFrame(animationId);
+    document.body.removeChild(canvas);
+    callback();
+  }, matrixCommand.duration || 5000);
 };
 
 // Open the surprise video
@@ -116,7 +261,26 @@ export const openSurprise = (): void => {
 // Toggle music playback
 export const toggleMusic = (trackIndex: number = 0): boolean => {
   const musicCommand = terminalCommands.music as MusicCommand;
-  musicCommand.isPlaying = !musicCommand.isPlaying;
+  
+  if (!audioElement) {
+    audioElement = new Audio();
+  }
+  
+  if (musicCommand.isPlaying) {
+    // Stop music
+    audioElement.pause();
+    musicCommand.isPlaying = false;
+  } else {
+    // Play music
+    if (trackIndex < musicCommand.tracks.length) {
+      const track = musicCommand.tracks[trackIndex];
+      audioElement.src = track.url;
+      audioElement.loop = true;
+      audioElement.play().catch(err => console.error("Error playing audio:", err));
+      musicCommand.isPlaying = true;
+    }
+  }
+  
   return musicCommand.isPlaying;
 };
 
@@ -138,9 +302,20 @@ export const getCommandHelp = (): Record<string, string> => {
     ascii: "ascii [text] - Converts text to ASCII art",
     matrix: "matrix - Activates a Matrix-like screen effect",
     surprise: "surprise - Opens a fun surprise video",
-    music: "music - Plays background music (toggle with music again)"
+    music: "music - Plays background music (toggle with music again)",
+    help: "help - Show this help message",
+    clear: "clear - Clear the terminal",
+    email: "email - Start composing an email",
+    submit: "submit - Submit the form",
+    about: "about - Show information about this terminal",
+    theme: "theme [dark|light|matrix|retro] - Change terminal theme",
+    echo: "echo [text] - Echo text",
+    date: "date - Display current date and time",
+    whoami: "whoami - Display visitor info",
+    ls: "ls - List available sections",
+    open: "open [section] - Navigate to a section",
+    contact: "contact - Show contact info"
   };
 };
 
 export default terminalCommands;
-

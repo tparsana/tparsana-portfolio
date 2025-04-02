@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
-import { Terminal, Send, Mail, Copy, Trash, Search, FileText } from "lucide-react";
+import { Terminal, Send } from "lucide-react";
 import { sendEmail } from "@/utils/EmailService";
 import { 
   getRandomJoke, 
@@ -13,7 +14,6 @@ import {
   openSurprise,
   toggleMusic,
   getMusicTracks,
-  getAvailableCommands,
   getCommandHelp
 } from "@/utils/TerminalCommands";
 
@@ -72,24 +72,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       setCommandHistory([
         ...newHistory,
         "Available commands:",
-        ...Object.values(helpTexts),
-        "- help: Show this help message",
-        "- clear: Clear the terminal",
-        "- email: Start composing an email",
-        "- submit: Submit the form",
-        "- about: Show information about this terminal",
-        "- theme [dark|light|matrix|retro]: Change terminal theme",
-        "- echo [text]: Echo text",
-        "- date: Display current date and time",
-        "- whoami: Display visitor info",
-        "- ls: List available sections",
-        "- open [section]: Navigate to a section",
-        "- contact: Show contact info",
-        "- joke: Get a random joke",
-        "- ascii [text]: Convert text to ASCII art",
-        "- matrix: Initialize Matrix effect",
-        "- surprise: Open a surprise",
-        "- music: Toggle music",
+        ...Object.values(helpTexts)
       ]);
     } else if (mainCommand === "clear") {
       setCommandHistory([]);
@@ -217,27 +200,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         ...newHistory,
         "Initializing Matrix effect..."
       ]);
-      const overlay = document.createElement("div");
-      overlay.style.position = "fixed";
-      overlay.style.top = "0";
-      overlay.style.left = "0";
-      overlay.style.width = "100vw";
-      overlay.style.height = "100vh";
-      overlay.style.backgroundColor = "black";
-      overlay.style.color = "#0f0";
-      overlay.style.fontSize = "16px";
-      overlay.style.fontFamily = "monospace";
-      overlay.style.zIndex = "10000";
-      overlay.style.overflow = "hidden";
-      overlay.style.display = "flex";
-      overlay.style.alignItems = "center";
-      overlay.style.justifyContent = "center";
-      overlay.innerHTML = "MATRIX INITIALIZED";
-      
-      document.body.appendChild(overlay);
       
       triggerMatrixEffect(() => {
-        document.body.removeChild(overlay);
         setCommandHistory([
           ...newHistory,
           "Matrix effect complete."

@@ -51,55 +51,63 @@ const projects = [
 
 const experiences = [
   {
-    date: "2022 - Present",
-    title: "Senior Frontend Developer",
-    subtitle: "Tech Innovation Inc.",
-    description: "Leading the frontend team in developing cutting-edge web applications using React, TypeScript, and modern CSS frameworks.",
-    location: "San Francisco, CA",
+    date: "Aug 2024 - Present",
+    title: "Officer of Industry Relations",
+    subtitle: "DevLabs Club at ASU",
+    description: "As an Industry Relations Officer at DevLabs at ASU, I focus on building strong relationships with tech companies and industry professionals. My role involves organizing networking events, securing sponsorships, and connecting club members with valuable industry opportunities. I act as a bridge between our passionate student community and the tech industry, helping peers advance their careers and gain real-world insights.",
+    location: "Tempe, AZ, USA",
     logo: "https://randomuser.me/api/portraits/men/1.jpg",
   },
   {
-    date: "2019 - 2022",
-    title: "Full Stack Developer",
-    subtitle: "Digital Solutions Agency",
-    description: "Developed and maintained full-stack applications, with a focus on responsive design, performance optimization, and accessibility.",
-    location: "New York, NY",
+    date: "Aug 2023 - Present",
+    title: "Technology Consultant",
+    subtitle: "Enterprise Technology at ASU",
+    description: "As a Tech Consultant at ASU, I play a pivotal role in driving technological efficiency across the university. I provide high-level support to students and faculty, optimising system performance, streamlining software deployments, and resolving complex technical challenges. In addition to troubleshooting, I lead training initiatives to enhance digital literacy and ensure smooth operations across diverse departments, contributing to the university's digital transformation efforts.",
+    location: "Tempe, AZ, USA",
+    logo: "https://randomuser.me/api/portraits/men/1.jpg",
+  },
+  {
+    date: "May 2024 - Aug 2024",
+    title: "Data Science & AI Intern",
+    subtitle: "York IE",
+    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm’s vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization.",
+    location: "Manchester, NH, USA",
     logo: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
-    date: "May 2023 - May 2023",
-    title: "Data Science and AI Intern",
+    date: "May 2023 - Aug 2023",
+    title: "Data Science Intern",
     subtitle: "York IE",
-    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm's vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization",
-    location: "Boston, MA",
-    logo: "/asset9.png",
+    description: "Developed data collection and preprocessing initiatives, enhancing data analysis capabilities through effective scraping and sorting techniques. Engineered and integrated schemas for AI APIs, significantly improving data processing efficiency from voluminous datasets. Implemented AWS S3, Lambda, and Batch, along with Docker containers, streamlining data storage, access, and processing, ensuring system independence. Contributed to the development lifecycle by actively participating in code reviews, embracing, and implementing feedback to refine and optimize code quality.",
+    location: "Manchester, NH, USA",
+    logo: "https://randomuser.me/api/portraits/men/1.jpg",
   },
 ];
 
 const education = [
   {
-    date: "2012 - 2016",
-    title: "Bachelor of Science in Computer Science",
-    subtitle: "University of Technology",
-    description: "Focused on software engineering, web development, and user experience design. Graduated with honors.",
-    location: "Cambridge, MA",
+    date: "2022 - 2026",
+    title: "Bachelor of Science in Computer Science, Minor in Business",
+    subtitle: "Arizona State University",
+    description: "Focused on software engineering, web development, data science and user experience design.",
+    location: "Tempe, AZ, USA",
   },
   {
-    date: "2018",
-    title: "Advanced React & Redux Certification",
-    subtitle: "Frontend Masters",
-    description: "Intensive course covering advanced React patterns, Redux state management, and modern frontend development practices.",
-    location: "Online",
+    date: "2010 - 2022",
+    title: "High School Diploma",
+    subtitle: "St. Kabir School",
+    description: "Completed CBSE schooling with strong academic foundation and holistic development focus.",
+    location: "Ahmedabad, GJ, India",
   },
 ];
 
 const extracurricular = [
   {
-    date: "2024",
+    date: "2025",
     title: "Ironman Arizona Triathlon",
     subtitle: "Endurance Athletics",
     description: "Currently training for the Ironman Arizona triathlon. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance.",
-    location: "Arizona, USA",
+    location: "Tempe, AZ, USA",
   }
 ];
 
@@ -140,14 +148,14 @@ ${largeText.toUpperCase()}
 };
 
 const facts = [
-  "I've visited over 20 countries",
-  "I play guitar in a local band",
-  "I'm a coffee enthusiast with my own espresso machine",
+  "Triathlete-in-training aiming for Ironman; logs everything on Notion.",
+  "Accidentally became the tech support for family’s real estate biz.",
+  "Believes “just one more API” is always the solution.",
   "I contribute to open-source projects in my free time",
-  "I've completed three marathons",
-  "I'm learning Japanese as a third language",
+  "I've completed 8 half-marathons",
+  "Has more Notion dashboards than real-life responsibilities (almost).",
   "I enjoy rock climbing and hiking",
-  "I collect vintage programming books",
+  "Trains for Ironman but cries cycling up small hills.",
 ];
 
 const Index = () => {
@@ -251,16 +259,16 @@ const Index = () => {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="space-y-6">
                     <p className="text-lg">
-                      I'm a passionate frontend developer with over 6 years of experience
-                      creating engaging, responsive, and accessible web applications.
-                      I specialize in React, TypeScript, and modern CSS frameworks,
-                      with a focus on creating performant and visually appealing user interfaces.
+                      I'm a creative and ambitious developer with a strong foundation in full-stack development, AI
+                      integration, and modern web technologies. My work blends practical design with powerful
+                      functionality, using tools like React, Python, cloud platforms, React, TypeScript, and modern CSS frameworks to build smart, user-centered
+                      applications.
                     </p>
                     <p className="text-lg">
-                      When I'm not coding, you can find me exploring new technologies,
+                      When I'm not coding, you can find me training for an Ironman, or exploring new technologies,
                       contributing to open-source projects, or enjoying outdoor activities.
                       I believe in continuous learning and staying updated with the latest
-                      trends in web development.
+                      trends in technology.
                     </p>
 
                     <div className="pt-4">
@@ -375,7 +383,7 @@ const Index = () => {
                 </div>
                 
                 <h3 className="text-2xl font-bold mb-8 text-center">
-                  <SplitFlapText text="Extracurricular" className="font-mono" />
+                  <SplitFlapText text="Interests" className="font-mono" />
                 </h3>
 
                 <div>

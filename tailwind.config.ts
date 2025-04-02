@@ -124,6 +124,24 @@ export default {
 					"0%": { transform: "scale(1)" },
 					"50%": { transform: "scale(1.2)" },
 					"100%": { transform: "scale(1)" }
+				},
+				"blob-float": {
+					"0%": { transform: "translate(0px, 0px) scale(1)" },
+					"33%": { transform: "translate(30px, -30px) scale(1.05)" },
+					"66%": { transform: "translate(-20px, 20px) scale(0.95)" },
+					"100%": { transform: "translate(0px, 0px) scale(1)" }
+				},
+				"blob-float-slow": {
+					"0%": { transform: "translate(0px, 0px) rotate(0deg) scale(1)" },
+					"33%": { transform: "translate(-20px, 20px) rotate(5deg) scale(1.03)" },
+					"66%": { transform: "translate(20px, -10px) rotate(-5deg) scale(0.97)" },
+					"100%": { transform: "translate(0px, 0px) rotate(0deg) scale(1)" }
+				},
+				"blob-float-reverse": {
+					"0%": { transform: "translate(0px, 0px) rotate(0deg) scale(1)" },
+					"33%": { transform: "translate(20px, 20px) rotate(-3deg) scale(0.95)" },
+					"66%": { transform: "translate(-10px, -15px) rotate(3deg) scale(1.05)" },
+					"100%": { transform: "translate(0px, 0px) rotate(0deg) scale(1)" }
 				}
 			},
 			animation: {
@@ -135,7 +153,10 @@ export default {
 				"slide-up": "slide-up 0.5s ease-out forwards",
 				"fade-in": "fade-in 0.5s ease-out forwards",
 				"terminal-cursor": "terminal-cursor 1s ease-in-out infinite",
-				"cursor-pulse": "cursor-pulse 2s ease-in-out infinite"
+				"cursor-pulse": "cursor-pulse 2s ease-in-out infinite",
+				"blob-float": "blob-float 15s ease-in-out infinite",
+				"blob-float-slow": "blob-float-slow 20s ease-in-out infinite",
+				"blob-float-reverse": "blob-float-reverse 18s ease-in-out infinite"
 			},
 			fontFamily: {
 				mono: ["JetBrains Mono", "monospace"],

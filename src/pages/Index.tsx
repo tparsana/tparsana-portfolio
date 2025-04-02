@@ -12,6 +12,7 @@ import PreLoader from "@/components/PreLoader";
 import TechSkillFlip from "@/components/TechSkillFlip";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const projects = [
   {
@@ -188,12 +189,9 @@ const Index = () => {
           <main className="min-h-screen">
             <section
               id="home"
-              className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden geometric-bg"
+              className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
             >
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute h-48 w-48 rounded-full bg-primary/5 top-1/4 left-1/4 -translate-x-1/2 animate-pulse" style={{ animationDuration: '15s' }} />
-                <div className="absolute h-64 w-64 rounded-full bg-primary/5 bottom-1/4 right-1/4 translate-x-1/2 animate-pulse" style={{ animationDuration: '20s' }} />
-              </div>
+              <AnimatedBackground />
 
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">

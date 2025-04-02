@@ -15,8 +15,8 @@ interface MatrixCommand {
   duration?: number;
 }
 
-interface RickrollCommand {
-  type: 'rickroll';
+interface SurpriseCommand {
+  type: 'surprise';
   url: string;
 }
 
@@ -35,7 +35,7 @@ type Command =
   | JokeCommand 
   | AsciiCommand 
   | MatrixCommand 
-  | RickrollCommand 
+  | SurpriseCommand 
   | MusicCommand;
 
 const terminalCommands: Record<string, Command> = {
@@ -71,8 +71,8 @@ ${largeText.toUpperCase()}
     description: "Activates a Matrix-like screen effect",
     duration: 5000 // milliseconds
   },
-  rickroll: {
-    type: 'rickroll',
+  surprise: {
+    type: 'surprise',
     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   music: {
@@ -107,10 +107,10 @@ export const triggerMatrixEffect = (callback: () => void): void => {
   setTimeout(callback, matrixCommand.duration || 5000);
 };
 
-// Open the rickroll video
-export const rickroll = (): void => {
-  const rickrollCommand = terminalCommands.rickroll as RickrollCommand;
-  window.open(rickrollCommand.url, '_blank');
+// Open the surprise video
+export const openSurprise = (): void => {
+  const surpriseCommand = terminalCommands.surprise as SurpriseCommand;
+  window.open(surpriseCommand.url, '_blank');
 };
 
 // Toggle music playback
@@ -137,9 +137,10 @@ export const getCommandHelp = (): Record<string, string> => {
     joke: "joke - Displays a random programming joke",
     ascii: "ascii [text] - Converts text to ASCII art",
     matrix: "matrix - Activates a Matrix-like screen effect",
-    rickroll: "rickroll - Opens a surprise video",
+    surprise: "surprise - Opens a fun surprise video",
     music: "music - Plays background music (toggle with music again)"
   };
 };
 
 export default terminalCommands;
+

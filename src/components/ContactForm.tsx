@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +10,7 @@ import {
   getRandomJoke, 
   generateAsciiArt, 
   triggerMatrixEffect, 
-  rickroll,
+  openSurprise,
   toggleMusic,
   getMusicTracks,
   getAvailableCommands,
@@ -68,7 +67,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     const mainCommand = commandParts[0].toLowerCase();
     const args = commandParts.slice(1).join(" ");
     
-    // Process command
     if (mainCommand === "help") {
       const helpTexts = getCommandHelp();
       setCommandHistory([
@@ -87,6 +85,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "- ls: List available sections",
         "- open [section]: Navigate to a section",
         "- contact: Show contact info",
+        "- joke: Get a random joke",
+        "- ascii [text]: Convert text to ASCII art",
+        "- matrix: Initialize Matrix effect",
+        "- surprise: Open a surprise",
+        "- music: Toggle music",
       ]);
     } else if (mainCommand === "clear") {
       setCommandHistory([]);
@@ -190,7 +193,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "LinkedIn: linkedin.com/in/tanish-parsana"
       ]);
     } else if (mainCommand === "joke") {
-      // Get a random joke
       const joke = getRandomJoke();
       setCommandHistory([
         ...newHistory,
@@ -215,7 +217,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         ...newHistory,
         "Initializing Matrix effect..."
       ]);
-      // Create a temporary overlay for the Matrix effect
       const overlay = document.createElement("div");
       overlay.style.position = "fixed";
       overlay.style.top = "0";
@@ -242,12 +243,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           "Matrix effect complete."
         ]);
       });
-    } else if (mainCommand === "rickroll") {
+    } else if (mainCommand === "surprise") {
       setCommandHistory([
         ...newHistory,
         "Opening surprise..."
       ]);
-      rickroll();
+      openSurprise();
     } else if (mainCommand === "music") {
       const newIsPlaying = toggleMusic(currentTrack);
       setIsPlayingMusic(newIsPlaying);
@@ -276,7 +277,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     setIsSubmitting(true);
     
     try {
-      // Send email using our EmailService
       const result = await sendEmail({
         name,
         email,
@@ -308,7 +308,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   };
 
   useEffect(() => {
-    // Initialize command history
     setCommandHistory([
       "Welcome to the terminal!",
       "Type 'help' for available commands.",

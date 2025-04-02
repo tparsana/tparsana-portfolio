@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SplitFlapText from "./SplitFlapText";
 
@@ -36,6 +36,7 @@ const Navigation = () => {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
+    { name: "Resume", href: "/resume.pdf", isExternal: true, icon: <FileText className="h-3 w-3 ml-1" /> }
   ];
 
   return (
@@ -58,9 +59,12 @@ const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                className="px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center"
+                target={link.isExternal ? "_blank" : undefined}
+                rel={link.isExternal ? "noopener noreferrer" : undefined}
               >
                 {link.name}
+                {link.icon && link.icon}
               </a>
             ))}
           </nav>
@@ -106,10 +110,13 @@ const Navigation = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-3 py-2 text-sm font-medium hover:text-primary"
+                  className="px-3 py-2 text-sm font-medium hover:text-primary flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
                 >
                   {link.name}
+                  {link.icon && link.icon}
                 </a>
               ))}
             </nav>

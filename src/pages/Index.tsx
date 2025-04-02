@@ -71,7 +71,7 @@ const experiences = [
     subtitle: "York IE",
     description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm's vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization",
     location: "Boston, MA",
-    logo: "https://randomuser.me/api/portraits/men/2.jpg",
+    logo: "/asset9.png",
   },
 ];
 
@@ -90,6 +90,16 @@ const education = [
     description: "Intensive course covering advanced React patterns, Redux state management, and modern frontend development practices.",
     location: "Online",
   },
+];
+
+const extracurricular = [
+  {
+    date: "2024",
+    title: "Ironman Arizona Triathlon",
+    subtitle: "Endurance Athletics",
+    description: "Currently training for the Ironman Arizona triathlon. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance.",
+    location: "Arizona, USA",
+  }
 ];
 
 const terminalCommands = {
@@ -323,7 +333,7 @@ const Index = () => {
                   <SplitFlapText text="My Projects" className="font-mono" />
                 </h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {projects.map((project, index) => (
                     <ProjectCard
                       key={index}
@@ -331,8 +341,9 @@ const Index = () => {
                       className={cn(
                         "opacity-0",
                         "animate-fade-in",
-                        { "animation-delay-100": index % 3 === 1 },
-                        { "animation-delay-200": index % 3 === 2 }
+                        { "animation-delay-100": index % 4 === 1 },
+                        { "animation-delay-200": index % 4 === 2 },
+                        { "animation-delay-300": index % 4 === 3 }
                       )}
                     />
                   ))}
@@ -359,9 +370,19 @@ const Index = () => {
                   <SplitFlapText text="Education" className="font-mono" />
                 </h3>
 
-                <div>
+                <div className="mb-16">
                   {education.map((edu, index) => (
                     <TimelineItem key={index} {...edu} />
+                  ))}
+                </div>
+                
+                <h3 className="text-2xl font-bold mb-8 text-center">
+                  <SplitFlapText text="Extracurricular" className="font-mono" />
+                </h3>
+
+                <div>
+                  {extracurricular.map((item, index) => (
+                    <TimelineItem key={index} {...item} />
                   ))}
                 </div>
               </div>

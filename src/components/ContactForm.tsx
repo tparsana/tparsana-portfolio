@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +7,16 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { Terminal, Send, Mail, Copy, Trash, Search, FileText } from "lucide-react";
 import { sendEmail } from "@/utils/EmailService";
+import { 
+  getRandomJoke, 
+  generateAsciiArt, 
+  triggerMatrixEffect, 
+  rickroll,
+  toggleMusic,
+  getMusicTracks,
+  getAvailableCommands,
+  getCommandHelp
+} from "@/utils/TerminalCommands";
 
 interface ContactFormProps {
   className?: string;
@@ -21,6 +32,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [terminalTheme, setTerminalTheme] = useState<TerminalTheme>("dark");
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(0);
   const terminalRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -51,13 +64,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     const newHistory = [...commandHistory, `> ${command}`];
     setCommandHistory(newHistory);
     
-    const lowerCommand = command.toLowerCase();
+    const commandParts = command.trim().split(" ");
+    const mainCommand = commandParts[0].toLowerCase();
+    const args = commandParts.slice(1).join(" ");
     
     // Process command
-    if (lowerCommand === "help" || lowerCommand.includes("help")) {
+    if (mainCommand === "help") {
+      const helpTexts = getCommandHelp();
       setCommandHistory([
         ...newHistory,
         "Available commands:",
+        ...Object.values(helpTexts),
         "- help: Show this help message",
         "- clear: Clear the terminal",
         "- email: Start composing an email",
@@ -71,9 +88,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "- open [section]: Navigate to a section",
         "- contact: Show contact info",
       ]);
-    } else if (lowerCommand === "clear" || lowerCommand.includes("clear")) {
+    } else if (mainCommand === "clear") {
       setCommandHistory([]);
-    } else if (lowerCommand === "email" || lowerCommand.includes("email")) {
+    } else if (mainCommand === "email") {
       setCommandHistory([
         ...newHistory,
         "Compose your message below:",
@@ -83,7 +100,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "",
         "Use 'submit' to send your message once all fields are filled."
       ]);
-    } else if (lowerCommand === "submit" || lowerCommand.includes("submit")) {
+    } else if (mainCommand === "submit") {
       if (name && email && message) {
         handleSubmit();
         setCommandHistory([
@@ -101,7 +118,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           !message ? "- Message" : "",
         ].filter(Boolean));
       }
-    } else if (lowerCommand === "about" || lowerCommand.includes("about")) {
+    } else if (mainCommand === "about") {
       setCommandHistory([
         ...newHistory,
         "Terminal v1.0",
@@ -109,8 +126,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "A retro-inspired interactive terminal for portfolio website",
         "Type 'help' for available commands"
       ]);
-    } else if (lowerCommand.startsWith("theme ")) {
-      const requestedTheme = lowerCommand.split(" ")[1] as TerminalTheme;
+    } else if (mainCommand === "theme") {
+      const requestedTheme = args as TerminalTheme;
       if (["dark", "light", "matrix", "retro"].includes(requestedTheme)) {
         setTerminalTheme(requestedTheme);
         setCommandHistory([
@@ -123,25 +140,24 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           "Invalid theme. Available themes: dark, light, matrix, retro"
         ]);
       }
-    } else if (lowerCommand.startsWith("echo ")) {
-      const text = command.substring(5);
+    } else if (mainCommand === "echo") {
       setCommandHistory([
         ...newHistory,
-        text
+        args
       ]);
-    } else if (lowerCommand === "date") {
+    } else if (mainCommand === "date") {
       setCommandHistory([
         ...newHistory,
         new Date().toString()
       ]);
-    } else if (lowerCommand === "whoami") {
+    } else if (mainCommand === "whoami") {
       setCommandHistory([
         ...newHistory,
         `Visitor from: ${window.navigator.userAgent}`,
         `Language: ${window.navigator.language}`,
         `Screen: ${window.screen.width}x${window.screen.height}`,
       ]);
-    } else if (lowerCommand === "ls") {
+    } else if (mainCommand === "ls") {
       setCommandHistory([
         ...newHistory,
         "Available sections:",
@@ -151,8 +167,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "- experience",
         "- contact"
       ]);
-    } else if (lowerCommand.startsWith("open ")) {
-      const section = lowerCommand.split(" ")[1];
+    } else if (mainCommand === "open") {
+      const section = args;
       if (["home", "about", "projects", "experience", "contact"].includes(section)) {
         window.location.href = `#${section}`;
         setCommandHistory([
@@ -165,13 +181,85 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
           `Section '${section}' not found. Use 'ls' to see available sections.`
         ]);
       }
-    } else if (lowerCommand === "contact") {
+    } else if (mainCommand === "contact") {
       setCommandHistory([
         ...newHistory,
         "Contact Information:",
         "Email: tanish.parsana2004@gmail.com",
         "GitHub: github.com/tparsana",
         "LinkedIn: linkedin.com/in/tanish-parsana"
+      ]);
+    } else if (mainCommand === "joke") {
+      // Get a random joke
+      const joke = getRandomJoke();
+      setCommandHistory([
+        ...newHistory,
+        joke
+      ]);
+    } else if (mainCommand === "ascii") {
+      if (!args) {
+        setCommandHistory([
+          ...newHistory,
+          "Please provide text to convert to ASCII art.",
+          "Usage: ascii [text]"
+        ]);
+      } else {
+        const art = generateAsciiArt(args);
+        setCommandHistory([
+          ...newHistory,
+          art
+        ]);
+      }
+    } else if (mainCommand === "matrix") {
+      setCommandHistory([
+        ...newHistory,
+        "Initializing Matrix effect..."
+      ]);
+      // Create a temporary overlay for the Matrix effect
+      const overlay = document.createElement("div");
+      overlay.style.position = "fixed";
+      overlay.style.top = "0";
+      overlay.style.left = "0";
+      overlay.style.width = "100vw";
+      overlay.style.height = "100vh";
+      overlay.style.backgroundColor = "black";
+      overlay.style.color = "#0f0";
+      overlay.style.fontSize = "16px";
+      overlay.style.fontFamily = "monospace";
+      overlay.style.zIndex = "10000";
+      overlay.style.overflow = "hidden";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.innerHTML = "MATRIX INITIALIZED";
+      
+      document.body.appendChild(overlay);
+      
+      triggerMatrixEffect(() => {
+        document.body.removeChild(overlay);
+        setCommandHistory([
+          ...newHistory,
+          "Matrix effect complete."
+        ]);
+      });
+    } else if (mainCommand === "rickroll") {
+      setCommandHistory([
+        ...newHistory,
+        "Opening surprise..."
+      ]);
+      rickroll();
+    } else if (mainCommand === "music") {
+      const newIsPlaying = toggleMusic(currentTrack);
+      setIsPlayingMusic(newIsPlaying);
+      
+      const tracks = getMusicTracks();
+      const trackInfo = tracks[currentTrack].name;
+      
+      setCommandHistory([
+        ...newHistory,
+        newIsPlaying ? 
+          `Now playing: ${trackInfo}` : 
+          "Music stopped."
       ]);
     } else {
       setCommandHistory([

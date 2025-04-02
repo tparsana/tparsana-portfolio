@@ -12,7 +12,6 @@ import PreLoader from "@/components/PreLoader";
 import TechSkillFlip from "@/components/TechSkillFlip";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import AnimatedBackground from "@/components/AnimatedBackground";
 
 const projects = [
   {
@@ -56,7 +55,7 @@ const experiences = [
     subtitle: "Tech Innovation Inc.",
     description: "Leading the frontend team in developing cutting-edge web applications using React, TypeScript, and modern CSS frameworks.",
     location: "San Francisco, CA",
-    logo: "/asset9.png",
+    logo: "https://randomuser.me/api/portraits/men/1.jpg",
   },
   {
     date: "2019 - 2022",
@@ -64,7 +63,7 @@ const experiences = [
     subtitle: "Digital Solutions Agency",
     description: "Developed and maintained full-stack applications, with a focus on responsive design, performance optimization, and accessibility.",
     location: "New York, NY",
-    logo: "/asset9.png",
+    logo: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
     date: "May 2023 - May 2023",
@@ -189,9 +188,12 @@ const Index = () => {
           <main className="min-h-screen">
             <section
               id="home"
-              className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
+              className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden geometric-bg"
             >
-              <AnimatedBackground />
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute h-48 w-48 rounded-full bg-primary/5 top-1/4 left-1/4 -translate-x-1/2 animate-pulse" style={{ animationDuration: '15s' }} />
+                <div className="absolute h-64 w-64 rounded-full bg-primary/5 bottom-1/4 right-1/4 translate-x-1/2 animate-pulse" style={{ animationDuration: '20s' }} />
+              </div>
 
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">

@@ -1,3 +1,4 @@
+
 interface JokeCommand {
   type: 'joke';
   jokes: string[];
@@ -58,102 +59,99 @@ const terminalCommands: Record<string, Command> = {
   ascii: {
     type: 'ascii',
     execute: (text: string) => {
+      // Better ASCII art conversion
       if (!text) return "Please provide text to convert!";
       
-      const funAscii: Record<string, string> = {
-        'happy': `
-   .--.  .--.
-  ( (\\) ( \\/ )
-   ) )    ) )
-  ( (    ( (
-   '-'    '-'
-  `,
-        'cool': `
-   _____
-  / o o \\
- |   >   |
-  \\_---_/
-    | |
-    `,
-        'cat': `
-  /\\_/\\
- ( o.o )
-  > ^ <
-    `,
-        'dog': `
-   / \\__
-  (    @\\___
-  /         O
- /   (_____/
-/_____/   U
-    `,
-        'robot': `
-  .|||||.
- | o   o |
-(|  <->  |)
- |  \\_/  |
-  \\_____/
-    `,
-        'ghost': `
-   .-.
-  .'   '.
- :       :
- :       :
-  '.___.'
-    `,
-        'rocket': `
-    /\\
-   /  \\
-  |    |
-  |____|
- /      \\
-/        \\
-|   __   |
-|  |__|  |
-||      ||
-||      ||
-||\\_/\\_/||
-|/      \\|
-    `,
-        'heart': `
-  .:::.   .::.
- :::::::.::::
- :::::::::::
- ':::::::::'
-   ':::::'
-     ':'
-    `
+      const letters: Record<string, string[]> = {
+        A: [' AAA ', 'A   A', 'AAAAA', 'A   A', 'A   A'],
+        B: ['BBBB ', 'B   B', 'BBBB ', 'B   B', 'BBBB '],
+        C: [' CCC ', 'C   C', 'C    ', 'C   C', ' CCC '],
+        D: ['DDDD ', 'D   D', 'D   D', 'D   D', 'DDDD '],
+        E: ['EEEEE', 'E    ', 'EEE  ', 'E    ', 'EEEEE'],
+        F: ['FFFFF', 'F    ', 'FFF  ', 'F    ', 'F    '],
+        G: [' GGG ', 'G    ', 'G  GG', 'G   G', ' GGG '],
+        H: ['H   H', 'H   H', 'HHHHH', 'H   H', 'H   H'],
+        I: ['IIIII', '  I  ', '  I  ', '  I  ', 'IIIII'],
+        J: ['JJJJJ', '    J', '    J', 'J   J', ' JJJ '],
+        K: ['K   K', 'K  K ', 'KKK  ', 'K  K ', 'K   K'],
+        L: ['L    ', 'L    ', 'L    ', 'L    ', 'LLLLL'],
+        M: ['M   M', 'MM MM', 'M M M', 'M   M', 'M   M'],
+        N: ['N   N', 'NN  N', 'N N N', 'N  NN', 'N   N'],
+        O: [' OOO ', 'O   O', 'O   O', 'O   O', ' OOO '],
+        P: ['PPPP ', 'P   P', 'PPPP ', 'P    ', 'P    '],
+        Q: [' QQQ ', 'Q   Q', 'Q   Q', 'Q  QQ', ' QQQQ'],
+        R: ['RRRR ', 'R   R', 'RRRR ', 'R  R ', 'R   R'],
+        S: [' SSS ', 'S    ', ' SSS ', '    S', ' SSS '],
+        T: ['TTTTT', '  T  ', '  T  ', '  T  ', '  T  '],
+        U: ['U   U', 'U   U', 'U   U', 'U   U', ' UUU '],
+        V: ['V   V', 'V   V', 'V   V', ' V V ', '  V  '],
+        W: ['W   W', 'W   W', 'W W W', 'WW WW', 'W   W'],
+        X: ['X   X', ' X X ', '  X  ', ' X X ', 'X   X'],
+        Y: ['Y   Y', ' Y Y ', '  Y  ', '  Y  ', '  Y  '],
+        Z: ['ZZZZZ', '   Z ', '  Z  ', ' Z   ', 'ZZZZZ'],
+        '0': [' 000 ', '0  00', '0 0 0', '00  0', ' 000 '],
+        '1': ['  1  ', ' 11  ', '  1  ', '  1  ', '11111'],
+        '2': [' 222 ', '2   2', '   2 ', '  2  ', '22222'],
+        '3': ['3333 ', '    3', ' 333 ', '    3', '3333 '],
+        '4': ['   4 ', '  44 ', ' 4 4 ', '44444', '   4 '],
+        '5': ['55555', '5    ', '5555 ', '    5', '5555 '],
+        '6': [' 666 ', '6    ', '6666 ', '6   6', ' 666 '],
+        '7': ['77777', '   7 ', '  7  ', ' 7   ', '7    '],
+        '8': [' 888 ', '8   8', ' 888 ', '8   8', ' 888 '],
+        '9': [' 999 ', '9   9', ' 9999', '    9', ' 999 '],
+        ' ': ['     ', '     ', '     ', '     ', '     '],
+        '!': ['  !  ', '  !  ', '  !  ', '     ', '  !  '],
+        '.': ['     ', '     ', '     ', '     ', '  .  '],
+        ',': ['     ', '     ', '     ', '  ,  ', ' ,   '],
+        '?': [' ??? ', '?   ?', '   ? ', '     ', '  ?  '],
+        ':': ['     ', '  :  ', '     ', '  :  ', '     '],
+        ';': ['     ', '  ;  ', '     ', '  ;  ', ' ;   '],
+        '-': ['     ', '     ', '-----', '     ', '     '],
+        '_': ['     ', '     ', '     ', '     ', '_____'],
+        '+': ['     ', '  +  ', '+++++', '  +  ', '     '],
+        '=': ['     ', '=====', '     ', '=====', '     '],
+        '/': ['    /', '   / ', '  /  ', ' /   ', '/    '],
+        '\\': ['\\    ', ' \\   ', '  \\  ', '   \\ ', '    \\'],
+        '(': ['  (  ', ' (   ', '(    ', ' (   ', '  (  '],
+        ')': ['  )  ', '   ) ', '    )', '   ) ', '  )  '],
+        '[': ['[[[  ', '[    ', '[    ', '[    ', '[[[  '],
+        ']': ['  ]]]', '    ]', '    ]', '    ]', '  ]]]'],
+        '{': ['  {  ', ' {   ', '{{   ', ' {   ', '  {  '],
+        '}': ['  }  ', '   } ', '   }}', '   } ', '  }  '],
+        '|': ['  |  ', '  |  ', '  |  ', '  |  ', '  |  '],
+        '*': ['     ', ' * * ', '  *  ', ' * * ', '     '],
+        '&': [' &&  ', '&  & ', ' &&  ', '&  & ', ' && &'],
+        '^': ['  ^  ', ' ^ ^ ', '^   ^', '     ', '     '],
+        '%': ['%%  %', '%% / ', '  /  ', ' / %%', '%  %%'],
+        '$': ['  $  ', ' $$$$', '$$   ', '   $$', '$$$$ '],
+        '#': [' # # ', '#####', ' # # ', '#####', ' # # '],
+        '@': [' @@@ ', '@   @', '@ @@@', '@    ', ' @@@ '],
+        '~': ['     ', ' ~  ~', '     ', '     ', '     ']
       };
       
-      if (funAscii[text.toLowerCase()]) {
-        return funAscii[text.toLowerCase()];
+      const upperText = text.toUpperCase();
+      let result = '';
+      
+      // Generate each row of the ASCII art
+      for (let row = 0; row < 5; row++) {
+        let line = '';
+        for (let i = 0; i < upperText.length; i++) {
+          const char = upperText[i];
+          const pattern = letters[char] || letters[' '];
+          line += pattern[row] + ' ';
+        }
+        result += line + '\n';
       }
       
-      const textLines = [
-        '╔═╗┌─┐┌─┐┬┬  ╔═╗┬─┐┌┬┐',
-        '╠═╣└─┐│  ││  ╠═╣├┬┘ │ ',
-        '╩ ╩└─┘└─┘┴┴─┘╩ ╩┴└─ ┴ '
-      ];
-      
-      const borderTop = '┌' + '─'.repeat(text.length + 2) + '┐';
-      const borderBottom = '└' + '─'.repeat(text.length + 2) + '┘';
-      const content = `│ ${text} │`;
-      
-      const fullArt = [borderTop, content, borderBottom].join('\n');
-      
-      return `
-${textLines.join('\n')}
-
-${fullArt}
-`;
+      return result;
     }
   },
   matrix: {
     type: 'matrix',
     description: "Activates a Matrix-like screen effect",
-    duration: 8000 // milliseconds
+    duration: 5000 // milliseconds
   },
-  "surprise me": {
+  surprise: {
     type: 'surprise',
     url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
@@ -185,6 +183,7 @@ export const generateAsciiArt = (text: string): string => {
 export const triggerMatrixEffect = (callback: () => void): void => {
   const matrixCommand = terminalCommands.matrix as MatrixCommand;
   
+  // Create matrix rain effect
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   
@@ -201,18 +200,22 @@ export const triggerMatrixEffect = (callback: () => void): void => {
   canvas.style.zIndex = '10000';
   document.body.appendChild(canvas);
   
+  // Set canvas size to match window
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   
+  // Matrix characters
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
   const fontSize = 14;
   const columns = Math.floor(canvas.width / fontSize);
   
+  // Array to track y position of each column
   const drops: number[] = [];
   for (let i = 0; i < columns; i++) {
     drops[i] = 1;
   }
   
+  // Draw the matrix effect
   const draw = () => {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -222,7 +225,6 @@ export const triggerMatrixEffect = (callback: () => void): void => {
     
     for (let i = 0; i < drops.length; i++) {
       const text = characters.charAt(Math.floor(Math.random() * characters.length));
-      
       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
       
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -233,6 +235,7 @@ export const triggerMatrixEffect = (callback: () => void): void => {
     }
   };
   
+  // Run animation
   let animationId: number;
   const animate = () => {
     draw();
@@ -241,16 +244,17 @@ export const triggerMatrixEffect = (callback: () => void): void => {
   
   animate();
   
+  // Clean up after duration
   setTimeout(() => {
     cancelAnimationFrame(animationId);
     document.body.removeChild(canvas);
     callback();
-  }, matrixCommand.duration || 8000);
+  }, matrixCommand.duration || 5000);
 };
 
 // Open the surprise video
 export const openSurprise = (): void => {
-  const surpriseCommand = terminalCommands["surprise me"] as SurpriseCommand;
+  const surpriseCommand = terminalCommands.surprise as SurpriseCommand;
   window.open(surpriseCommand.url, '_blank');
 };
 
@@ -260,40 +264,19 @@ export const toggleMusic = (trackIndex: number = 0): boolean => {
   
   if (!audioElement) {
     audioElement = new Audio();
-    
-    audioElement.addEventListener('error', (e) => {
-      console.error("Audio error:", e);
-      musicCommand.isPlaying = false;
-    });
-    
-    audioElement.addEventListener('playing', () => {
-      console.log("Audio is now playing");
-      musicCommand.isPlaying = true;
-    });
-    
-    audioElement.addEventListener('pause', () => {
-      console.log("Audio is now paused");
-      musicCommand.isPlaying = false;
-    });
   }
   
   if (musicCommand.isPlaying) {
+    // Stop music
     audioElement.pause();
-    audioElement.currentTime = 0;
     musicCommand.isPlaying = false;
   } else {
+    // Play music
     if (trackIndex < musicCommand.tracks.length) {
       const track = musicCommand.tracks[trackIndex];
       audioElement.src = track.url;
-      audioElement.volume = 0.7;
       audioElement.loop = true;
-      
-      audioElement.play().catch(err => {
-        console.error("Error playing audio:", err);
-        alert("Unable to play audio. Please interact with the page first.");
-        musicCommand.isPlaying = false;
-      });
-      
+      audioElement.play().catch(err => console.error("Error playing audio:", err));
       musicCommand.isPlaying = true;
     }
   }
@@ -316,9 +299,9 @@ export const getAvailableCommands = (): string[] => {
 export const getCommandHelp = (): Record<string, string> => {
   return {
     joke: "joke - Displays a random programming joke",
-    ascii: "ascii [text] - Converts text to ASCII art. Try: ascii cat, ascii dog, ascii robot, ascii happy, ascii cool, ascii heart",
+    ascii: "ascii [text] - Converts text to ASCII art",
     matrix: "matrix - Activates a Matrix-like screen effect",
-    "surprise me": "surprise me - Opens a fun surprise",
+    surprise: "surprise - Opens a fun surprise video",
     music: "music - Plays background music (toggle with music again)",
     help: "help - Show this help message",
     clear: "clear - Clear the terminal",

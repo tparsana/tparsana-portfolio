@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X, FileText, Download } from "lucide-react";
+import { Moon, Sun, Menu, X, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SplitFlapText from "./SplitFlapText";
 
@@ -36,12 +36,7 @@ const Navigation = () => {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-    { 
-      name: "Resume", 
-      href: "/resume.pdf", 
-      icon: <Download className="h-3 w-3 ml-1" />,
-      download: true
-    }
+    { name: "Resume", href: "/resume.pdf", icon: <FileText className="h-3 w-3 ml-1" /> }
   ];
 
   return (
@@ -65,9 +60,6 @@ const Navigation = () => {
                 key={link.name}
                 href={link.href}
                 className="px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center"
-                download={link.download}
-                target={link.download ? "_self" : undefined}
-                rel={link.download ? "noopener noreferrer" : undefined}
               >
                 {link.name}
                 {link.icon && link.icon}
@@ -118,9 +110,6 @@ const Navigation = () => {
                   href={link.href}
                   className="px-3 py-2 text-sm font-medium hover:text-primary flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
-                  download={link.download}
-                  target={link.download ? "_self" : undefined}
-                  rel={link.download ? "noopener noreferrer" : undefined}
                 >
                   {link.name}
                   {link.icon && link.icon}
@@ -135,3 +124,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

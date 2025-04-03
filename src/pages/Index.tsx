@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
 import PreLoader from "@/components/PreLoader";
-import TechSkillFlip from "@/components/TechSkillFlip";
+import TechStackCompact from "@/components/TechStackCompact";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -195,12 +195,12 @@ const Index = () => {
         <>
           <Navigation />
           <main className="min-h-screen">
+            <AnimatedBackground />
+            
             <section
               id="home"
               className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
             >
-              <AnimatedBackground />
-
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
                   <SplitFlapText
@@ -324,8 +324,8 @@ const Index = () => {
                   <SplitFlapText text="Tech Stack" className="font-mono" />
                 </h2>
                 
-                <div className="bg-card shadow-lg rounded-xl p-6 overflow-x-auto">
-                  <TechSkillFlip />
+                <div className="bg-card shadow-lg rounded-xl p-6">
+                  <TechStackCompact />
                 </div>
               </div>
             </section>

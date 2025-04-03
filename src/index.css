@@ -16,6 +16,33 @@
     from { width: 0%; }
     to { width: var(--target-width, 100%); }
   }
+  
+  @keyframes blob-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes blob-float-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  @keyframes blob-float-reverse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(20px); }
+  }
+  
+  .animate-blob-float {
+    animation: blob-float 6s ease-in-out infinite;
+  }
+  
+  .animate-blob-float-slow {
+    animation: blob-float-slow 8s ease-in-out infinite;
+  }
+  
+  .animate-blob-float-reverse {
+    animation: blob-float-reverse 7s ease-in-out infinite;
+  }
 }
 
 @layer base {

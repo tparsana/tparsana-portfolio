@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X, FileText } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SplitFlapText from "./SplitFlapText";
+import ResumeViewer from "./ResumeViewer";
 
 const Navigation = () => {
   const { theme, setTheme } = useTheme();
@@ -36,7 +37,6 @@ const Navigation = () => {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-    { name: "Resume", href: "/resume.pdf", target: "_blank", rel: "noopener noreferrer", icon: <FileText className="h-3 w-3 ml-1" /> }
   ];
 
   return (
@@ -59,14 +59,12 @@ const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
-                target={link.target}
-                rel={link.rel}
                 className="px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center"
               >
                 {link.name}
-                {link.icon && link.icon}
               </a>
             ))}
+            <ResumeViewer />
           </nav>
 
           <div className="flex items-center">
@@ -110,15 +108,13 @@ const Navigation = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  target={link.target}
-                  rel={link.rel}
                   className="px-3 py-2 text-sm font-medium hover:text-primary flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
-                  {link.icon && link.icon}
                 </a>
               ))}
+              <ResumeViewer triggerClassName="justify-start" />
             </nav>
           </div>
         </div>

@@ -12,7 +12,9 @@ const TechStackCompact = () => {
       "JavaScript",
       "Tailwind CSS",
       "JavaFX",
-      "HTML/CSS"
+      "HTML/CSS",
+      "Material-UI",
+      "React Router"
     ],
     "Backend": [
       "Node.js",
@@ -64,7 +66,11 @@ const TechStackCompact = () => {
       "Bezi (3D)",
       "Unity",
       "Adobe Suite",
-      "Microsoft Office"
+      "Microsoft Office",
+      "Axios",
+      "Streamlit",
+      "Firebase",
+      "Supabase"
     ]
   };
   

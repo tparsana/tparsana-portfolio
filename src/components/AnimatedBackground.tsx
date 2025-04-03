@@ -20,7 +20,7 @@ const AnimatedBackground = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     
-    // Independent blob movement animation
+    // Independent blob movement animation with increased speed
     let animationFrameId: number;
     let timestamp = 0;
     
@@ -29,18 +29,21 @@ const AnimatedBackground = () => {
       const delta = time - timestamp;
       timestamp = time;
       
+      // Increased speed by multiplying time by 1.8
+      const speedFactor = 1.8;
+      
       setBlobPositions(prev => ({
         blob1: {
-          x: 15 * Math.sin(time / 2000),
-          y: 10 * Math.cos(time / 1800)
+          x: 15 * Math.sin(time * speedFactor / 2000),
+          y: 10 * Math.cos(time * speedFactor / 1800)
         },
         blob2: {
-          x: 20 * Math.cos(time / 2200),
-          y: 15 * Math.sin(time / 1600)
+          x: 20 * Math.cos(time * speedFactor / 2200),
+          y: 15 * Math.sin(time * speedFactor / 1600)
         },
         blob3: {
-          x: 12 * Math.sin(time / 1600 + Math.PI/4),
-          y: 18 * Math.cos(time / 2400 + Math.PI/3)
+          x: 12 * Math.sin(time * speedFactor / 1600 + Math.PI/4),
+          y: 18 * Math.cos(time * speedFactor / 2400 + Math.PI/3)
         }
       }));
       

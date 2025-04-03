@@ -105,17 +105,18 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         )}
         
         <div className={cn(
-          "overflow-hidden transition-all duration-300",
+          "overflow-hidden transition-all duration-500 ease-in-out", // Made transition smoother
           isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         )}>
           <p className="text-sm pt-2">{description}</p>
         </div>
         
         <div className={cn(
-          "absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 text-muted-foreground opacity-0 transition-opacity duration-300",
-          isExpanded ? "opacity-0" : "group-hover:opacity-50"
+          "absolute bottom-1 left-1/2 transform -translate-x-1/2 translate-y-6 text-muted-foreground",
+          isExpanded ? "opacity-0" : "md:group-hover:opacity-50 opacity-50", // Always visible on mobile
+          "transition-opacity duration-300"
         )}>
-          <ChevronDown className="h-4 w-4" />
+          <ChevronDown className="h-4 w-4 animate-bounce" />
         </div>
       </div>
     </div>

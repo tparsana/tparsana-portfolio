@@ -11,18 +11,40 @@ const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || 
+        navigator.maxTouchPoints > 0 ||
+        (navigator as any).msMaxTouchPoints > 0;
+      setIsMobile(isTouchDevice);
+    };
+    
+    checkMobile();
+    
+    // Don't continue with custom cursor setup if on mobile
+    if (isMobile) {
+      document.body.style.cursor = "auto";
+      return;
+    }
+
     const updateCursorPosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsHidden(false);
     };
 
     const updateCursorType = () => {
-      const hoveredElement = document.elementFromPoint(position.x, position.y);
-      const isPointerElement = hoveredElement && 
-        window.getComputedStyle(hoveredElement).cursor === "pointer";
-      setIsPointer(isPointerElement);
+      try {
+        const hoveredElement = document.elementFromPoint(position.x, position.y);
+        const isPointerElement = hoveredElement && 
+          window.getComputedStyle(hoveredElement).cursor === "pointer";
+        setIsPointer(isPointerElement);
+      } catch (err) {
+        // If there's an error determining cursor style, default to standard cursor
+        setIsPointer(false);
+      }
     };
 
     const handleMouseDown = () => setIsClicking(true);
@@ -49,9 +71,10 @@ const CustomCursor = () => {
       
       document.body.style.cursor = "auto";
     };
-  }, [position.x, position.y]);
+  }, [position.x, position.y, isMobile]);
 
-  if (isHidden) return null;
+  // Don't render custom cursor on mobile devices
+  if (isHidden || isMobile) return null;
 
   return (
     <div

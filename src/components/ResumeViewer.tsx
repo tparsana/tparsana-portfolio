@@ -29,11 +29,12 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({ triggerClassName }) => {
             View my professional resume
           </DialogDescription>
         </DialogHeader>
-        <div className="mt-4">
+        <div className="mt-4 cursor-auto">
           <img 
             src="/lovable-uploads/b9a581e3-cfdb-4614-9018-f55726ba64a5.png" 
             alt="Tanish Parsana Resume" 
             className="w-full h-auto rounded-md shadow-md" 
+            style={{ cursor: 'auto' }}
           />
         </div>
       </DialogContent>

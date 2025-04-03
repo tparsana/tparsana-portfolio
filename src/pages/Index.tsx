@@ -26,7 +26,7 @@ const projects = [
   {
     title: "Construction Project Management App",
     description: "A super easy to use Project Management App focuing on construction project (with WhatsApp integration upcoming).",
-    image: "https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["TypeScript", "React", "Firebase", "Supabase", "Tailwind", "Node.js", "Express.js", "MongoDB", "Redux", "Material-UI", "React Router", "Axios"],
     githubUrl: "https://github.com/tparsana/buildtrack-constructify",
     liveUrl: "https://example.com",
@@ -34,7 +34,7 @@ const projects = [
   {
     title: "Unionsky.",
     description: "Plane-spotting web app for displaying the information of all the flights that fly outside my window.",
-    image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1572573385781-2fd4f8c1389e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "Streamlit", "OpenSky API", "FlightRadar API", "REST API", "Requests", "Streamlit Autorefresh", "Real-time Data", "Data Visualization"],
     githubUrl: "https://github.com/tparsana/unionsky",
     liveUrl: "https://example.com", 
@@ -42,7 +42,7 @@ const projects = [
   {
     title: "Portfolio Website",
     description: "This personal portfolio website showcasing projects and skills.",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["React", "Framer Motion", "Tailwind", "Vite"],
     githubUrl: "https://github.com/tparsana/tparsana-portfolio",
     liveUrl: "https://tanishparsana.vercel.app",

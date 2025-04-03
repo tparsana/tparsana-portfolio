@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import SplitFlapText from "./SplitFlapText";
@@ -16,19 +15,13 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
     const loadingTexts = [
       "Initializing...",
       "Loading components...",
-      "Preparing animations...",
-      "Almost there...",
       "Ready!",
     ];
 
-    let interval = 0;
-    
-    // Simulate loading progress
     const timer = setInterval(() => {
       setProgress((prevProgress) => {
-        const newProgress = prevProgress + Math.random() * 15;
+        const newProgress = prevProgress + Math.random() * 25;
         
-        // Update loading text based on progress
         const textIndex = Math.min(
           Math.floor((newProgress / 100) * loadingTexts.length),
           loadingTexts.length - 1
@@ -42,16 +35,15 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
           clearInterval(timer);
           setIsComplete(true);
           
-          // Delay to let the animation finish
           setTimeout(() => {
             onLoadComplete();
-          }, 1000);
+          }, 400);
           
           return 100;
         }
         return newProgress;
       });
-    }, 400);
+    }, 200);
 
     return () => clearInterval(timer);
   }, [loadingText, onLoadComplete]);

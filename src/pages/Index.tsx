@@ -320,11 +320,11 @@ const Index = () => {
 
             <section id="tech-stack" className="py-20 px-4">
               <div className="container mx-auto max-w-6xl">
-                <h2 className="text-3xl font-bold mb-16 text-center">
+                <h2 className="text-3xl font-bold mb-8 text-center">
                   <SplitFlapText text="Tech Stack" className="font-mono" />
                 </h2>
                 
-                <div className="bg-card shadow-lg rounded-xl p-6 overflow-hidden">
+                <div className="bg-card shadow-lg rounded-xl p-6 overflow-x-auto">
                   <TechSkillFlip />
                 </div>
               </div>

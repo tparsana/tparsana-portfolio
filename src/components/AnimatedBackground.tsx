@@ -1,11 +1,34 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const AnimatedBackground = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Smoothed mouse tracking with reduced movement intensity (divided by 50)
+      setMousePosition({
+        x: e.clientX / 50,
+        y: e.clientY / 50
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
       {/* Blob 1 - Top Left */}
-      <div className="absolute top-[-150px] left-[-100px] w-[600px] h-[600px] opacity-30 animate-blob-float-slow blur-[80px]">
+      <div 
+        className="absolute top-[-150px] left-[-100px] w-[600px] h-[600px] opacity-30 animate-blob-float-slow blur-[80px]"
+        style={{ 
+          transform: `translate(${mousePosition.x * -0.5}px, ${mousePosition.y * -0.5}px)` 
+        }}
+      >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <path
             fill="#8B5CF6"
@@ -16,7 +39,12 @@ const AnimatedBackground = () => {
       </div>
 
       {/* Blob 2 - Bottom Right */}
-      <div className="absolute bottom-[-100px] right-[-150px] w-[700px] h-[700px] opacity-20 animate-blob-float blur-[100px]">
+      <div 
+        className="absolute bottom-[-100px] right-[-150px] w-[700px] h-[700px] opacity-20 animate-blob-float blur-[100px]"
+        style={{ 
+          transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)` 
+        }}
+      >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <path
             fill="#06B6D4"
@@ -27,7 +55,12 @@ const AnimatedBackground = () => {
       </div>
 
       {/* Blob 3 - Center Right */}
-      <div className="absolute top-[30%] right-[-50px] w-[500px] h-[500px] opacity-25 animate-blob-float-reverse blur-[70px]">
+      <div 
+        className="absolute top-[30%] right-[-50px] w-[500px] h-[500px] opacity-25 animate-blob-float-reverse blur-[70px]"
+        style={{ 
+          transform: `translate(${mousePosition.x * 0.2}px, ${mousePosition.y * -0.2}px)` 
+        }}
+      >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <path
             fill="#10B981"

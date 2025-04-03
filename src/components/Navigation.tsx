@@ -36,7 +36,7 @@ const Navigation = () => {
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
-    { name: "Resume", href: "/resume.pdf", icon: <FileText className="h-3 w-3 ml-1" /> }
+    { name: "Resume", href: "/resume.pdf", target: "_blank", rel: "noopener noreferrer", icon: <FileText className="h-3 w-3 ml-1" /> }
   ];
 
   return (
@@ -59,6 +59,8 @@ const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
+                target={link.target}
+                rel={link.rel}
                 className="px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center"
               >
                 {link.name}
@@ -108,6 +110,8 @@ const Navigation = () => {
                 <a
                   key={link.name}
                   href={link.href}
+                  target={link.target}
+                  rel={link.rel}
                   className="px-3 py-2 text-sm font-medium hover:text-primary flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -124,4 +128,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-

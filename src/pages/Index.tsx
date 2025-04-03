@@ -34,7 +34,7 @@ const projects = [
   {
     title: "Unionsky.",
     description: "Plane-spotting web app for displaying the information of all the flights that fly outside my window.",
-    image: "https://images.unsplash.com/photo-1572573385781-2fd4f8c1389e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "Streamlit", "OpenSky API", "FlightRadar API", "REST API", "Requests", "Streamlit Autorefresh", "Real-time Data", "Data Visualization"],
     githubUrl: "https://github.com/tparsana/unionsky",
     liveUrl: "https://example.com", 
@@ -56,7 +56,7 @@ const experiences = [
     subtitle: "DevLabs Club at ASU",
     description: "As an Industry Relations Officer at DevLabs at ASU, I focus on building strong relationships with tech companies and industry professionals. My role involves organizing networking events, securing sponsorships, and connecting club members with valuable industry opportunities. I act as a bridge between our passionate student community and the tech industry, helping peers advance their careers and gain real-world insights.",
     location: "Tempe, AZ, USA",
-    logo: "https://randomuser.me/api/portraits/men/1.jpg",
+    logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
   },
   {
     date: "Aug 2023 - Present",
@@ -64,7 +64,7 @@ const experiences = [
     subtitle: "Enterprise Technology at ASU",
     description: "As a Tech Consultant at ASU, I play a pivotal role in driving technological efficiency across the university. I provide high-level support to students and faculty, optimising system performance, streamlining software deployments, and resolving complex technical challenges. In addition to troubleshooting, I lead training initiatives to enhance digital literacy and ensure smooth operations across diverse departments, contributing to the university's digital transformation efforts.",
     location: "Tempe, AZ, USA",
-    logo: "https://randomuser.me/api/portraits/men/1.jpg",
+    logo: "https://1000logos.net/wp-content/uploads/2021/06/Arizona-State-Sun-Devils-logo.png",
   },
   {
     date: "May 2024 - Aug 2024",

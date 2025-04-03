@@ -6,12 +6,66 @@ import { cn } from "@/lib/utils";
 
 const TechStackCompact = () => {
   const techStacks = {
-    "Frontend": ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML/CSS"],
-    "Backend": ["Node.js", "Python", "Express", "Django", "Flask"],
-    "Database": ["MongoDB", "PostgreSQL", "MySQL", "Redis"],
-    "AI/ML": ["TensorFlow", "PyTorch", "NLP", "Computer Vision"],
-    "Cloud/DevOps": ["AWS", "Docker", "CI/CD", "Kubernetes"],
-    "Tools": ["Git", "VS Code", "Postman", "Figma"]
+    "Frontend": [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "JavaFX",
+      "HTML/CSS"
+    ],
+    "Backend": [
+      "Node.js",
+      "Python",
+      "Express",
+      "Django",
+      "Flask",
+      "Java",
+      "C++",
+      "C"
+    ],
+    "Database": [
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "Redis",
+      "Vector Databases",
+      "Pinecone"
+    ],
+    "AI/ML": [
+      "TensorFlow",
+      "PyTorch",
+      "NLP",
+      "Computer Vision",
+      "LangChain",
+      "OpenAI API",
+      "LLMs",
+      "Machine Learning",
+      "Data Science"
+    ],
+    "Cloud/DevOps": [
+      "AWS",
+      "AWS Lambda",
+      "AWS S3",
+      "AWS Glue",
+      "Docker",
+      "CI/CD",
+      "Kubernetes",
+      "Linux",
+      "Bash"
+    ],
+    "Tools": [
+      "Git",
+      "VS Code",
+      "Postman",
+      "Figma",
+      "PySpark",
+      "Pandas",
+      "Bezi (3D)",
+      "Unity",
+      "Adobe Suite",
+      "Microsoft Office"
+    ]
   };
   
   const getCategoryColor = (category: string): string => {

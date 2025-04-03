@@ -3,6 +3,7 @@ import React from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ResumeViewerProps {
   triggerClassName?: string;

@@ -5,7 +5,7 @@
 export const siteConfig = {
   name: "Tanish Parsana",
   description: "Full Stack Developer, Data Science & AI Engineer",
-  email: "tanish.parsana2004@gmail.com",
+  email: "parsanatanish@gmail.com",
   urls: {
     github: "https://github.com/tparsana",
     linkedin: "https://www.linkedin.com/in/tanish-parsana/",

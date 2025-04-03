@@ -105,7 +105,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         )}
         
         <div className={cn(
-          "overflow-hidden transition-all duration-500 ease-in-out", // Made transition smoother
+          "overflow-hidden transition-all duration-800 ease-in-out", // Made transition smoother
           isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         )}>
           <p className="text-sm pt-2">{description}</p>

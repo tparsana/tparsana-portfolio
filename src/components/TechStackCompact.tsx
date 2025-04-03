@@ -26,6 +26,18 @@ const TechStackCompact = () => {
     }
   };
 
+  const getCategoryHoverColor = (category: string): string => {
+    switch (category) {
+      case "Frontend": return "group-hover:bg-indigo-600";
+      case "Backend": return "group-hover:bg-blue-600";
+      case "Database": return "group-hover:bg-cyan-600";
+      case "AI/ML": return "group-hover:bg-green-600";
+      case "Cloud/DevOps": return "group-hover:bg-amber-600";
+      case "Tools": return "group-hover:bg-rose-600";
+      default: return "group-hover:bg-gray-600";
+    }
+  };
+
   return (
     <div className="space-y-4">
       {Object.entries(techStacks).map(([category, skills]) => (
@@ -35,15 +47,22 @@ const TechStackCompact = () => {
             <div className={cn("w-2 h-2 rounded-full", getCategoryColor(category))}></div>
           </div>
           
-          <Card className="p-3">
+          <Card className="p-3 transition-all duration-300 hover:shadow-md">
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => (
                 <Badge 
                   key={skill} 
                   variant="secondary"
-                  className="px-3 py-1 text-sm font-medium"
+                  className={cn(
+                    "px-3 py-1 text-sm font-medium group transition-all duration-300",
+                    "hover:scale-105 hover:shadow-sm cursor-pointer"
+                  )}
                 >
-                  {skill}
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">{skill}</span>
+                  <span className={cn(
+                    "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md", 
+                    getCategoryHoverColor(category)
+                  )}></span>
                 </Badge>
               ))}
             </div>

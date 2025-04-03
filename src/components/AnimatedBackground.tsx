@@ -3,6 +3,11 @@ import React, { useEffect, useState } from "react";
 
 const AnimatedBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [blobPositions, setBlobPositions] = useState({
+    blob1: { x: 0, y: 0 },
+    blob2: { x: 0, y: 0 },
+    blob3: { x: 0, y: 0 }
+  });
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -15,8 +20,38 @@ const AnimatedBackground = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     
+    // Independent blob movement animation
+    let animationFrameId: number;
+    let timestamp = 0;
+    
+    const animateBlobs = (time: number) => {
+      // Calculate time difference for smooth animation
+      const delta = time - timestamp;
+      timestamp = time;
+      
+      setBlobPositions(prev => ({
+        blob1: {
+          x: 15 * Math.sin(time / 2000),
+          y: 10 * Math.cos(time / 1800)
+        },
+        blob2: {
+          x: 20 * Math.cos(time / 2200),
+          y: 15 * Math.sin(time / 1600)
+        },
+        blob3: {
+          x: 12 * Math.sin(time / 1600 + Math.PI/4),
+          y: 18 * Math.cos(time / 2400 + Math.PI/3)
+        }
+      }));
+      
+      animationFrameId = requestAnimationFrame(animateBlobs);
+    };
+    
+    animationFrameId = requestAnimationFrame(animateBlobs);
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -26,7 +61,7 @@ const AnimatedBackground = () => {
       <div 
         className="absolute top-[-150px] left-[-100px] w-[600px] h-[600px] opacity-30 animate-blob-float-slow blur-[80px]"
         style={{ 
-          transform: `translate(${mousePosition.x * -0.5}px, ${mousePosition.y * -0.5}px)` 
+          transform: `translate(${blobPositions.blob1.x + mousePosition.x * -0.3}px, ${blobPositions.blob1.y + mousePosition.y * -0.3}px)` 
         }}
       >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +77,7 @@ const AnimatedBackground = () => {
       <div 
         className="absolute bottom-[-100px] right-[-150px] w-[700px] h-[700px] opacity-20 animate-blob-float blur-[100px]"
         style={{ 
-          transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)` 
+          transform: `translate(${blobPositions.blob2.x + mousePosition.x * 0.2}px, ${blobPositions.blob2.y + mousePosition.y * 0.2}px)` 
         }}
       >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +93,7 @@ const AnimatedBackground = () => {
       <div 
         className="absolute top-[30%] right-[-50px] w-[500px] h-[500px] opacity-25 animate-blob-float-reverse blur-[70px]"
         style={{ 
-          transform: `translate(${mousePosition.x * 0.2}px, ${mousePosition.y * -0.2}px)` 
+          transform: `translate(${blobPositions.blob3.x + mousePosition.x * 0.1}px, ${blobPositions.blob3.y + mousePosition.y * -0.1}px)` 
         }}
       >
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">

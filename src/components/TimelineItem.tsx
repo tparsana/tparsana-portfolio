@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { MapPin } from "lucide-react";
+import { MapPin, ChevronDown } from "lucide-react";
 
 interface TimelineItemProps {
   date: string;
@@ -23,6 +23,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   className,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -48,6 +49,10 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       }
     };
   }, []);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <div
@@ -81,9 +86,13 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
       <div
         className={cn(
-          "transform transition-all duration-500",
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          "transform transition-all duration-500 group relative",
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+          "hover:bg-muted/10 rounded-lg p-2 -m-2"
         )}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+        onClick={toggleExpand}
       >
         <h3 className="font-semibold text-lg">{title}</h3>
         <p className="text-sm text-muted-foreground mb-1">{subtitle}</p>
@@ -95,7 +104,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           </div>
         )}
         
-        <p className="text-sm">{description}</p>
+        <div className={cn(
+          "overflow-hidden transition-all duration-300",
+          isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        )}>
+          <p className="text-sm pt-2">{description}</p>
+        </div>
+        
+        <div className={cn(
+          "absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 text-muted-foreground opacity-0 transition-opacity duration-300",
+          isExpanded ? "opacity-0" : "group-hover:opacity-50"
+        )}>
+          <ChevronDown className="h-4 w-4" />
+        </div>
       </div>
     </div>
   );

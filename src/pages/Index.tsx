@@ -16,11 +16,11 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with cart, payments, and admin dashboard.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    githubUrl: "https://github.com",
+    title: "ACTV",
+    description: "A RAG based Dynamic and Personalized Fitness and Nutrition Coach to suggest Customized Workout and Meal Plans.",
+    image: "https://unsplash.com/photos/man-riding-bike-on-cliff-at-daytime-9qsK2QHidmg",
+    tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API" , "MongoDB"],
+    githubUrl: "https://github.com/tparsana/ACTV",
     liveUrl: "https://example.com",
   },
   {
@@ -407,7 +407,7 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-semibold mb-4">Let's Connect</h3>
                     <p className="mb-6">
-                      I'm currently available for freelance work and full-time positions.
+                      I'm currently available for freelance work and internship positions.
                       If you have a project that needs some creative touches or
                       if you're looking to add a developer to your team, I'd love to hear from you.
                     </p>

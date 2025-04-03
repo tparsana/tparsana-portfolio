@@ -64,7 +64,7 @@ const experiences = [
     subtitle: "Enterprise Technology at ASU",
     description: "As a Tech Consultant at ASU, I play a pivotal role in driving technological efficiency across the university. I provide high-level support to students and faculty, optimising system performance, streamlining software deployments, and resolving complex technical challenges. In addition to troubleshooting, I lead training initiatives to enhance digital literacy and ensure smooth operations across diverse departments, contributing to the university's digital transformation efforts.",
     location: "Tempe, AZ, USA",
-    logo: "https://seekvectors.com/files/download/Arizona%20State%20University-04.png",
+    logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
   },
   {
     date: "May 2024 - Aug 2024",

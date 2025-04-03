@@ -22,6 +22,22 @@ const skills: Skill[] = [
   { name: "Tailwind CSS", proficiency: 92, category: "Frontend" },
   { name: "Data Science", proficiency: 85, category: "Analytics" },
   { name: "Machine Learning", proficiency: 80, category: "AI" },
+  
+  { name: "Java", proficiency: 78, category: "Languages" },
+  { name: "JavaFX", proficiency: 75, category: "Frontend" },
+  { name: "C++", proficiency: 75, category: "Languages" },
+  { name: "HTML", proficiency: 90, category: "Frontend" },
+  { name: "CSS", proficiency: 88, category: "Frontend" },
+  { name: "JavaScript", proficiency: 90, category: "Languages" },
+  { name: "SQL", proficiency: 80, category: "Database" },
+  { name: "LangChain", proficiency: 80, category: "AI" },
+  { name: "OpenAI API", proficiency: 85, category: "AI" },
+  { name: "Vector Databases", proficiency: 78, category: "Database" },
+  { name: "Pinecone", proficiency: 77, category: "Database" },
+  { name: "PySpark", proficiency: 75, category: "Analytics" },
+  { name: "AWS Lambda", proficiency: 80, category: "Cloud" },
+  { name: "AWS S3", proficiency: 82, category: "Cloud" },
+  { name: "AWS Glue", proficiency: 75, category: "Cloud" },
 ];
 
 const categories = Array.from(new Set(skills.map(skill => skill.category)));

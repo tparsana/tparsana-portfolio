@@ -18,7 +18,7 @@ const projects = [
   {
     title: "ACTV",
     description: "A RAG based Dynamic and Personalized Fitness and Nutrition Coach to suggest Customized Workout and Meal Plans.",
-    image: "https://unsplash.com/photos/man-riding-bike-on-cliff-at-daytime-9qsK2QHidmg",
+    image: "https://images.unsplash.com/photo-1525104698733-6c7a05140af3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
     tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API" , "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
     liveUrl: "https://example.com",

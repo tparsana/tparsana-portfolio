@@ -301,22 +301,26 @@ const Index = () => {
                   </div>
 
                   <div className="relative">
-                    <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
+                    <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20 relative">
+                      {/* Image */}
                       <img
                         src="/IMG_1241.jpeg"
                         alt="Tanish Parsana"
                         className="w-full h-full object-cover"
                       />
-                    </div>
-                    <div className="absolute bottom-4 right-4 bg-card p-4 rounded-lg shadow-lg max-w-[80%]">
-                      <p className="font-mono text-sm">
-                        "I build things for the web that people love to use."
-                      </p>
+                
+                      {/* Dark Tint Overlay */}
+                      <div className="absolute inset-0 bg-black opacity-40 mix-blend-multiply pointer-events-none z-10" />
+                
+                      {/* Quote Text */}
+                      <div className="absolute bottom-4 right-4 z-20 bg-card/80 backdrop-blur p-4 rounded-lg shadow-lg max-w-[80%] text-white">
+                        <p className="font-mono text-sm">
+                          "I build things for the web that people love to use."
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </section>
+                </section>
 
             <section id="tech-stack" className="py-20 px-4">
               <div className="container mx-auto max-w-6xl">

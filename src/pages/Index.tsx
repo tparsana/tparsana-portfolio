@@ -301,14 +301,14 @@ const Index = () => {
                   </div>
 
                   <div className="relative">
-                    <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
+                    <div className="relative aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
                       <img
                         src="/IMG_1241.jpeg"
                         alt="Tanish Parsana"
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="absolute bottom-4 right-4 bg-card p-4 rounded-lg shadow-lg max-w-[80%]">
+                    <div className="absolute inset-0 bg-purple-900 opacity-30 mix-blend-multiply pointer-events-none">
                       <p className="font-mono text-sm">
                         "I build things for the web that people love to use."
                       </p>

@@ -308,7 +308,7 @@ const Index = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="absolute inset-0 bg-purple-900 opacity-30 mix-blend-multiply pointer-events-none">
+                    <div className="absolute bottom-4 right-4 bg-card p-4 rounded-lg shadow-lg max-w-[80%]">
                       <p className="font-mono text-sm">
                         "I build things for the web that people love to use."
                       </p>

@@ -301,7 +301,7 @@ const Index = () => {
                   </div>
 
                   <div className="relative">
-                    <div className="relative aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
+                    <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
                       <img
                         src="/IMG_1241.jpeg"
                         alt="Tanish Parsana"

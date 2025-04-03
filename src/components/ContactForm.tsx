@@ -171,7 +171,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       setCommandHistory([
         ...newHistory,
         "Contact Information:",
-        "Email: tanish.parsana2004@gmail.com",
+        "Email: parsanatanish@gmail.com",
         "GitHub: github.com/tparsana",
         "LinkedIn: linkedin.com/in/tanish-parsana"
       ]);

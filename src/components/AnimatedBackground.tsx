@@ -30,7 +30,7 @@ const AnimatedBackground = () => {
       timestamp = time;
       
       // Increased speed by multiplying time by 1.8
-      const speedFactor = 10;
+      const speedFactor = 1.8;
       
       setBlobPositions(prev => ({
         blob1: {

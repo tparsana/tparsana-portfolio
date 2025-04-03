@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import SplitFlapText from "./SplitFlapText";
@@ -20,7 +21,7 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
 
     const timer = setInterval(() => {
       setProgress((prevProgress) => {
-        const newProgress = prevProgress + Math.random() * 25;
+        const newProgress = prevProgress + Math.random() * 40; // Increased speed
         
         const textIndex = Math.min(
           Math.floor((newProgress / 100) * loadingTexts.length),
@@ -37,13 +38,13 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
           
           setTimeout(() => {
             onLoadComplete();
-          }, 400);
+          }, 200); // Reduced delay from 400ms to 200ms
           
           return 100;
         }
         return newProgress;
       });
-    }, 200);
+    }, 100); // Reduced interval from 200ms to 100ms
 
     return () => clearInterval(timer);
   }, [loadingText, onLoadComplete]);
@@ -52,7 +53,7 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
     <div
       className={cn(
         "fixed inset-0 z-50 flex flex-col items-center justify-center bg-background",
-        "transition-opacity duration-500",
+        "transition-opacity duration-300", // Reduced from 500ms to 300ms
         isComplete ? "opacity-0 pointer-events-none" : "opacity-100"
       )}
     >
@@ -67,7 +68,7 @@ const PreLoader: React.FC<PreLoaderProps> = ({ onLoadComplete }) => {
       
       <div className="w-64 h-2 bg-secondary rounded-full overflow-hidden">
         <div 
-          className="h-full bg-primary transition-all duration-300 ease-out"
+          className="h-full bg-primary transition-all duration-200 ease-out" // Reduced from 300ms to 200ms
           style={{ width: `${progress}%` }}
         />
       </div>

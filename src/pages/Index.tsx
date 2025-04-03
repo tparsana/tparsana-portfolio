@@ -303,7 +303,7 @@ const Index = () => {
                   <div className="relative">
                     <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
                       <img
-                        src="https://media.licdn.com/dms/image/v2/D5603AQHW_EiVJ5xWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1728076399562?e=2147483647&v=beta&t=yQhTbbTjCGGD3erhSJ33sCsT7a6FDsIddAInMZNAHSU"
+                        src="/IMG_1241.jpeg"
                         alt="Tanish Parsana"
                         className="w-full h-full object-cover"
                       />

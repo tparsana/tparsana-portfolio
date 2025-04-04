@@ -126,10 +126,10 @@ const terminalCommands = {
   ascii: {
     execute: (text: string) => {
       const largeText = text.split('').join('  ');
-      return `
+      return 
  #####  #####  #####  #####  #####
 ${largeText.toUpperCase()}
-#####  #####  #####  #####  #####`;
+#####  #####  #####  #####  #####;
     }
   },
   matrix: {
@@ -271,34 +271,36 @@ const Index = () => {
                       trends in technology.
                     </p>
 
-                    <FlipCard
-                      className="h-40"
-                      frontContent={
-                        <div className="flex flex-col h-full items-center justify-center">
-                          <p className="text-lg font-semibold mb-2">Did you know?</p>
-                          <p className="text-center text-muted-foreground">
-                            {randomFact}
-                          </p>
-                        </div>
-                      }
-                      backContent={(flipBack) => (
-                        <div className="flex flex-col h-full items-center justify-center">
-                          <p className="text-lg font-semibold mb-2">Another fact</p>
-                          <Button
-                            variant="ghost"
-                            onClick={(e) => {
-                              e.stopPropagation(); // Prevent card click
-                              changeRandomFact();  // Get new fact
-                              setTimeout(() => {
-                                flipBack(); // Flip back to front after short delay
-                              }, 300);
-                            }}
-                          >
-                            Show me more
-                          </Button>
-                        </div>
-                      )}
-                    />
+                    <div className="pt-4">
+                      <FlipCard
+                        className="h-40"
+                        frontContent={
+                          <div className="flex flex-col h-full items-center justify-center">
+                            <p className="text-lg font-semibold mb-2">Fun Fact:</p>
+                            <p className="text-center text-muted-foreground">
+                              {randomFact}
+                            </p>
+                          </div>
+                        }
+                        backContent={(flipBack) => (
+                          <div className="flex flex-col h-full items-center justify-center">
+                            <p className="text-lg font-semibold mb-2">Another fact</p>
+                            <Button 
+                              variant="ghost" 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                changeRandomFact();
+                                setTimeout(() => {
+                                  flipBack(); // Flip card back automatically
+                                }, 300);
+                                    element.click();
+                              }}
+                            >
+                              Show me more
+                            </Button>
+                          </div>
+                        }
+                      />
                     </div>
                   </div>
 
@@ -417,7 +419,7 @@ const Index = () => {
                     <div className="space-y-4">
                       <div className="flex items-center">
                         <Mail className="h-5 w-5 mr-3 text-muted-foreground" />
-                        <a href={`mailto:${siteConfig.email}`} className="hover:text-primary transition-colors">
+                        <a href={mailto:${siteConfig.email}} className="hover:text-primary transition-colors">
                           {siteConfig.email}
                         </a>
                       </div>

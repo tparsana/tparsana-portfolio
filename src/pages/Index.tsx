@@ -285,17 +285,12 @@ const Index = () => {
                         backContent={
                           <div className="flex flex-col h-full items-center justify-center">
                             <p className="text-lg font-semibold mb-2">Another fact</p>
-                            <Button 
-                              variant="ghost" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                changeRandomFact();
-                              }}
-                            >
+                            <Button variant="ghost">
                               Show me more
                             </Button>
                           </div>
                         }
+                        onBackClick={changeRandomFact}
                       />
                     </div>
                   </div>
@@ -339,7 +334,7 @@ const Index = () => {
                   <SplitFlapText text="My Projects" className="font-mono" />
                 </h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   {projects.map((project, index) => (
                     <ProjectCard
                       key={index}

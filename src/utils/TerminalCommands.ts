@@ -148,7 +148,7 @@ const terminalCommands: Record<string, Command> = {
   matrix: {
     type: 'matrix',
     description: "Activates a Matrix-like screen effect",
-    duration: 5000 // milliseconds
+    duration?: number
   },
   surprise: {
     type: 'surprise',
@@ -179,7 +179,7 @@ export const generateAsciiArt = (text: string): string => {
 };
 
 // Execute the matrix effect
-export const triggerMatrixEffect = (callback: () => void): void => {
+export const triggerMatrixEffect = (activate: boolean): void => {
   const matrixCommand = terminalCommands.matrix as MatrixCommand;
   
   // Create matrix rain effect
@@ -187,7 +187,6 @@ export const triggerMatrixEffect = (callback: () => void): void => {
   const ctx = canvas.getContext('2d');
   
   if (!ctx) {
-    callback();
     return;
   }
   
@@ -247,7 +246,6 @@ export const triggerMatrixEffect = (callback: () => void): void => {
   setTimeout(() => {
     cancelAnimationFrame(animationId);
     document.body.removeChild(canvas);
-    callback();
   }, matrixCommand.duration || 5000);
 };
 

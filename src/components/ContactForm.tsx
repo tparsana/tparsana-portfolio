@@ -208,7 +208,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       ]);
       openSurprise();
     } else if (mainCommand === "music") {
-      const newIsPlaying = toggleMusic(currentTrack);
+      const newIsPlaying = toggleMusic();
       setIsPlayingMusic(newIsPlaying);
       
       const tracks = getMusicTracks();

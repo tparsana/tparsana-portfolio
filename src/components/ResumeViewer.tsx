@@ -2,7 +2,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FileText } from "lucide-react";
+import { FileText, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ResumeViewerProps {
@@ -25,8 +25,12 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({ triggerClassName }) => {
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>Resume</DialogTitle>
-          <DialogDescription>
-            View my professional resume
+          <DialogDescription className="flex items-center justify-between">
+            <span>View my professional resume</span>
+            <span className="flex items-center text-xs text-muted-foreground">
+              <Calendar className="h-3 w-3 mr-1" />
+              Last modified: April 4th, 2025
+            </span>
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 cursor-auto">

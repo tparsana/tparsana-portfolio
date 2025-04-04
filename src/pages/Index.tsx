@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
@@ -149,8 +150,8 @@ ${largeText.toUpperCase()}
 
 const facts = [
   "Triathlete-in-training aiming for Ironman; logs everything on Notion.",
-  "Accidentally became the tech support for family’s real estate biz.",
-  "Believes “just one more API” is always the solution.",
+  "Accidentally became the tech support for family's real estate biz.",
+  "Believes "just one more API" is always the solution.",
   "I contribute to open-source projects in my free time",
   "I've completed 8 half-marathons",
   "Has more Notion dashboards than real-life responsibilities (almost).",
@@ -282,20 +283,20 @@ const Index = () => {
                             </p>
                           </div>
                         }
-                        backContent={
+                        backContent={(handleBackButtonClick) => (
                           <div className="flex flex-col h-full items-center justify-center">
                             <p className="text-lg font-semibold mb-2">Another fact</p>
                             <Button 
                               variant="ghost" 
                               onClick={(e) => {
-                                e.stopPropagation();
                                 changeRandomFact();
+                                handleBackButtonClick(e);
                               }}
                             >
                               Show me more
                             </Button>
                           </div>
-                        }
+                        )}
                       />
                     </div>
                   </div>
@@ -339,7 +340,7 @@ const Index = () => {
                   <SplitFlapText text="My Projects" className="font-mono" />
                 </h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {projects.map((project, index) => (
                     <ProjectCard
                       key={index}

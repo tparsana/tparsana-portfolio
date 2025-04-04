@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MapPin, ChevronDown } from "lucide-react";
@@ -60,7 +59,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
     <div
       ref={elementRef}
       className={cn(
-        "grid md:grid-cols-[1fr_3px_3fr] grid-cols-[60px_3px_1fr] gap-4 md:gap-8 mb-8 opacity-0",
+        "group grid md:grid-cols-[1fr_3px_3fr] grid-cols-[60px_3px_1fr] gap-4 md:gap-8 mb-8 opacity-0",
         isVisible ? "animate-fade-in" : "",
         className
       )}
@@ -70,8 +69,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           {date}
         </div>
         {logo && (
-          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300">
-            <img src={logo} alt={title} className="h-8 w-8 object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
+          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
+            <img
+              src={logo}
+              alt={title}
+              className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100"
+            />
           </div>
         )}
       </div>
@@ -98,7 +101,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       >
         <h3 className="font-semibold text-lg">{title}</h3>
         <p className="text-sm text-muted-foreground mb-1">{subtitle}</p>
-        
+
         {location && (
           <div className="flex flex-col text-xs text-muted-foreground mb-2">
             <div className="flex items-center">
@@ -106,25 +109,25 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
               <span>{location}</span>
             </div>
             <div className="flex items-center text-muted-foreground mt-1">
-              <ChevronDown 
+              <ChevronDown
                 className={cn(
                   "h-4 w-4 transition-transform duration-300",
                   isExpanded ? "rotate-180" : ""
                 )}
               />
               {isMobile && (
-                <span className="ml-1 text-[10px]">
-                  Click to expand
-                </span>
+                <span className="ml-1 text-[10px]">Click to expand</span>
               )}
             </div>
           </div>
         )}
-        
-        <div className={cn(
-          "overflow-hidden transition-all duration-500 ease-in-out",
-          isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        )}>
+
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-500 ease-in-out",
+            isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
           <p className="text-sm pt-2">{description}</p>
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -201,7 +200,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "Initializing Matrix effect..."
       ]);
       
-      triggerMatrixEffect();
+      triggerMatrixEffect(true);
     } else if (mainCommand === "surprise") {
       setCommandHistory([
         ...newHistory,

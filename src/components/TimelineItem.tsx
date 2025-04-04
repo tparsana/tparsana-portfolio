@@ -116,7 +116,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
                 )}
               />
               {isMobile && (
-                <span className="ml-1 text-[10px]">Click to expand</span>
+                <span className="ml-1 text-[10px]">
+                  {isExpanded ? "Click to collapse" : "Click to expand"}
+                </span>
               )}
             </div>
           </div>

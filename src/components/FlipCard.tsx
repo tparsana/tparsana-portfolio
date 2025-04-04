@@ -6,28 +6,17 @@ interface FlipCardProps {
   frontContent: React.ReactNode;
   backContent: React.ReactNode;
   className?: string;
-  onBackButtonClick?: () => void;
 }
 
 const FlipCard: React.FC<FlipCardProps> = ({ 
   frontContent, 
   backContent, 
-  className,
-  onBackButtonClick
+  className 
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const toggleFlip = () => {
     setIsFlipped(!isFlipped);
-  };
-
-  const handleBackButtonClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card from flipping back
-    if (onBackButtonClick) {
-      onBackButtonClick();
-    }
-    // Flip back to front
-    setIsFlipped(false);
   };
 
   return (
@@ -55,7 +44,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         )}
       >
         <div className="absolute w-full h-full p-4 bg-card border rounded-lg shadow">
-          {typeof backContent === 'function' ? backContent(handleBackButtonClick) : backContent}
+          {backContent}
         </div>
       </div>
     </div>

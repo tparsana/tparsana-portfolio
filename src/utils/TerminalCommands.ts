@@ -1,3 +1,4 @@
+
 interface JokeCommand {
   type: 'joke';
   jokes: string[];
@@ -258,7 +259,7 @@ export const openSurprise = (): void => {
 };
 
 // Toggle music playback
-export const toggleMusic = (): boolean => {
+export const toggleMusic = (trackIndex: number = 0): boolean => {
   const musicCommand = terminalCommands.music as MusicCommand;
   
   if (!audioElement) {
@@ -270,13 +271,14 @@ export const toggleMusic = (): boolean => {
     audioElement.pause();
     musicCommand.isPlaying = false;
   } else {
-    // Play random track
-    const randomIndex = Math.floor(Math.random() * musicCommand.tracks.length);
-    const randomTrack = musicCommand.tracks[randomIndex];
-    audioElement.src = randomTrack.url;
-    audioElement.loop = true;
-    audioElement.play().catch(err => console.error("Error playing audio:", err));
-    musicCommand.isPlaying = true;
+    // Play music
+    if (trackIndex < musicCommand.tracks.length) {
+      const track = musicCommand.tracks[trackIndex];
+      audioElement.src = track.url;
+      audioElement.loop = true;
+      audioElement.play().catch(err => console.error("Error playing audio:", err));
+      musicCommand.isPlaying = true;
+    }
   }
   
   return musicCommand.isPlaying;
@@ -300,7 +302,7 @@ export const getCommandHelp = (): Record<string, string> => {
     ascii: "ascii [text] - Converts text to ASCII art",
     matrix: "matrix - Activates a Matrix-like screen effect",
     surprise: "surprise - Opens a fun surprise video",
-    music: "music - Plays random background music (toggle with music again)",
+    music: "music - Plays background music (toggle with music again)",
     help: "help - Show this help message",
     clear: "clear - Clear the terminal",
     email: "email - Start composing an email",

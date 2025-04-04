@@ -30,7 +30,7 @@ const ProjectCard: React.FC<ProjectProps> = ({
     <div
       className={cn(
         "group rounded-lg overflow-hidden bg-card border shadow-sm transition-all duration-300",
-        "hover:shadow-md transform perspective-[800px] h-full flex flex-col",
+        "hover:shadow-md transform perspective-[800px]",
         isHovered ? "scale-[1.01]" : "",
         className
       )}
@@ -52,24 +52,19 @@ const ProjectCard: React.FC<ProjectProps> = ({
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      <div className="p-3 flex flex-col flex-grow">
+      <div className="p-3">
         <h3 className="text-base font-semibold mb-1">{title}</h3>
         <p className="text-xs text-muted-foreground mb-2">{description}</p>
         
         <div className="flex flex-wrap gap-1 mb-3">
-          {tags.slice(0, 4).map((tag, index) => (
+          {tags.map((tag, index) => (
             <Badge key={index} variant="secondary" className="text-xs px-1.5 py-0">
               {tag}
             </Badge>
           ))}
-          {tags.length > 4 && (
-            <Badge variant="outline" className="text-xs px-1.5 py-0">
-              +{tags.length - 4} more
-            </Badge>
-          )}
         </div>
-        
-        <div className="mt-auto pt-2 flex gap-2">
+
+        <div className="flex gap-2">
           {githubUrl && (
             <Button size="sm" variant="outline" asChild className="h-7 text-xs">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">

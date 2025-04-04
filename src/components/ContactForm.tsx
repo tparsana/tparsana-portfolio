@@ -201,12 +201,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "Initializing Matrix effect..."
       ]);
       
-      triggerMatrixEffect(() => {
-        setCommandHistory([
-          ...newHistory,
-          "Matrix effect complete."
-        ]);
-      });
+      triggerMatrixEffect();  // Remove the callback parameter
     } else if (mainCommand === "surprise") {
       setCommandHistory([
         ...newHistory,

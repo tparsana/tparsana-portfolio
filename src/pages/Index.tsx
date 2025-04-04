@@ -272,35 +272,35 @@ const Index = () => {
                     </p>
 
                     <div className="pt-4">
-                      <FlipCard
-                        className="h-40"
-                        frontContent={
-                          <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Fun Fact:</p>
-                            <p className="text-center text-muted-foreground">
-                              {randomFact}
-                            </p>
-                          </div>
-                        }
-                        backContent={(flipBack) => (
-                          <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Another fact</p>
-                            <Button 
-                              variant="ghost" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                changeRandomFact();
-                                setTimeout(() => {
-                                  flipBack(); // Flip card back automatically
-                                }, 300);
-                              }}
-                            >
-                              Show me more
-                            </Button>
-                          </div>
-                        )}
-                      />
-                    </div>
+                         <FlipCard
+                         className="h-40"
+                         frontContent={
+                              <div className="flex flex-col h-full items-center justify-center">
+                              <p className="text-lg font-semibold mb-2">Fun Fact:</p>
+                              <p className="text-center text-muted-foreground">
+                                   {randomFact}
+                              </p>
+                              </div>
+                         }
+                         backContent={(flipBack) => (
+                              <div className="flex flex-col h-full items-center justify-center">
+                                <p className="text-lg font-semibold mb-2">Another fact</p>
+                                <Button
+                                  variant="ghost"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    changeRandomFact();
+                                    setTimeout(() => {
+                                      flipBack(); // Flip card back automatically
+                                    }, 300);
+                                  }}
+                                >
+                                  Show me more
+                                </Button>
+                              </div>
+                            )}
+                          />
+                        </div>
                   </div>
 
                   <div className="relative">

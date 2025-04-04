@@ -51,8 +51,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
     };
   }, []);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+  const toggleExpand = (e: React.MouseEvent) => {
+    // Prevent conflict with hover state on desktop
+    if (isMobile) {
+      e.stopPropagation();
+      setIsExpanded((prev) => !prev);
+    }
   };
 
   return (
@@ -95,8 +99,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
           "hover:bg-muted/10 rounded-lg p-2 -m-2"
         )}
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => setIsExpanded(false)}
+        onMouseEnter={() => !isMobile && setIsExpanded(true)}
+        onMouseLeave={() => !isMobile && setIsExpanded(false)}
         onClick={toggleExpand}
       >
         <h3 className="font-semibold text-lg">{title}</h3>

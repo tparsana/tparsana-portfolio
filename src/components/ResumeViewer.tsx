@@ -25,8 +25,9 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({ triggerClassName }) => {
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>Resume</DialogTitle>
-          <DialogDescription>
-            View my professional resume
+          <DialogDescription className="flex justify-between items-center">
+            <span>View my professional resume</span>
+            <span className="text-xs text-muted-foreground">Last updated: April 4th, 2025</span>
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 cursor-auto">
@@ -34,7 +35,7 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({ triggerClassName }) => {
             src="/lovable-uploads/b9a581e3-cfdb-4614-9018-f55726ba64a5.png" 
             alt="Tanish Parsana Resume" 
             className="w-full h-auto rounded-md shadow-md" 
-            style={{ cursor: 'auto' }}
+            style={{ cursor: 'none' }}
           />
         </div>
       </DialogContent>

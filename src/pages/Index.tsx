@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
@@ -20,7 +19,7 @@ const projects = [
     title: "ACTV",
     description: "A RAG based Dynamic and Personalized Fitness and Nutrition Coach to suggest Customized Workout and Meal Plans.",
     image: "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API" , "MongoDB"],
+    tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API", "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
     liveUrl: "https://example.com",
   },

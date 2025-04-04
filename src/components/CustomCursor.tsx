@@ -26,7 +26,6 @@ const CustomCursor = () => {
     
     // Don't continue with custom cursor setup if on mobile
     if (isMobile) {
-      document.body.style.cursor = "auto";
       return;
     }
 
@@ -38,8 +37,10 @@ const CustomCursor = () => {
     const updateCursorType = () => {
       try {
         const hoveredElement = document.elementFromPoint(position.x, position.y);
-        const isPointerElement = hoveredElement && 
-          window.getComputedStyle(hoveredElement).cursor === "pointer";
+        const computedStyle = hoveredElement ? window.getComputedStyle(hoveredElement) : null;
+        const isPointerElement = computedStyle && 
+          (computedStyle.cursor === "pointer" || 
+           computedStyle.cursor === "hand");
         setIsPointer(isPointerElement);
       } catch (err) {
         // If there's an error determining cursor style, default to standard cursor
@@ -59,7 +60,8 @@ const CustomCursor = () => {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
-    document.body.style.cursor = "none";
+    // Don't change the default cursor
+    // document.body.style.cursor = "none";
 
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);
@@ -69,7 +71,7 @@ const CustomCursor = () => {
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
       
-      document.body.style.cursor = "auto";
+      // document.body.style.cursor = "auto";
     };
   }, [position.x, position.y, isMobile]);
 

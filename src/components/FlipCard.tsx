@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface FlipCardProps {
   frontContent: React.ReactNode;
-  backContent: React.ReactNode;
+  backContent: (flipBack: () => void) => React.ReactNode;
   className?: string;
 }
 
@@ -19,6 +18,10 @@ const FlipCard: React.FC<FlipCardProps> = ({
     setIsFlipped(!isFlipped);
   };
 
+  const flipBack = () => {
+    setIsFlipped(false);
+  };
+
   return (
     <div 
       className={cn(
@@ -27,6 +30,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
       )}
       onClick={toggleFlip}
     >
+      {/* Front Side */}
       <div 
         className={cn(
           "absolute w-full h-full transition-all duration-500 [transform-style:preserve-3d] [backface-visibility:hidden]",
@@ -37,6 +41,8 @@ const FlipCard: React.FC<FlipCardProps> = ({
           {frontContent}
         </div>
       </div>
+
+      {/* Back Side */}
       <div 
         className={cn(
           "absolute w-full h-full transition-all duration-500 [transform-style:preserve-3d] [backface-visibility:hidden]",
@@ -44,7 +50,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         )}
       >
         <div className="absolute w-full h-full p-4 bg-card border rounded-lg shadow">
-          {backContent}
+          {backContent(flipBack)}
         </div>
       </div>
     </div>

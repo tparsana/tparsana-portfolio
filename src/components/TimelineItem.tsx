@@ -1,7 +1,7 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MapPin, ChevronDown } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TimelineItemProps {
   date: string;
@@ -25,7 +25,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,19 +50,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
     };
   }, []);
 
-  const toggleExpand = (e: React.MouseEvent) => {
-    // Prevent conflict with hover state on desktop
-    if (isMobile) {
-      e.stopPropagation();
-      setIsExpanded((prev) => !prev);
-    }
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
     <div
       ref={elementRef}
       className={cn(
-        "group grid md:grid-cols-[1fr_3px_3fr] grid-cols-[60px_3px_1fr] gap-4 md:gap-8 mb-8 opacity-0",
+        "grid md:grid-cols-[1fr_3px_3fr] grid-cols-[60px_3px_1fr] gap-4 md:gap-8 mb-8 opacity-0",
         isVisible ? "animate-fade-in" : "",
         className
       )}
@@ -73,12 +68,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           {date}
         </div>
         {logo && (
-          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
-            <img
-              src={logo}
-              alt={title}
-              className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100"
-            />
+          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 filter grayscale hover:grayscale-0 transition-all duration-300">
+            <img src={logo} alt={title} className="h-8 w-8 object-contain" />
           </div>
         )}
       </div>
@@ -86,11 +77,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       <div className="relative flex justify-center">
         <div
           className={cn(
-            "absolute top-0 w-3 h-3 rounded-full bg-primary",
+            "absolute top-0 w-3 h-3 rounded-full bg-primary mt-2",
             isVisible ? "animate-flap-flip" : ""
           )}
         />
-        <div className="h-full w-[3px] bg-muted mt-[6px]" />
+        <div className="h-full w-[3px] bg-muted" />
       </div>
 
       <div
@@ -99,42 +90,33 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
           "hover:bg-muted/10 rounded-lg p-2 -m-2"
         )}
-        onMouseEnter={() => !isMobile && setIsExpanded(true)}
-        onMouseLeave={() => !isMobile && setIsExpanded(false)}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
         onClick={toggleExpand}
       >
         <h3 className="font-semibold text-lg">{title}</h3>
         <p className="text-sm text-muted-foreground mb-1">{subtitle}</p>
-
+        
         {location && (
-          <div className="flex flex-col text-xs text-muted-foreground mb-2">
-            <div className="flex items-center">
-              <MapPin className="h-3 w-3 mr-1" />
-              <span>{location}</span>
-            </div>
-            <div className="flex items-center text-muted-foreground mt-1">
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 transition-transform duration-300",
-                  isExpanded ? "rotate-180" : ""
-                )}
-              />
-              {isMobile && (
-                <span className="ml-1 text-[10px]">
-                  {isExpanded ? "Click to collapse" : "Click to expand"}
-                </span>
-              )}
-            </div>
+          <div className="flex items-center text-xs text-muted-foreground mb-2">
+            <MapPin className="h-3 w-3 mr-1" />
+            <span>{location}</span>
           </div>
         )}
-
-        <div
-          className={cn(
-            "overflow-hidden transition-all duration-500 ease-in-out",
-            isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
+        
+        <div className={cn(
+          "overflow-hidden transition-all duration-500 ease-in-out", // Made transition smoother
+          isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        )}>
           <p className="text-sm pt-2">{description}</p>
+        </div>
+        
+        <div className={cn(
+          "absolute bottom-1 left-1/2 transform -translate-x-1/2 translate-y-6 text-muted-foreground",
+          isExpanded ? "opacity-0" : "md:group-hover:opacity-50 opacity-50", // Always visible on mobile
+          "transition-opacity duration-100"
+        )}>
+          <ChevronDown className="h-4 w-4 animate-bounce" />
         </div>
       </div>
     </div>

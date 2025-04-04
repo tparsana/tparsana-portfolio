@@ -259,7 +259,7 @@ export const openSurprise = (): void => {
 };
 
 // Toggle music playback
-export const toggleMusic = (trackIndex: number = -1): boolean => {
+export const toggleMusic = (trackIndex: number = 0): boolean => {
   const musicCommand = terminalCommands.music as MusicCommand;
   
   if (!audioElement) {
@@ -272,16 +272,13 @@ export const toggleMusic = (trackIndex: number = -1): boolean => {
     musicCommand.isPlaying = false;
   } else {
     // Play music
-    // If trackIndex is -1 or invalid, pick a random track
-    if (trackIndex < 0 || trackIndex >= musicCommand.tracks.length) {
-      trackIndex = Math.floor(Math.random() * musicCommand.tracks.length);
+    if (trackIndex < musicCommand.tracks.length) {
+      const track = musicCommand.tracks[trackIndex];
+      audioElement.src = track.url;
+      audioElement.loop = true;
+      audioElement.play().catch(err => console.error("Error playing audio:", err));
+      musicCommand.isPlaying = true;
     }
-    
-    const track = musicCommand.tracks[trackIndex];
-    audioElement.src = track.url;
-    audioElement.loop = true;
-    audioElement.play().catch(err => console.error("Error playing audio:", err));
-    musicCommand.isPlaying = true;
   }
   
   return musicCommand.isPlaying;
@@ -305,7 +302,7 @@ export const getCommandHelp = (): Record<string, string> => {
     ascii: "ascii [text] - Converts text to ASCII art",
     matrix: "matrix - Activates a Matrix-like screen effect",
     surprise: "surprise - Opens a fun surprise video",
-    music: "music - Plays a random background music track (toggle with music again)",
+    music: "music - Plays background music (toggle with music again)",
     help: "help - Show this help message",
     clear: "clear - Clear the terminal",
     email: "email - Start composing an email",

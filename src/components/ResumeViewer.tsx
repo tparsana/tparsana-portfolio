@@ -25,9 +25,8 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({ triggerClassName }) => {
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>Resume</DialogTitle>
-          <DialogDescription className="flex items-center justify-between">
-            <span>View my professional resume</span>
-            <span className="text-xs font-mono text-muted-foreground">Last Modified: April 4, 2025</span>
+          <DialogDescription>
+            View my professional resume
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4 cursor-auto">

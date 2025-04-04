@@ -19,7 +19,7 @@ const projects = [
     title: "ACTV",
     description: "A RAG based Dynamic and Personalized Fitness and Nutrition Coach to suggest Customized Workout and Meal Plans.",
     image: "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API", "MongoDB"],
+    tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API" , "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
     liveUrl: "https://example.com",
   },
@@ -126,10 +126,10 @@ const terminalCommands = {
   ascii: {
     execute: (text: string) => {
       const largeText = text.split('').join('  ');
-      return 
+      return `
  #####  #####  #####  #####  #####
 ${largeText.toUpperCase()}
-#####  #####  #####  #####  #####;
+#####  #####  #####  #####  #####`;
     }
   },
   matrix: {
@@ -290,12 +290,6 @@ const Index = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 changeRandomFact();
-                                const element = e.currentTarget.closest('.flip-card') as HTMLElement;
-                                if (element) {
-                                  setTimeout(() => {
-                                    element.click();
-                                  }, 10);
-                                }
                               }}
                             >
                               Show me more
@@ -421,7 +415,7 @@ const Index = () => {
                     <div className="space-y-4">
                       <div className="flex items-center">
                         <Mail className="h-5 w-5 mr-3 text-muted-foreground" />
-                        <a href={mailto:${siteConfig.email}} className="hover:text-primary transition-colors">
+                        <a href={`mailto:${siteConfig.email}`} className="hover:text-primary transition-colors">
                           {siteConfig.email}
                         </a>
                       </div>

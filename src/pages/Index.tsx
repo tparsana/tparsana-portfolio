@@ -293,13 +293,12 @@ const Index = () => {
                                 setTimeout(() => {
                                   flipBack(); // Flip card back automatically
                                 }, 300);
-                                    element.click();
                               }}
                             >
                               Show me more
                             </Button>
                           </div>
-                        }
+                        )}
                       />
                     </div>
                   </div>

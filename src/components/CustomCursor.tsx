@@ -38,8 +38,9 @@ const CustomCursor = () => {
     const updateCursorType = () => {
       try {
         const hoveredElement = document.elementFromPoint(position.x, position.y);
-        // Remove the check for "pointer" cursor style so it always shows our custom cursor
-        setIsPointer(false);
+        const isPointerElement = hoveredElement && 
+          window.getComputedStyle(hoveredElement).cursor === "pointer";
+        setIsPointer(isPointerElement);
       } catch (err) {
         // If there's an error determining cursor style, default to standard cursor
         setIsPointer(false);
@@ -58,14 +59,7 @@ const CustomCursor = () => {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
-    // Force cursor to be "none" everywhere
     document.body.style.cursor = "none";
-    
-    // Apply cursor:none to all potential clickable elements
-    const elements = document.querySelectorAll('a, button, [role="button"], input, select, textarea');
-    elements.forEach(el => {
-      (el as HTMLElement).style.cursor = "none";
-    });
 
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);

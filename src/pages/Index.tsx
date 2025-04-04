@@ -296,7 +296,6 @@ const Index = () => {
                             </Button>
                           </div>
                         }
-                        onBackButtonClick={changeRandomFact}
                       />
                     </div>
                   </div>
@@ -340,7 +339,7 @@ const Index = () => {
                   <SplitFlapText text="My Projects" className="font-mono" />
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {projects.map((project, index) => (
                     <ProjectCard
                       key={index}

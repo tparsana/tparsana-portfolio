@@ -32,9 +32,7 @@ const ProjectCard: React.FC<ProjectProps> = ({
         "group rounded-lg overflow-hidden bg-card border shadow-sm transition-all duration-300",
         "hover:shadow-md transform perspective-[800px]",
         isHovered ? "scale-[1.01]" : "",
-        className,
-        // Make cards full width on small screens
-        "col-span-2 sm:col-span-1"
+        className
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

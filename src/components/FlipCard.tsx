@@ -6,14 +6,12 @@ interface FlipCardProps {
   frontContent: React.ReactNode;
   backContent: React.ReactNode;
   className?: string;
-  onBackButtonClick?: () => void;
 }
 
 const FlipCard: React.FC<FlipCardProps> = ({ 
   frontContent, 
   backContent, 
-  className,
-  onBackButtonClick
+  className 
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -46,16 +44,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         )}
       >
         <div className="absolute w-full h-full p-4 bg-card border rounded-lg shadow">
-          {React.cloneElement(backContent as React.ReactElement, {
-            onClick: (e: React.MouseEvent) => {
-              e.stopPropagation();
-              if (onBackButtonClick) {
-                onBackButtonClick();
-                // Automatically flip back to front after clicking the button
-                setTimeout(() => setIsFlipped(false), 100);
-              }
-            }
-          })}
+          {backContent}
         </div>
       </div>
     </div>

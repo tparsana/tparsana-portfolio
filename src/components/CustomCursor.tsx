@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 
 interface CursorPosition {
@@ -14,20 +13,17 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if device is mobile
     const checkMobile = () => {
-      const isTouchDevice = 'ontouchstart' in window || 
+      const isTouchDevice =
+        "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
         (navigator as any).msMaxTouchPoints > 0;
       setIsMobile(isTouchDevice);
     };
-    
+
     checkMobile();
-    
-    // Don't continue with custom cursor setup if on mobile
-    if (isMobile) {
-      return;
-    }
+
+    if (isMobile) return;
 
     const updateCursorPosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -37,13 +33,28 @@ const CustomCursor = () => {
     const updateCursorType = () => {
       try {
         const hoveredElement = document.elementFromPoint(position.x, position.y);
-        const computedStyle = hoveredElement ? window.getComputedStyle(hoveredElement) : null;
-        const isPointerElement = computedStyle && 
-          (computedStyle.cursor === "pointer" || 
-           computedStyle.cursor === "hand");
+        const computedStyle = hoveredElement
+          ? window.getComputedStyle(hoveredElement)
+          : null;
+
+        // Only allow pointer cursor if the element is not generic/static content
+        const ignoredTags = ["H1", "SPAN", "P", "DIV", "SECTION", "MAIN"];
+        const ignoredClasses = ["no-cursor", "non-interactive", "select-none"];
+
+        const isInteractive =
+          hoveredElement &&
+          !ignoredTags.includes(hoveredElement.tagName) &&
+          !ignoredClasses.some((cls) =>
+            hoveredElement.classList.contains(cls)
+          );
+
+        const isPointerElement =
+          computedStyle &&
+          isInteractive &&
+          (computedStyle.cursor === "pointer" || computedStyle.cursor === "hand");
+
         setIsPointer(isPointerElement);
       } catch (err) {
-        // If there's an error determining cursor style, default to standard cursor
         setIsPointer(false);
       }
     };
@@ -60,7 +71,6 @@ const CustomCursor = () => {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
-    // Hide default cursor
     document.body.style.cursor = "none";
 
     return () => {
@@ -70,12 +80,11 @@ const CustomCursor = () => {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
-      
+
       document.body.style.cursor = "auto";
     };
   }, [position.x, position.y, isMobile]);
 
-  // Don't render custom cursor on mobile devices
   if (isHidden || isMobile) return null;
 
   return (
@@ -89,10 +98,10 @@ const CustomCursor = () => {
         transform: "translate(-50%, -50%)",
       }}
     >
-      <div 
+      <div
         className={`w-4 h-4 bg-white rounded-full flex items-center justify-center ${
           isPointer ? "scale-150" : "scale-100"
-        } transition-transform duration-200`} 
+        } transition-transform duration-200`}
       />
     </div>
   );

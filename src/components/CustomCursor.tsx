@@ -38,9 +38,11 @@ const CustomCursor = () => {
     const updateCursorType = () => {
       try {
         const hoveredElement = document.elementFromPoint(position.x, position.y);
-        // We'll simply ignore pointer cursors to always show the custom cursor
-        setIsPointer(false);
+        const isPointerElement = hoveredElement && 
+          window.getComputedStyle(hoveredElement).cursor === "pointer";
+        setIsPointer(isPointerElement);
       } catch (err) {
+        // If there's an error determining cursor style, default to standard cursor
         setIsPointer(false);
       }
     };
@@ -59,11 +61,6 @@ const CustomCursor = () => {
 
     document.body.style.cursor = "none";
 
-    // Override all pointer cursors
-    const styleElement = document.createElement('style');
-    styleElement.innerHTML = `* { cursor: none !important; } input, textarea, select, button { cursor: none !important; }`;
-    document.head.appendChild(styleElement);
-
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);
       window.removeEventListener("mousemove", updateCursorType);
@@ -73,9 +70,6 @@ const CustomCursor = () => {
       window.removeEventListener("mouseenter", handleMouseEnter);
       
       document.body.style.cursor = "auto";
-      if (styleElement) {
-        document.head.removeChild(styleElement);
-      }
     };
   }, [position.x, position.y, isMobile]);
 
@@ -94,7 +88,9 @@ const CustomCursor = () => {
       }}
     >
       <div 
-        className={`w-4 h-4 bg-white rounded-full flex items-center justify-center transition-transform duration-200`} 
+        className={`w-4 h-4 bg-white rounded-full flex items-center justify-center ${
+          isPointer ? "scale-150" : "scale-100"
+        } transition-transform duration-200`} 
       />
     </div>
   );

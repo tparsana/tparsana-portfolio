@@ -1,3 +1,4 @@
+
 interface JokeCommand {
   type: 'joke';
   jokes: string[];
@@ -148,7 +149,7 @@ const terminalCommands: Record<string, Command> = {
   matrix: {
     type: 'matrix',
     description: "Activates a Matrix-like screen effect",
-    duration?: number
+    duration: 5000 // milliseconds
   },
   surprise: {
     type: 'surprise',
@@ -179,7 +180,7 @@ export const generateAsciiArt = (text: string): string => {
 };
 
 // Execute the matrix effect
-export const triggerMatrixEffect = (activate: boolean): void => {
+export const triggerMatrixEffect = (callback: () => void): void => {
   const matrixCommand = terminalCommands.matrix as MatrixCommand;
   
   // Create matrix rain effect
@@ -187,6 +188,7 @@ export const triggerMatrixEffect = (activate: boolean): void => {
   const ctx = canvas.getContext('2d');
   
   if (!ctx) {
+    callback();
     return;
   }
   
@@ -246,6 +248,7 @@ export const triggerMatrixEffect = (activate: boolean): void => {
   setTimeout(() => {
     cancelAnimationFrame(animationId);
     document.body.removeChild(canvas);
+    callback();
   }, matrixCommand.duration || 5000);
 };
 
@@ -255,8 +258,8 @@ export const openSurprise = (): void => {
   window.open(surpriseCommand.url, '_blank');
 };
 
-// Toggle music playback with random track selection
-export const toggleMusic = (): boolean => {
+// Toggle music playback
+export const toggleMusic = (trackIndex: number = 0): boolean => {
   const musicCommand = terminalCommands.music as MusicCommand;
   
   if (!audioElement) {
@@ -268,14 +271,14 @@ export const toggleMusic = (): boolean => {
     audioElement.pause();
     musicCommand.isPlaying = false;
   } else {
-    // Play random track
-    const randomIndex = Math.floor(Math.random() * musicCommand.tracks.length);
-    const track = musicCommand.tracks[randomIndex];
-    audioElement.src = track.url;
-    audioElement.loop = true;
-    audioElement.play().catch(err => console.error("Error playing audio:", err));
-    musicCommand.isPlaying = true;
-    console.log(`Now playing: ${track.name}`);
+    // Play music
+    if (trackIndex < musicCommand.tracks.length) {
+      const track = musicCommand.tracks[trackIndex];
+      audioElement.src = track.url;
+      audioElement.loop = true;
+      audioElement.play().catch(err => console.error("Error playing audio:", err));
+      musicCommand.isPlaying = true;
+    }
   }
   
   return musicCommand.isPlaying;

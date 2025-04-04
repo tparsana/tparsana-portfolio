@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -200,7 +201,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "Initializing Matrix effect..."
       ]);
       
-      triggerMatrixEffect(true);
+      triggerMatrixEffect(() => {
+        setCommandHistory([
+          ...newHistory,
+          "Matrix effect complete."
+        ]);
+      });
     } else if (mainCommand === "surprise") {
       setCommandHistory([
         ...newHistory,
@@ -208,7 +214,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       ]);
       openSurprise();
     } else if (mainCommand === "music") {
-      const newIsPlaying = toggleMusic();
+      const newIsPlaying = toggleMusic(currentTrack);
       setIsPlayingMusic(newIsPlaying);
       
       const tracks = getMusicTracks();

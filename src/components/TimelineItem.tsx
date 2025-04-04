@@ -68,8 +68,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           {date}
         </div>
         {logo && (
-          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 hover:filter-none">
-            <img src={logo} alt={title} className="h-8 w-8 object-contain filter grayscale hover:grayscale-0 transition-all duration-300" />
+          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 filter grayscale hover:grayscale-0 transition-all duration-300">
+            <img src={logo} alt={title} className="h-8 w-8 object-contain" />
           </div>
         )}
       </div>
@@ -77,7 +77,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       <div className="relative flex justify-center">
         <div
           className={cn(
-            "absolute top-0 w-3 h-3 rounded-full bg-primary",
+            "absolute top-0 w-3 h-3 rounded-full bg-primary mt-2",
             isVisible ? "animate-flap-flip" : ""
           )}
         />
@@ -105,15 +105,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         )}
         
         <div className={cn(
-          "overflow-hidden transition-all duration-500 ease-in-out",
+          "overflow-hidden transition-all duration-500 ease-in-out", // Made transition smoother
           isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         )}>
           <p className="text-sm pt-2">{description}</p>
         </div>
         
         <div className={cn(
-          "text-muted-foreground mt-1",
-          isExpanded ? "opacity-0" : "opacity-50",
+          "absolute bottom-1 left-1/2 transform -translate-x-1/2 translate-y-6 text-muted-foreground",
+          isExpanded ? "opacity-0" : "md:group-hover:opacity-50 opacity-50", // Always visible on mobile
           "transition-opacity duration-100"
         )}>
           <ChevronDown className="h-4 w-4 animate-bounce" />

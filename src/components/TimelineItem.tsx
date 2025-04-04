@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MapPin, ChevronDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TimelineItemProps {
   date: string;
@@ -25,6 +26,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,8 +70,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           {date}
         </div>
         {logo && (
-          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 filter group-hover:grayscale-0 transition-all duration-300">
-            <img src={logo} alt={title} className="h-8 w-8 object-contain" />
+          <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300">
+            <img src={logo} alt={title} className="h-8 w-8 object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
           </div>
         )}
       </div>
@@ -110,9 +112,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
                   isExpanded ? "rotate-180" : ""
                 )}
               />
-              <span className="ml-1 text-[10px]">
-                {isExpanded ? "Click to collapse" : "Click to expand"}
-              </span>
+              {isMobile && (
+                <span className="ml-1 text-[10px]">
+                  Click to expand
+                </span>
+              )}
             </div>
           </div>
         )}

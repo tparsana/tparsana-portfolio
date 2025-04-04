@@ -60,8 +60,8 @@ const CustomCursor = () => {
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
-    // Don't change the default cursor
-    // document.body.style.cursor = "none";
+    // Hide default cursor
+    document.body.style.cursor = "none";
 
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);
@@ -71,7 +71,7 @@ const CustomCursor = () => {
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
       
-      // document.body.style.cursor = "auto";
+      document.body.style.cursor = "auto";
     };
   }, [position.x, position.y, isMobile]);
 

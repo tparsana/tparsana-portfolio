@@ -290,6 +290,12 @@ const Index = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 changeRandomFact();
+                                const element = e.currentTarget.closest('.flip-card') as HTMLElement;
+                                if (element) {
+                                  setTimeout(() => {
+                                    element.click();
+                                  }, 10);
+                                }
                               }}
                             >
                               Show me more

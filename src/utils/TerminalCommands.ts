@@ -1,4 +1,3 @@
-
 interface JokeCommand {
   type: 'joke';
   jokes: string[];
@@ -259,7 +258,7 @@ export const openSurprise = (): void => {
 };
 
 // Toggle music playback
-export const toggleMusic = (trackIndex: number = 0): boolean => {
+export const toggleMusic = (trackIndex?: number): boolean => {
   const musicCommand = terminalCommands.music as MusicCommand;
   
   if (!audioElement) {
@@ -271,6 +270,11 @@ export const toggleMusic = (trackIndex: number = 0): boolean => {
     audioElement.pause();
     musicCommand.isPlaying = false;
   } else {
+    // Play random music track if no track index provided
+    if (trackIndex === undefined) {
+      trackIndex = Math.floor(Math.random() * musicCommand.tracks.length);
+    }
+    
     // Play music
     if (trackIndex < musicCommand.tracks.length) {
       const track = musicCommand.tracks[trackIndex];

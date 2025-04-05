@@ -162,6 +162,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
+  const [factCardRef, setFactCardRef] = useState<HTMLElement | null>(null);
 
   const changeRandomFact = () => {
     const newFact = facts[Math.floor(Math.random() * facts.length)];
@@ -290,12 +291,12 @@ const Index = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 changeRandomFact();
-                                const element = e.currentTarget.closest('.flip-card') as HTMLElement;
-                                if (element) {
-                                  setTimeout(() => {
+                                setTimeout(() => {
+                                  const element = e.currentTarget.closest('.relative') as HTMLElement;
+                                  if (element) {
                                     element.click();
-                                  }, 10);
-                                }
+                                  }
+                                }, 300);
                               }}
                             >
                               Show me more
@@ -324,7 +325,10 @@ const Index = () => {
               </div>
             </section>
 
-            <section id="tech-stack" className="py-20 px-4">
+            <section
+              id="tech-stack"
+              className="py-20 px-4"
+            >
               <div className="container mx-auto max-w-6xl">
                 <h2 className="text-3xl font-bold mb-8 text-center">
                   <SplitFlapText text="Tech Stack" className="font-mono" />

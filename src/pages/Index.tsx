@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
@@ -162,7 +163,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
-  const [factCardRef, setFactCardRef] = useState<HTMLElement | null>(null);
 
   const changeRandomFact = () => {
     const newFact = facts[Math.floor(Math.random() * facts.length)];

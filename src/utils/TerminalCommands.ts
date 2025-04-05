@@ -81,7 +81,7 @@ const terminalCommands: Record<string, Command> = {
         Q: [' QQQ ', 'Q   Q', 'Q   Q', 'Q  QQ', ' QQQQ'],
         R: ['RRRR ', 'R   R', 'RRRR ', 'R  R ', 'R   R'],
         S: [' SSS ', 'S    ', ' SSS ', '    S', ' SSS '],
-        T: ['TTTTT', '  T  ', '  T  ', '  T  ', '  T  '],
+        T: ['TTTTT', '  T  ', '  T  ', '  T  ', 'TTTTT'],
         U: ['U   U', 'U   U', 'U   U', 'U   U', ' UUU '],
         V: ['V   V', 'V   V', 'V   V', ' V V ', '  V  '],
         W: ['W   W', 'W   W', 'W W W', 'WW WW', 'W   W'],

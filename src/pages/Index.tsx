@@ -71,7 +71,7 @@ const experiences = [
     date: "May 2024 - Aug 2024",
     title: "Data Science & AI Intern",
     subtitle: "York IE",
-    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm’s vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization.",
+    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm's vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization.",
     location: "Manchester, NH, USA",
     logo: "https://avatars.slack-edge.com/2021-06-16/2178256167170_381b8dc0864c2ff691e3_512.png",
   },
@@ -164,6 +164,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const changeRandomFact = () => {
     const newFact = facts[Math.floor(Math.random() * facts.length)];
@@ -192,13 +193,16 @@ const Index = () => {
   const handleShowMoreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     changeRandomFact();
-    // Find the closest FlipCard element and trigger its click event
-    const flipCardElement = e.currentTarget.closest('.relative') as HTMLElement;
-    if (flipCardElement) {
-      setTimeout(() => {
+    
+    // Flip the card back after changing fact
+    setIsFlipped(false);
+    
+    setTimeout(() => {
+      const flipCardElement = e.currentTarget.closest('.relative') as HTMLElement;
+      if (flipCardElement) {
         flipCardElement.click();
-      }, 300);
-    }
+      }
+    }, 300);
   };
 
   return (
@@ -307,6 +311,8 @@ const Index = () => {
                             </Button>
                           </div>
                         }
+                        isFlipped={isFlipped}
+                        onFlip={() => setIsFlipped(!isFlipped)}
                       />
                     </div>
                   </div>

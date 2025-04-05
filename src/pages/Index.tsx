@@ -71,7 +71,7 @@ const experiences = [
     date: "May 2024 - Aug 2024",
     title: "Data Science & AI Intern",
     subtitle: "York IE",
-    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm's vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization.",
+    description: "Built and deployed a Retrieval-Augmented Generation (RAG) model using LLMs such as AWS Bedrock and OpenAI GPT 4o, strategically balancing cost and speed for embedding generation and text processing for an internal research tool for the firm’s vast database. Developed an efficient pipeline for creating embeddings from database, leveraging AWS Services and integrating Vector Databases (Pinecone) to enhance retrieval capabilities. Designed and optimized AI API schemas to streamline data processing workflows, carefully evaluating solutions like embeddings and large-scale inference models to ensure scalability, minimize costs, and optimize resource utilization.",
     location: "Manchester, NH, USA",
     logo: "https://avatars.slack-edge.com/2021-06-16/2178256167170_381b8dc0864c2ff691e3_512.png",
   },
@@ -144,15 +144,14 @@ ${largeText.toUpperCase()}
       { name: "Chill Lofi Beat", url: "https://example.com/lofi1.mp3" },
       { name: "Synthwave Cruisin'", url: "https://example.com/synth1.mp3" },
       { name: "Coding Focus", url: "https://example.com/ambient1.mp3" }
-    ],
-    playRandom: true
+    ]
   }
 };
 
 const facts = [
   "Triathlete-in-training aiming for Ironman; logs everything on Notion.",
-  "Accidentally became the tech support for family's real estate biz.",
-  "Believes "just one more API" is always the solution.",
+  "Accidentally became the tech support for family’s real estate biz.",
+  "Believes “just one more API” is always the solution.",
   "I contribute to open-source projects in my free time",
   "I've completed 8 half-marathons",
   "Has more Notion dashboards than real-life responsibilities (almost).",
@@ -164,7 +163,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
-  const [isFlipped, setIsFlipped] = useState(false);
 
   const changeRandomFact = () => {
     const newFact = facts[Math.floor(Math.random() * facts.length)];
@@ -188,21 +186,6 @@ const Index = () => {
 
   const handleLoadComplete = () => {
     setIsLoading(false);
-  };
-
-  const handleShowMoreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    changeRandomFact();
-    
-    // Flip the card back after changing fact
-    setIsFlipped(false);
-    
-    setTimeout(() => {
-      const flipCardElement = e.currentTarget.closest('.relative') as HTMLElement;
-      if (flipCardElement) {
-        flipCardElement.click();
-      }
-    }, 300);
   };
 
   return (
@@ -305,14 +288,21 @@ const Index = () => {
                             <p className="text-lg font-semibold mb-2">Another fact</p>
                             <Button 
                               variant="ghost" 
-                              onClick={handleShowMoreClick}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                changeRandomFact();
+                                setTimeout(() => {
+                                  const element = e.currentTarget.closest('.relative') as HTMLElement;
+                                  if (element) {
+                                    element.click();
+                                  }
+                                }, 300);
+                              }}
                             >
                               Show me more
                             </Button>
                           </div>
                         }
-                        isFlipped={isFlipped}
-                        onFlip={() => setIsFlipped(!isFlipped)}
                       />
                     </div>
                   </div>

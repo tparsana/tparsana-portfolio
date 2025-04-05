@@ -144,14 +144,15 @@ ${largeText.toUpperCase()}
       { name: "Chill Lofi Beat", url: "https://example.com/lofi1.mp3" },
       { name: "Synthwave Cruisin'", url: "https://example.com/synth1.mp3" },
       { name: "Coding Focus", url: "https://example.com/ambient1.mp3" }
-    ]
+    ],
+    playRandom: true
   }
 };
 
 const facts = [
   "Triathlete-in-training aiming for Ironman; logs everything on Notion.",
-  "Accidentally became the tech support for family’s real estate biz.",
-  "Believes “just one more API” is always the solution.",
+  "Accidentally became the tech support for family's real estate biz.",
+  "Believes "just one more API" is always the solution.",
   "I contribute to open-source projects in my free time",
   "I've completed 8 half-marathons",
   "Has more Notion dashboards than real-life responsibilities (almost).",
@@ -186,6 +187,18 @@ const Index = () => {
 
   const handleLoadComplete = () => {
     setIsLoading(false);
+  };
+
+  const handleShowMoreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    changeRandomFact();
+    // Find the closest FlipCard element and trigger its click event
+    const flipCardElement = e.currentTarget.closest('.relative') as HTMLElement;
+    if (flipCardElement) {
+      setTimeout(() => {
+        flipCardElement.click();
+      }, 300);
+    }
   };
 
   return (
@@ -288,16 +301,7 @@ const Index = () => {
                             <p className="text-lg font-semibold mb-2">Another fact</p>
                             <Button 
                               variant="ghost" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                changeRandomFact();
-                                setTimeout(() => {
-                                  const element = e.currentTarget.closest('.relative') as HTMLElement;
-                                  if (element) {
-                                    element.click();
-                                  }
-                                }, 300);
-                              }}
+                              onClick={handleShowMoreClick}
                             >
                               Show me more
                             </Button>

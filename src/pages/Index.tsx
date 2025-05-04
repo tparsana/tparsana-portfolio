@@ -36,7 +36,7 @@ const projects = [
     description: "Plane-spotting web app for displaying the information of all the flights that fly outside my window.",
     image: "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "Streamlit", "OpenSky API", "FlightRadar API", "REST API", "Requests", "Streamlit Autorefresh", "Real-time Data", "Data Visualization"],
-    githubUrl: "https://github.com/tparsana/unionsky",
+    githubUrl: "https://github.com/tparsana/unionsky-website",
     liveUrl: "https://unionsky.vercel.app", 
   },
   {

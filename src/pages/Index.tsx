@@ -37,7 +37,7 @@ const projects = [
     image: "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "Streamlit", "OpenSky API", "FlightRadar API", "REST API", "Requests", "Streamlit Autorefresh", "Real-time Data", "Data Visualization"],
     githubUrl: "https://github.com/tparsana/unionsky",
-    liveUrl: "https://example.com", 
+    liveUrl: "https://unionsky.vercel.app", 
   },
   {
     title: "Portfolio Website",

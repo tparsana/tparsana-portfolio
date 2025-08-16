@@ -2,12 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MapPin, ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-interface Position {
-  date: string;
-  title: string;
-  description: string;
-}
-
 interface TimelineItemProps {
   date: string;
   title: string;
@@ -16,7 +10,6 @@ interface TimelineItemProps {
   location?: string;
   logo?: string;
   className?: string;
-  positions?: Position[]; // For multiple positions within same company
 }
 const TimelineItem: React.FC<TimelineItemProps> = ({
   date,
@@ -25,8 +18,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description,
   location,
   logo,
-  className,
-  positions
+  className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,9 +63,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
       <div className="relative flex justify-center">
         <div className={cn("absolute top-0 w-3 h-3 rounded-full bg-primary", isVisible ? "animate-flap-flip" : "")} />
-        {positions && positions.length > 0 && (
-          <div className={cn("absolute top-8 w-2 h-2 rounded-full bg-primary/70", isVisible ? "animate-flap-flip" : "")} style={{ animationDelay: "0.2s" }} />
-        )}
         <div className="h-full w-[3px] bg-muted mt-[6px]" />
       </div>
 
@@ -96,20 +85,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
         <div className={cn("overflow-hidden transition-all duration-500 ease-in-out", isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0")}>
           <p className="text-sm pt-2">{description}</p>
-          
-          {positions && positions.length > 0 && (
-            <div className="mt-4 space-y-3">
-              {positions.map((position, index) => (
-                <div key={index} className="border-l-2 border-muted pl-4">
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-sm">{position.title}</h4>
-                    <span className="text-xs text-muted-foreground font-mono">{position.date}</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">{position.description}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>;

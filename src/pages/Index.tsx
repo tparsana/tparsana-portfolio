@@ -42,7 +42,7 @@ const projects = [
   {
     title: "LaterTube",
     description: "A distraction-free YouTube watchlist that bypasses ads, lets you save and organize videos with tags and priorities, and keeps everything in sync in real time.",
-    image: "https://images.unsplash.com/photo-1553166272-e69910ab5ae1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1625813948790-936f256faea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Supabase Auth", "Supabase Realtime", "PostgreSQL", "Youtube Data API"],
     githubUrl: "https://github.com/tparsana/YourTube",
     liveUrl: "https://latertube.vercel.app",

@@ -40,12 +40,12 @@ const projects = [
     liveUrl: "https://unionsky.vercel.app", 
   },
   {
-    title: "Portfolio Website",
-    description: "This personal portfolio website showcasing projects and skills.",
-    image: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: ["React", "Framer Motion", "Tailwind", "Vite"],
-    githubUrl: "https://github.com/tparsana/tparsana-portfolio",
-    liveUrl: "https://tanishparsana.vercel.app",
+    title: "LaterTube",
+    description: "LaterTube is a custom YouTube watchlist app designed for a clean, distraction-free viewing experience and it bypasses ads. It lets you save, tag, and prioritize videos seamlessly, with real-time sync and an intuitive, personalized flow.",
+    image: "https://images.unsplash.com/photo-1591696205602-72d1a0c1b23e?auto=format&fit=crop&w=1000&q=80",
+    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Supabase Auth", "Supabase Realtime", "PostgreSQL", "Youtube Data API"],
+    githubUrl: "https://github.com/tparsana/YourTube",
+    liveUrl: "https://latertube.vercel.app",
   },
 ];
 

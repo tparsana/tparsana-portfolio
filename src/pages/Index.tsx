@@ -212,7 +212,7 @@ const Index = () => {
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
                   <SplitFlapText
-                    text="Tanish Parsana"
+                    text="Tanish   Parsana"
                     className="font-mono"
                     onComplete={() => setIntroComplete(true)}
                   />
@@ -222,7 +222,7 @@ const Index = () => {
                   <div className="animate-slide-up">
                     <p className="text-xl md:text-2xl text-muted-foreground mb-8">
                       <SplitFlapText
-                        text="Full Stack Developer, Data Science & AI Engineer"
+                        text="Full   Stack   Developer, Data   Science   &   AI   Engineer"
                         delay={200}
                         className="font-mono"
                       />

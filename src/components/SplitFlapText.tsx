@@ -61,10 +61,10 @@ const SplitFlapText: React.FC<SplitFlapTextProps> = ({
       {text.split("").map((char, index) => (
         <span
           key={index}
-          className={`split-flap-char ${index === flippingIndex ? "animate-flap-flip" : ""}`}
+          className={`split-flap-char ${char === " " ? "space-char" : ""} ${index === flippingIndex ? "animate-flap-flip" : ""}`}
         >
           <span className="char">
-            {index < displayedText.length ? char : " "}
+            {index < displayedText.length ? (char === " " ? "\u00A0" : char) : "\u00A0"}
           </span>
         </span>
       ))}

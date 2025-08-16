@@ -121,6 +121,10 @@
   perspective: 1000px;
 }
 
+.split-flap-char.space-char {
+  min-width: 0.5em;
+}
+
 .split-flap-char .char {
   @apply block duration-300;
   transition-property: transform, opacity;

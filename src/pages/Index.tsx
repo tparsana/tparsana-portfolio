@@ -51,20 +51,24 @@ const projects = [
 
 const experiences = [
   {
-    date: "Apr 2025 - Present",
-    title: "Vice President - Industry Relations",
+    date: "Aug 2024 - Present",
+    title: "Industry Relations Team",
     subtitle: "DevLabs Club at ASU",
-    description: "Promoted from Officer to Vice President to lead DevLabs' external partnerships with startups, venture capital firms, and industry leaders. Managing and mentoring the Industry Team to drive strategic outreach, secure sponsorships, and bring real-world connections to student-led projects. Spearheading initiatives that connect student founders with the broader tech ecosystem to build, launch, and scale impactful innovations.",
+    description: "Leading DevLabs' external partnerships with startups, venture capital firms, and industry leaders. Building strategic relationships that connect student founders with the broader tech ecosystem.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
-  },
-  {
-    date: "Aug 2024 - Apr 2025",
-    title: "Officer of Industry Relations",
-    subtitle: "DevLabs Club at ASU",
-    description: "As an Industry Relations Officer at DevLabs at ASU, I focus on building strong relationships with tech companies and industry professionals. My role involves organizing networking events, securing sponsorships, and connecting club members with valuable industry opportunities. I act as a bridge between our passionate student community and the tech industry, helping peers advance their careers and gain real-world insights.",
-    location: "Tempe, AZ, USA",
-    logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
+    positions: [
+      {
+        date: "Apr 2025 - Present",
+        title: "Vice President - Industry Relations",
+        description: "Promoted to lead DevLabs' external partnerships with startups, venture capital firms, and industry leaders. Managing and mentoring the Industry Team to drive strategic outreach, secure sponsorships, and bring real-world connections to student-led projects."
+      },
+      {
+        date: "Aug 2024 - Apr 2025",
+        title: "Officer of Industry Relations",
+        description: "Focused on building strong relationships with tech companies and industry professionals. Organized networking events, secured sponsorships, and connected club members with valuable industry opportunities."
+      }
+    ]
   },
   {
     date: "Aug 2023 - Present",

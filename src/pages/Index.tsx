@@ -24,12 +24,12 @@ const projects = [
     liveUrl: "https://example.com",
   },
   {
-    title: "Construction Project Management App",
+    title: "Assigned",
     description: "A super easy to use Project Management App focuing on construction project (with WhatsApp integration upcoming).",
     image: "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["TypeScript", "React", "Firebase", "Supabase", "Tailwind", "Node.js", "Express.js", "MongoDB", "Redux", "Material-UI", "React Router", "Axios"],
     githubUrl: "https://github.com/tparsana/buildtrack-constructify",
-    liveUrl: "https://example.com",
+    liveUrl: "https://assigned-tasks.glide.page",
   },
   {
     title: "UnionSky",

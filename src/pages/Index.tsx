@@ -115,7 +115,7 @@ const education = [
     subtitle: "St. Kabir School",
     description: "Completed CBSE schooling with strong academic foundation and holistic development focus.",
     location: "Ahmedabad, GJ, India",
-    logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    logo: "https://stkabir.com/school_form/images/logo.png",
   },
 ];
 
@@ -126,7 +126,7 @@ const extracurricular = [
     subtitle: "Endurance Athletics",
     description: "Currently training for the Ironman Arizona triathlon. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance.",
     location: "Tempe, AZ, USA",
-    logo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    logo: "https://yt3.googleusercontent.com/ytc/AIdro_mTtApPEGx_zR-2hiGgDKuI8jlbrhiTngwOY4wveB5-cxA=s900-c-k-c0x00ffffff-no-rj",
   }
 ];
 

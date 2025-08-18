@@ -10,9 +10,6 @@ interface TimelineItemProps {
   location?: string;
   logo?: string;
   className?: string;
-  isPromotion?: boolean;
-  promotionGroup?: string;
-  isPromotionEnd?: boolean;
 }
 const TimelineItem: React.FC<TimelineItemProps> = ({
   date,
@@ -21,10 +18,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description,
   location,
   logo,
-  className,
-  isPromotion = false,
-  promotionGroup,
-  isPromotionEnd = false
+  className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -69,18 +63,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
       <div className="relative flex justify-center">
         <div className={cn("absolute top-0 w-3 h-3 rounded-full bg-primary", isVisible ? "animate-flap-flip" : "")} />
-        <div className={cn(
-          "w-[3px] bg-muted mt-[6px]",
-          isPromotion && !isPromotionEnd ? "h-full" : "h-full",
-          isPromotionEnd ? "h-16" : "h-full"
-        )} />
-        {isPromotion && (
-          <div className={cn(
-            "absolute w-3 h-3 rounded-full bg-primary",
-            isPromotionEnd ? "bottom-16" : "bottom-0",
-            isVisible ? "animate-flap-flip" : ""
-          )} />
-        )}
+        <div className="h-full w-[3px] bg-muted mt-[6px]" />
       </div>
 
       <div className={cn("transform transition-all duration-500 group relative", isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0", "hover:bg-muted/10 rounded-lg p-2 -m-2")} onMouseEnter={() => !isMobile && setIsExpanded(true)} onMouseLeave={() => !isMobile && setIsExpanded(false)} onClick={toggleExpand}>

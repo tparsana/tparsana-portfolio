@@ -57,6 +57,8 @@ const experiences = [
     description: "Promoted from Officer to Vice President to lead DevLabs' external partnerships with startups, venture capital firms, and industry leaders. Managing and mentoring the Industry Team to drive strategic outreach, secure sponsorships, and bring real-world connections to student-led projects. Spearheading initiatives that connect student founders with the broader tech ecosystem to build, launch, and scale impactful innovations.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
+    isPromotion: true,
+    promotionGroup: "devlabs",
   },
   {
     date: "Aug 2024 - Apr 2025",
@@ -65,6 +67,9 @@ const experiences = [
     description: "As an Industry Relations Officer at DevLabs at ASU, I focus on building strong relationships with tech companies and industry professionals. My role involves organizing networking events, securing sponsorships, and connecting club members with valuable industry opportunities. I act as a bridge between our passionate student community and the tech industry, helping peers advance their careers and gain real-world insights.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
+    isPromotion: true,
+    promotionGroup: "devlabs",
+    isPromotionEnd: true,
   },
   {
     date: "Aug 2025 - Present",
@@ -107,6 +112,7 @@ const education = [
     subtitle: "Arizona State University",
     description: "Focused on software engineering, web development, data science and user experience design.",
     location: "Tempe, AZ, USA",
+    logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
   },
   {
     date: "2010 - 2022",
@@ -114,6 +120,7 @@ const education = [
     subtitle: "St. Kabir School",
     description: "Completed CBSE schooling with strong academic foundation and holistic development focus.",
     location: "Ahmedabad, GJ, India",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYEYvOJG8DjgfJJPwJK6J2rB2gfmR2qcBKfA&s",
   },
 ];
 
@@ -124,6 +131,7 @@ const extracurricular = [
     subtitle: "Endurance Athletics",
     description: "Currently training for the Ironman Arizona triathlon. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance.",
     location: "Tempe, AZ, USA",
+    logo: "https://www.ironman.com/sites/all/themes/ironman/logo.png",
   }
 ];
 

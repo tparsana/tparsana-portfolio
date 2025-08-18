@@ -17,7 +17,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 const projects = [
   {
     title: "ACTV",
-    description: "A RAG based Dynamic and Personalized Fitness and Nutrition Coach to suggest Customized Workout and Meal Plans.",
+    description: "A Retrieval-Augmented, AI-powered fitness and nutrition coach that dynamically builds personalized workout routines and meal plans, adapting to user goals in real time while integrating progress tracking, habit-forming techniques, and smart performance recommendations.",
     image: "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API", "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     title: "Assigned",
-    description: "A super easy to use Project Management App focuing on construction project (with WhatsApp integration upcoming).",
+    description: "A simple yet powerful project management platform designed for construction workflows, offering task assignments, progress tracking, and collaboration tools, with seamless WhatsApp integration coming soon to keep teams connected instantly and effortlessly.",
     image: "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["TypeScript", "React", "Firebase", "Supabase", "Tailwind", "Node.js", "Express.js", "MongoDB", "Redux", "Material-UI", "React Router", "Axios"],
     githubUrl: "https://github.com/tparsana/buildtrack-constructify",
@@ -33,7 +33,7 @@ const projects = [
   },
   {
     title: "UnionSky",
-    description: "Plane-spotting web app for displaying the information of all the flights that fly outside my window.",
+    description: "A plane-spotting web app that tracks and displays detailed flight data for aircrafts outside my window, showing live routes, airline information, and aircraft models in real time with an intuitive, distraction-free interface.",
     image: "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "TypeScript", "OpenSky API", "FlightRadar API", "REST API", "Requests", "React", "Real-time Data", "Data Visualization"],
     githubUrl: "https://github.com/tparsana/unionsky-website",
@@ -295,7 +295,7 @@ const Index = () => {
                         className="h-40"
                         frontContent={
                           <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Did you know?</p>
+                            <p className="text-lg font-semibold mb-2">Fun facts about me:</p>
                             <p className="text-center text-muted-foreground">
                               {randomFact}
                             </p>
@@ -435,7 +435,7 @@ const Index = () => {
                   <div>
                     <h3 className="text-xl font-semibold mb-4">Let's Connect</h3>
                     <p className="mb-6">
-                      I'm currently available for freelance work and internship positions.
+                      I'm currently available for full-time and co-op positions.
                       If you have a project that needs some creative touches or
                       if you're looking to add a developer to your team, I'd love to hear from you.
                     </p>

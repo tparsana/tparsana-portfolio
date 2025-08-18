@@ -159,9 +159,11 @@ ${largeText.toUpperCase()}
   },
   music: {
     tracks: [
-      { name: "Chill Lofi Beat", url: "https://example.com/lofi1.mp3" },
-      { name: "Synthwave Cruisin'", url: "https://example.com/synth1.mp3" },
-      { name: "Coding Focus", url: "https://example.com/ambient1.mp3" }
+      { name: "Cowgirls - Morgan Wallen", url: "https://www.dropbox.com/scl/fi/nseej8ekcq5elkey3pqoy/Cowgirls.mp3?rlkey=yku04utm847nx5zwyvofl4p27&st=w5eltuci&raw=1" },
+      { name: "I Got You - Duke Dumont", url: "https://www.dropbox.com/scl/fi/bw2fqlt243vgoohb8vv19/IGotYou.mp3?rlkey=s6y0nc6xlxcsvefzbnzojinxr&st=vn289kto&raw=1" },
+      { name: "Memory Cassettes - Ben Bohmer", url: "https://www.dropbox.com/scl/fi/mczrpjy238rf21od7fbd9/MemoryCassettes.mp3?rlkey=20erjnu49n1jvxioyi6mu58xz&st=z36bztuo&raw=1" },
+      { name: "Roar - Katy Perry", url: "https://www.dropbox.com/scl/fi/30tag8h25jb7rwzv9b2x8/Roar.mp3?rlkey=zqwz5lfqbnzad68jixvjq3pal&st=fjdppgat&raw=1" },
+      { name: "We Are Young - fun.", url: "https://www.dropbox.com/scl/fi/jlll8592tey29ohpn9iy9/We-Are-Young.mp3?rlkey=01pr9tgtrn86ivz5griy0hazn&st=91zektzn&raw=1" }
     ]
   }
 };

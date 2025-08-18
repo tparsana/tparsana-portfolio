@@ -17,7 +17,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 const projects = [
   {
     title: "ACTV",
-    description: "A Retrieval-Augmented, AI-powered fitness and nutrition coach that dynamically builds personalized workout routines and meal plans, adapting to user goals in real time while integrating progress tracking, habit-forming techniques, and smart performance recommendations.",
+    description: "An AI-powered fitness and nutrition coach that builds adaptive workout routines and meal plans, using Retrieval-Augmented guidance and progress tracking to deliver personalized recommendations that evolve with your goals.",
     image: "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API", "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     title: "Assigned",
-    description: "A simple yet powerful project management platform designed for construction workflows, offering task assignments, progress tracking, and collaboration tools, with seamless WhatsApp integration coming soon to keep teams connected instantly and effortlessly.",
+    description: "A streamlined project management platform tailored to construction teams, combining task tracking, scheduling, and collaboration tools, with upcoming WhatsApp integration to keep projects moving forward in real time.",
     image: "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["TypeScript", "React", "Firebase", "Supabase", "Tailwind", "Node.js", "Express.js", "MongoDB", "Redux", "Material-UI", "React Router", "Axios"],
     githubUrl: "https://github.com/tparsana/buildtrack-constructify",
@@ -33,7 +33,7 @@ const projects = [
   },
   {
     title: "UnionSky",
-    description: "A plane-spotting web app that tracks and displays detailed flight data for aircrafts outside my window, showing live routes, airline information, and aircraft models in real time with an intuitive, distraction-free interface.",
+    description: "A plane-spotting web app that streams live flight data from aircrafts outside my room window, displaying routes, airlines, and aircraft details in real time through a clean interface built for aviation enthusiasts.",
     image: "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Python", "TypeScript", "OpenSky API", "FlightRadar API", "REST API", "Requests", "React", "Real-time Data", "Data Visualization"],
     githubUrl: "https://github.com/tparsana/unionsky-website",
@@ -295,7 +295,7 @@ const Index = () => {
                         className="h-40"
                         frontContent={
                           <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Fun facts about me:</p>
+                            <p className="text-lg font-semibold mb-2">Fun Fact:</p>
                             <p className="text-center text-muted-foreground">
                               {randomFact}
                             </p>

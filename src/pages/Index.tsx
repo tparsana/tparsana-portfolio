@@ -124,7 +124,7 @@ const extracurricular = [
     date: "2025",
     title: "Ironman Arizona Triathlon",
     subtitle: "Endurance Athletics",
-    description: "Currently training for the Ironman Arizona triathlon. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance.",
+    description: "Currently training for the Ironman Arizona triathlon, Racing in November 2025. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance. Race includes Swim - 2.4 miles, Bike - 112 miles, and Run - 26.2 miles.",
     location: "Tempe, AZ, USA",
     logo: "https://yt3.googleusercontent.com/ytc/AIdro_mTtApPEGx_zR-2hiGgDKuI8jlbrhiTngwOY4wveB5-cxA=s900-c-k-c0x00ffffff-no-rj",
   }

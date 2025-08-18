@@ -17,7 +17,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 const projects = [
   {
     title: "ACTV",
-    description: "An AI-powered fitness and nutrition coach that builds adaptive workout routines and meal plans, using Retrieval-Augmented guidance and progress tracking to deliver personalized recommendations that evolve with your goals.",
+    description: "An AI-powered fitness & nutrition coach that builds adaptive workout routines and meal plans, using RAG-based guidance and progress tracking to deliver personalized recommendations that evolve with your goals.",
     image: "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["React", "Node.js", "Python", "LangChain", "LLMs", "Vector DB", "OpenAI API", "Gemini API", "MongoDB"],
     githubUrl: "https://github.com/tparsana/ACTV",
@@ -41,7 +41,7 @@ const projects = [
   },
   {
     title: "LaterTube",
-    description: "A distraction-free YouTube watchlist that bypasses ads, lets you save and organize videos with tags and priorities, and keeps everything in sync in real time.",
+    description: "A distraction-free YouTube watchlist that bypasses Youtube ad layer, lets you save and organize videos with tags and priorities to come back to later, and keeps everything in sync in real time with proper AUTH and DB.",
     image: "https://images.unsplash.com/photo-1625813948790-936f256faea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Supabase Auth", "Supabase Realtime", "PostgreSQL", "Youtube Data API"],
     githubUrl: "https://github.com/tparsana/YourTube",

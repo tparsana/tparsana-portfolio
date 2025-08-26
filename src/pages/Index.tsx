@@ -68,9 +68,9 @@ const experiences = [
   },
   {
     date: "Aug 2025 - Present",
-    title: "Senior Technology Consultant",
+    title: "Senior Creative Technology Consultant",
     subtitle: "Zoom Innovation Lab at Enterprise Technology - ASU",
-    description: "Promoted to Senior Tech Consultant at Arizona State University’s Zoom Innovation Lab and Tech Hub, where I get to lead an incredible team of consultants and help bring ideas to life through technology. My role blends hands-on problem solving with big-picture leadership — from making sure our recording and production equipment runs seamlessly, to troubleshooting challenges, to building strong relationships with clients and collaborators. What I love most is driving innovation and teamwork at both the ZIL and Tech Hub, creating spaces where creativity and technology come together to make an impact.",
+    description: "Promoted to Senior Creative Tech Consultant at Arizona State University’s Zoom Innovation Lab and Tech Hub, where I get to lead an incredible team of consultants and help bring ideas to life through technology. My role blends hands-on problem solving with big-picture leadership — from making sure our recording and production equipment runs seamlessly, to troubleshooting challenges, to building strong relationships with clients and collaborators. What I love most is driving innovation and teamwork at both the ZIL and Tech Hub, creating spaces where creativity and technology come together to make an impact.",
     location: "Tempe, AZ, USA",
     logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
   },

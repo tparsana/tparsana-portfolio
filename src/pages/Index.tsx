@@ -8,7 +8,6 @@ import FlipCard from "@/components/FlipCard";
 import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
-import PreLoader from "@/components/PreLoader";
 import TechStackCompact from "@/components/TechStackCompact";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
@@ -180,7 +179,6 @@ const facts = [
 ];
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
 
@@ -199,23 +197,38 @@ const Index = () => {
     ).matches;
 
     if (prefersReducedMotion) {
-      setIsLoading(false);
       setIntroComplete(true);
     }
-  }, []);
 
-  const handleLoadComplete = () => {
-    setIsLoading(false);
-  };
+    // Handle hash fragments in URL (e.g., /#experience)
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        // Small delay to ensure the page has rendered
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    };
+
+    // Handle hash on initial load
+    handleHashNavigation();
+
+    // Listen for hash changes (in case user uses back/forward with hash URLs)
+    window.addEventListener('hashchange', handleHashNavigation);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashNavigation);
+    };
+  }, []);
 
   return (
     <ThemeProvider defaultTheme="dark">
-      {isLoading ? (
-        <PreLoader onLoadComplete={handleLoadComplete} />
-      ) : (
-        <>
-          <Navigation />
-          <main className="min-h-screen">
+      <Navigation />
+      <main className="min-h-screen">
             <AnimatedBackground />
             
             <section
@@ -510,8 +523,6 @@ const Index = () => {
               </div>
             </footer>
           </main>
-        </>
-      )}
     </ThemeProvider>
   );
 };

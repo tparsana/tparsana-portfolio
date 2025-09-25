@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Twitter, Mail, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import SplitFlapText from "@/components/SplitFlapText";
@@ -9,9 +10,11 @@ import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
 import TechStackCompact from "@/components/TechStackCompact";
+import WordByWordText from "@/components/WordByWordText";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { getHomePageProjects, Project } from "@/data/projects";
 
 const projects = [
   {
@@ -180,7 +183,39 @@ const facts = [
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [subtitleComplete, setSubtitleComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
+  const [homeProjects, setHomeProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    // Load projects from localStorage/data
+    const loadHomeProjects = () => {
+      const dynamicProjects = getHomePageProjects();
+      if (dynamicProjects.length > 0) {
+        setHomeProjects(dynamicProjects);
+      } else {
+        // Fallback to static projects converted to Project type
+        const fallbackProjects: Project[] = projects.slice(0, 4).map((project, index) => ({
+          id: `static-${index}`,
+          slug: project.title.toLowerCase().replace(/\s+/g, '-'),
+          longDescription: project.description,
+          featured: index < 2,
+          status: "completed" as const,
+          startDate: "2024-01-01",
+          category: "web" as const,
+          technologies: project.tags,
+          seo: {
+            metaTitle: `${project.title} - Tanish Parsana`,
+            metaDescription: project.description.slice(0, 160),
+            keywords: project.tags
+          },
+          ...project
+        }));
+        setHomeProjects(fallbackProjects);
+      }
+    };
+    loadHomeProjects();
+  }, []);
 
   const changeRandomFact = () => {
     const newFact = facts[Math.floor(Math.random() * facts.length)];
@@ -198,6 +233,7 @@ const Index = () => {
 
     if (prefersReducedMotion) {
       setIntroComplete(true);
+      setSubtitleComplete(true);
     }
 
     // Handle hash fragments in URL (e.g., /#experience)
@@ -247,13 +283,19 @@ const Index = () => {
                 {introComplete && (
                   <div className="animate-slide-up">
                     <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                      <SplitFlapText
-                        text="Full Stack Developer, Data Science & AI Engineer"
-                        delay={200}
+                      <WordByWordText
+                        words={["Full", "Stack", "Developer,", "Data", "Science", "&", "AI", "Engineer"]}
+                        delay={50}
+                        speed={150}
                         className="font-mono"
+                        onComplete={() => setSubtitleComplete(true)}
                       />
                     </p>
+                  </div>
+                )}
 
+                {subtitleComplete && (
+                  <div className="animate-slide-up">
                     <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
                       <Button asChild>
                         <a href="#projects">View My Work</a>
@@ -306,37 +348,20 @@ const Index = () => {
                     </p>
 
                     <div className="pt-4">
-                      <FlipCard
-                        className="h-40"
-                        frontContent={
-                          <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Fun Fact:</p>
-                            <p className="text-center text-muted-foreground">
-                              {randomFact}
-                            </p>
-                          </div>
-                        }
-                        backContent={
-                          <div className="flex flex-col h-full items-center justify-center">
-                            <p className="text-lg font-semibold mb-2">Another fact</p>
-                            <Button 
-                              variant="ghost" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                changeRandomFact();
-                                setTimeout(() => {
-                                  const element = e.currentTarget.closest('.relative') as HTMLElement;
-                                  if (element) {
-                                    element.click();
-                                  }
-                                }, 300);
-                              }}
-                            >
-                              Show me more
-                            </Button>
-                          </div>
-                        }
-                      />
+                      <div 
+                        className="h-40 w-full cursor-pointer bg-card border rounded-lg shadow p-4 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                        onClick={changeRandomFact}
+                      >
+                        <div className="flex flex-col h-full items-center justify-center">
+                          <p className="text-lg font-semibold mb-2">Fun Fact:</p>
+                          <p className="text-center text-muted-foreground">
+                            {randomFact}
+                          </p>
+                          <p className="text-xs text-muted-foreground/60 mt-3">
+                            Click for another fact
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -383,9 +408,9 @@ const Index = () => {
                 </h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {projects.map((project, index) => (
+                  {homeProjects.map((project, index) => (
                     <ProjectCard
-                      key={index}
+                      key={project.id || index}
                       {...project}
                       className={cn(
                         "opacity-0",
@@ -396,6 +421,16 @@ const Index = () => {
                       )}
                     />
                   ))}
+                </div>
+
+                {/* Show More Projects Button */}
+                <div className="text-center mt-12">
+                  <Button asChild variant="outline" size="lg">
+                    <Link to="/projects" className="flex items-center gap-2">
+                      View All Projects
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </section>

@@ -7,7 +7,6 @@ interface CursorPosition {
 
 const CustomCursor = () => {
   const [position, setPosition] = useState<CursorPosition>({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -30,60 +29,49 @@ const CustomCursor = () => {
       setIsHidden(false);
     };
 
-    const updateCursorType = () => {
-      try {
-        const hoveredElement = document.elementFromPoint(position.x, position.y);
-        const computedStyle = hoveredElement
-          ? window.getComputedStyle(hoveredElement)
-          : null;
-
-        // Only allow pointer cursor if the element is not generic/static content
-        const ignoredTags = ["H1", "SPAN", "P", "DIV", "SECTION", "MAIN"];
-        const ignoredClasses = ["no-cursor", "non-interactive", "select-none"];
-
-        const isInteractive =
-          hoveredElement &&
-          !ignoredTags.includes(hoveredElement.tagName) &&
-          !ignoredClasses.some((cls) =>
-            hoveredElement.classList.contains(cls)
-          );
-
-        const isPointerElement =
-          computedStyle &&
-          isInteractive &&
-          (computedStyle.cursor === "pointer" || computedStyle.cursor === "hand");
-
-        setIsPointer(isPointerElement);
-      } catch (err) {
-        setIsPointer(false);
-      }
-    };
-
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
     const handleMouseLeave = () => setIsHidden(true);
     const handleMouseEnter = () => setIsHidden(false);
 
     window.addEventListener("mousemove", updateCursorPosition);
-    window.addEventListener("mousemove", updateCursorType);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
+    // Force cursor to be none everywhere
     document.body.style.cursor = "none";
+    
+    // Override cursor style for all elements
+    const style = document.createElement('style');
+    style.textContent = `
+      *, *:hover, *:active, *:focus {
+        cursor: none !important;
+      }
+      a, button, [role="button"], input, textarea, select {
+        cursor: none !important;
+      }
+    `;
+    style.id = 'custom-cursor-override';
+    document.head.appendChild(style);
 
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);
-      window.removeEventListener("mousemove", updateCursorType);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
 
       document.body.style.cursor = "auto";
+      
+      // Remove the cursor override styles
+      const existingStyle = document.getElementById('custom-cursor-override');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
     };
-  }, [position.x, position.y, isMobile]);
+  }, [isMobile]);
 
   if (isHidden || isMobile) return null;
 
@@ -99,9 +87,7 @@ const CustomCursor = () => {
       }}
     >
       <div
-        className={`w-4 h-4 bg-white rounded-full flex items-center justify-center ${
-          isPointer ? "scale-150" : "scale-100"
-        } transition-transform duration-200`}
+        className="w-4 h-4 bg-white rounded-full flex items-center justify-center transition-transform duration-200"
       />
     </div>
   );

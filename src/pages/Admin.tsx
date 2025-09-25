@@ -4,30 +4,46 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import BlogEditor from "@/components/BlogEditor";
+import AdminAuth, { useAdminAuth } from "@/components/AdminAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllBlogPosts, saveBlogPost, deleteBlogPost, BlogPost } from "@/data/blogs";
-import { Plus, Edit, Trash2, Eye, RefreshCw } from "lucide-react";
+import { getAllProjects } from "@/data/projects";
+import { Plus, Edit, Trash2, Eye, RefreshCw, LogOut, FolderOpen } from "lucide-react";
 
 const Admin = () => {
+  const { isAuthenticated, logout } = useAdminAuth();
   const [currentView, setCurrentView] = useState<'list' | 'create' | 'edit'>('list');
   const [editingPost, setEditingPost] = useState<BlogPost | undefined>();
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [projectsCount, setProjectsCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load posts from localStorage on component mount
+  // Load posts and projects from localStorage on component mount
   useEffect(() => {
-    const loadPosts = () => {
-      const allPosts = getAllBlogPosts();
-      setPosts(allPosts);
-      setIsLoading(false);
-    };
-    loadPosts();
-  }, []);
+    if (isAuthenticated) {
+      const loadData = () => {
+        const allPosts = getAllBlogPosts();
+        const allProjects = getAllProjects();
+        setPosts(allPosts);
+        setProjectsCount(allProjects.length);
+        setIsLoading(false);
+      };
+      loadData();
+    }
+  }, [isAuthenticated]);
 
   const refreshPosts = () => {
     const allPosts = getAllBlogPosts();
     setPosts(allPosts);
+  };
+
+  const handleLogout = () => {
+    if (confirm('Are you sure you want to logout?')) {
+      logout();
+      setCurrentView('list');
+      setEditingPost(undefined);
+    }
   };
 
   const handleCreateNew = () => {
@@ -100,6 +116,15 @@ const Admin = () => {
     });
   };
 
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <ThemeProvider defaultTheme="dark">
+        <AdminAuth onAuthenticated={() => window.location.reload()} />
+      </ThemeProvider>
+    );
+  }
+
   if (currentView === 'create' || currentView === 'edit') {
     return (
       <ThemeProvider defaultTheme="dark">
@@ -149,10 +174,16 @@ const Admin = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h1 className="text-4xl font-bold mb-2">Blog Admin</h1>
-                <p className="text-muted-foreground">Manage your blog posts and thoughts</p>
+                <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
+                <p className="text-muted-foreground">Manage your content and portfolio</p>
               </div>
               <div className="flex gap-2">
+                <Button variant="outline" asChild>
+                  <Link to="/admin/projects">
+                    <FolderOpen className="h-4 w-4 mr-2" />
+                    Projects Admin
+                  </Link>
+                </Button>
                 <Button variant="outline" onClick={refreshPosts}>
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Refresh
@@ -161,15 +192,25 @@ const Admin = () => {
                   <Plus className="h-4 w-4 mr-2" />
                   New Post
                 </Button>
+                <Button variant="outline" onClick={handleLogout} className="text-red-400 hover:text-red-300">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
               </div>
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
               <Card>
                 <CardContent className="p-4">
                   <div className="text-2xl font-bold">{posts.length}</div>
-                  <div className="text-sm text-muted-foreground">Total Posts</div>
+                  <div className="text-sm text-muted-foreground">Blog Posts</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4">
+                  <div className="text-2xl font-bold">{projectsCount}</div>
+                  <div className="text-sm text-muted-foreground">Projects</div>
                 </CardContent>
               </Card>
               <Card>

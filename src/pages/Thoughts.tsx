@@ -46,20 +46,22 @@ const Thoughts = () => {
         <AnimatedBackground />
         
         {/* Hero Section */}
-        <section className="relative min-h-[40vh] flex flex-col items-center justify-center px-4 overflow-hidden">
-          <div className="text-center max-w-4xl space-y-6 z-10">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <SplitFlapText
-                text="blogs, thoughts and reactions"
-                className="font-mono"
-                onComplete={() => setIntroComplete(true)}
-              />
+        <section className="relative pt-48 pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
+          <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
+              <div className="flex justify-center items-center">
+                <SplitFlapText
+                  text="Blogs, Thoughts And Reactions"
+                  className="font-mono text-center"
+                  onComplete={() => setIntroComplete(true)}
+                />
+              </div>
             </h1>
           </div>
         </section>
 
         {/* Blog Posts Section */}
-        <section className="py-20 px-4 relative z-10">
+        <section className="py-8 px-4 relative z-10">
           <div className="container mx-auto max-w-4xl">
             {years.map((year) => (
               <div key={year} className="mb-16">

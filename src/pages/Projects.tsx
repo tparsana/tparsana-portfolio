@@ -22,7 +22,9 @@ const Projects = () => {
 
   useEffect(() => {
     const loadProjects = async () => {
+      console.log('🔍 Loading projects in Projects page...');
       const allProjects = await getAllProjects();
+      console.log('🚀 Projects loaded:', allProjects);
       setProjects(allProjects);
       setFilteredProjects(allProjects);
     };

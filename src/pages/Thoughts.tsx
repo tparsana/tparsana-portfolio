@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SplitFlapText from "@/components/SplitFlapText";
 import SEO from "@/components/SEO";
-import { getBlogPostsByYear } from "@/data/blogs";
+import { getBlogPostsByYear } from "@/data/blogs-unified";
 import { Calendar, Clock, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,8 +16,8 @@ const Thoughts = () => {
 
   // Load posts from localStorage on component mount
   useEffect(() => {
-    const loadPosts = () => {
-      const posts = getBlogPostsByYear();
+    const loadPosts = async () => {
+      const posts = await getBlogPostsByYear();
       setPostsByYear(posts);
       setYears(Object.keys(posts).map(Number).sort((a, b) => b - a));
     };

@@ -7,8 +7,8 @@ import BlogEditor from "@/components/BlogEditor";
 import AdminAuth, { useAdminAuth } from "@/components/AdminAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllBlogPosts, saveBlogPost, deleteBlogPost, BlogPost } from "@/data/blogs";
-import { getAllProjects } from "@/data/projects";
+import { getAllBlogPostsAdmin as getAllBlogPosts, saveBlogPost, deleteBlogPost, BlogPost } from "@/data/blogs-unified";
+import { getAllProjects } from "@/data/projects-unified";
 import { Plus, Edit, Trash2, Eye, RefreshCw, LogOut, FolderOpen } from "lucide-react";
 
 const Admin = () => {
@@ -19,12 +19,12 @@ const Admin = () => {
   const [projectsCount, setProjectsCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load posts and projects from localStorage on component mount
+  // Load posts and projects from data source on component mount
   useEffect(() => {
     if (isAuthenticated) {
-      const loadData = () => {
-        const allPosts = getAllBlogPosts();
-        const allProjects = getAllProjects();
+      const loadData = async () => {
+        const allPosts = await getAllBlogPosts();
+        const allProjects = await getAllProjects();
         setPosts(allPosts);
         setProjectsCount(allProjects.length);
         setIsLoading(false);
@@ -33,8 +33,8 @@ const Admin = () => {
     }
   }, [isAuthenticated]);
 
-  const refreshPosts = () => {
-    const allPosts = getAllBlogPosts();
+  const refreshPosts = async () => {
+    const allPosts = await getAllBlogPosts();
     setPosts(allPosts);
   };
 
@@ -56,7 +56,7 @@ const Admin = () => {
     setCurrentView('edit');
   };
 
-  const handleSavePost = (postData: Partial<BlogPost>) => {
+  const handleSavePost = async (postData: Partial<BlogPost>) => {
     try {
       const fullPost = {
         ...postData,
@@ -68,34 +68,42 @@ const Admin = () => {
         }
       } as BlogPost;
       
-      // Save to localStorage
-      saveBlogPost(fullPost);
+      // Save to data source
+      const success = await saveBlogPost(fullPost);
       
-      // Refresh local state
-      refreshPosts();
-      
-      // Navigate back to list
-      setCurrentView('list');
-      setEditingPost(undefined);
-      
-      // Show success message
-      console.log('Blog post saved successfully!');
+      if (success) {
+        // Refresh local state
+        await refreshPosts();
+        
+        // Navigate back to list
+        setCurrentView('list');
+        setEditingPost(undefined);
+        
+        // Show success message
+        console.log('Blog post saved successfully!');
+      } else {
+        alert('Error saving blog post. Please try again.');
+      }
     } catch (error) {
       console.error('Error saving blog post:', error);
       alert('Error saving blog post. Please try again.');
     }
   };
 
-  const handleDeletePost = (postId: string) => {
+  const handleDeletePost = async (postId: string) => {
     if (confirm('Are you sure you want to delete this post?')) {
       try {
-        // Delete from localStorage
-        deleteBlogPost(postId);
+        // Delete from data source
+        const success = await deleteBlogPost(postId);
         
-        // Refresh local state
-        refreshPosts();
-        
-        console.log('Blog post deleted successfully!');
+        if (success) {
+          // Refresh local state
+          await refreshPosts();
+          
+          console.log('Blog post deleted successfully!');
+        } else {
+          alert('Error deleting blog post. Please try again.');
+        }
       } catch (error) {
         console.error('Error deleting blog post:', error);
         alert('Error deleting blog post. Please try again.');

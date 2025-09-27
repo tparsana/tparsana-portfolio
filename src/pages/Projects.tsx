@@ -8,7 +8,7 @@ import ProjectCard from "@/components/ProjectCard";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getAllProjects, getProjectsByCategory, getProjectsByStatus, Project } from "@/data/projects";
+import { getAllProjects, getProjectsByCategory, getProjectsByStatus, Project } from "@/data/projects-unified";
 import { Filter, Grid, List } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,8 +21,8 @@ const Projects = () => {
   const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
-    const loadProjects = () => {
-      const allProjects = getAllProjects();
+    const loadProjects = async () => {
+      const allProjects = await getAllProjects();
       setProjects(allProjects);
       setFilteredProjects(allProjects);
     };
@@ -30,17 +30,20 @@ const Projects = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = projects;
+    const filterProjects = async () => {
+      let filtered = projects;
 
-    if (selectedCategory !== "all") {
-      filtered = getProjectsByCategory(selectedCategory);
-    }
+      if (selectedCategory !== "all") {
+        filtered = await getProjectsByCategory(selectedCategory);
+      }
 
-    if (selectedStatus !== "all") {
-      filtered = filtered.filter(project => project.status === selectedStatus);
-    }
+      if (selectedStatus !== "all") {
+        filtered = filtered.filter(project => project.status === selectedStatus);
+      }
 
-    setFilteredProjects(filtered);
+      setFilteredProjects(filtered);
+    };
+    filterProjects();
   }, [selectedCategory, selectedStatus, projects]);
 
   const categories = [

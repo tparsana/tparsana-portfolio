@@ -55,6 +55,40 @@ const TestData = () => {
         console.log('Project data type:', typeof projectData);
         console.log('Project data length:', projectData?.length);
         setProjects(projectData);
+
+        // Test saving a blog post
+        console.log('\n🧪 Testing blog post save...');
+        try {
+          const testBlog = {
+            title: 'Test Blog Post',
+            slug: 'test-blog-' + Date.now(),
+            content: 'This is a test blog post content.',
+            excerpt: 'This is a test excerpt.',
+            seo_title: 'Test Blog Post - Tanish Parsana',
+            seo_description: 'This is a test blog post for debugging.',
+            seo_keywords: ['test', 'debug']
+          };
+          
+          const { data: saveResult, error: saveError } = await supabase
+            .from('blog_posts')
+            .insert(testBlog)
+            .select();
+          
+          console.log('Save result:', saveResult);
+          console.log('Save error:', saveError);
+          
+          if (saveResult && saveResult.length > 0) {
+            console.log('✅ Test blog post saved successfully!');
+            // Clean up test data
+            await supabase
+              .from('blog_posts')
+              .delete()
+              .eq('id', saveResult[0].id);
+            console.log('🧹 Test data cleaned up');
+          }
+        } catch (saveTestError) {
+          console.error('❌ Save test failed:', saveTestError);
+        }
       } catch (error) {
         console.error('Error loading data:', error);
         console.error('Error details:', error);

@@ -28,10 +28,10 @@ const mapBlogPostToSupabase = (post: BlogPost) => ({
   slug: post.slug,
   content: post.content,
   excerpt: post.excerpt,
-  featured: post.featured,
-  published: post.published,
+  featured: post.featured || false,
+  published: true, // Always publish new posts
   read_time: post.readTime,
-  total_reads: post.totalReads,
+  total_reads: post.totalReads || 0,
   tags: post.tags,
   seo_title: post.seo.metaTitle,
   seo_description: post.seo.metaDescription,
@@ -105,33 +105,43 @@ export const getBlogPostBySlug = async (slug: string): Promise<BlogPost | null> 
 // Save blog post (create or update)
 export const saveBlogPost = async (post: BlogPost): Promise<boolean> => {
   try {
+    console.log('🔍 saveBlogPost called with:', post);
     const supabaseData = mapBlogPostToSupabase(post);
+    console.log('🔍 Mapped to Supabase data:', supabaseData);
     
     let query = supabase.from('blog_posts');
     
     if (post.id) {
+      console.log('🔄 Updating existing post with ID:', post.id);
       // Update existing post
-      const { error } = await query
+      const { data, error } = await query
         .update(supabaseData)
-        .eq('id', post.id);
+        .eq('id', post.id)
+        .select();
+      
+      console.log('🔄 Update result:', { data, error });
       
       if (error) {
-        console.error('Error updating blog post:', error);
+        console.error('❌ Error updating blog post:', error);
         return false;
       }
     } else {
+      console.log('➕ Creating new post');
       // Create new post
-      const { error } = await query.insert(supabaseData);
+      const { data, error } = await query.insert(supabaseData).select();
+      
+      console.log('➕ Insert result:', { data, error });
       
       if (error) {
-        console.error('Error creating blog post:', error);
+        console.error('❌ Error creating blog post:', error);
         return false;
       }
     }
 
+    console.log('✅ Blog post saved successfully');
     return true;
   } catch (error) {
-    console.error('Error saving blog post:', error);
+    console.error('❌ Error saving blog post:', error);
     return false;
   }
 };

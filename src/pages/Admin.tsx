@@ -58,6 +58,9 @@ const Admin = () => {
 
   const handleSavePost = async (postData: Partial<BlogPost>) => {
     try {
+      console.log('🔍 Starting save process...');
+      console.log('📝 Post data:', postData);
+      
       const fullPost = {
         ...postData,
         id: postData.id || editingPost?.id || Math.random().toString(36).substr(2, 9),
@@ -68,10 +71,16 @@ const Admin = () => {
         }
       } as BlogPost;
       
+      console.log('📝 Full post data:', fullPost);
+      
       // Save to data source
+      console.log('💾 Calling saveBlogPost...');
       const success = await saveBlogPost(fullPost);
+      console.log('💾 Save result:', success);
+      console.log('💾 Save result type:', typeof success);
       
       if (success) {
+        console.log('✅ Save successful, refreshing posts...');
         // Refresh local state
         await refreshPosts();
         
@@ -81,11 +90,14 @@ const Admin = () => {
         
         // Show success message
         console.log('Blog post saved successfully!');
+        alert('Blog post saved successfully!');
       } else {
+        console.log('❌ Save failed - success was false');
         alert('Error saving blog post. Please try again.');
       }
     } catch (error) {
-      console.error('Error saving blog post:', error);
+      console.error('❌ Error saving blog post:', error);
+      console.error('❌ Error details:', error);
       alert('Error saving blog post. Please try again.');
     }
   };

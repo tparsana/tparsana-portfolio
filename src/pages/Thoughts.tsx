@@ -17,7 +17,9 @@ const Thoughts = () => {
   // Load posts from localStorage on component mount
   useEffect(() => {
     const loadPosts = async () => {
+      console.log('🔍 Loading blog posts in Thoughts page...');
       const posts = await getBlogPostsByYear();
+      console.log('📝 Blog posts loaded:', posts);
       setPostsByYear(posts);
       setYears(Object.keys(posts).map(Number).sort((a, b) => b - a));
     };

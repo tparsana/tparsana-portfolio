@@ -10,6 +10,7 @@ import BlogPost from "./pages/BlogPost";
 import Projects from "./pages/Projects";
 import Admin from "./pages/Admin";
 import ProjectsAdmin from "./pages/ProjectsAdmin";
+import TestData from "./pages/TestData";
 import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/projects" element={<ProjectsAdmin />} />
+          <Route path="/test-data" element={<TestData />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

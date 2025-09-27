@@ -83,21 +83,25 @@ export const getBlogPostsByYear = async (): Promise<Record<string, BlogPost[]>> 
 // Get blog post by slug
 export const getBlogPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   try {
+    console.log('🔍 getBlogPostBySlug: Looking for slug:', slug);
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
       .eq('slug', slug)
-      .eq('published', true)
       .single();
 
+    console.log('🔍 getBlogPostBySlug: Query result:', { data, error });
+
     if (error) {
-      console.error('Error fetching blog post:', error);
+      console.error('❌ Error fetching blog post:', error);
       return null;
     }
 
-    return mapSupabaseToBlogPost(data);
+    const mappedPost = mapSupabaseToBlogPost(data);
+    console.log('🔍 getBlogPostBySlug: Mapped post:', mappedPost);
+    return mappedPost;
   } catch (error) {
-    console.error('Error fetching blog post:', error);
+    console.error('❌ Error fetching blog post:', error);
     return null;
   }
 };

@@ -16,8 +16,10 @@ const BlogPost = () => {
   
   useEffect(() => {
     const loadPost = async () => {
+      console.log('🔍 BlogPost: Loading post with slug:', slug);
       if (slug) {
         const foundPost = await getBlogPostBySlug(slug);
+        console.log('🔍 BlogPost: Found post:', foundPost);
         setPost(foundPost);
         
         // Increment read counter only once per visit

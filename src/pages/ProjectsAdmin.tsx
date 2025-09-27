@@ -8,7 +8,7 @@ import AdminAuth, { useAdminAuth } from "@/components/AdminAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getAllProjects, saveProject, deleteProject, Project } from "@/data/projects";
+import { getAllProjects, saveProject, deleteProject, Project } from "@/data/projects-unified";
 import { Plus, Edit, Trash2, Eye, RefreshCw, LogOut, ExternalLink, Github } from "lucide-react";
 
 const ProjectsAdmin = () => {
@@ -18,11 +18,11 @@ const ProjectsAdmin = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load projects from localStorage on component mount
+  // Load projects from data source on component mount
   useEffect(() => {
     if (isAuthenticated) {
-      const loadProjects = () => {
-        const allProjects = getAllProjects();
+      const loadProjects = async () => {
+        const allProjects = await getAllProjects();
         setProjects(allProjects);
         setIsLoading(false);
       };
@@ -30,8 +30,8 @@ const ProjectsAdmin = () => {
     }
   }, [isAuthenticated]);
 
-  const refreshProjects = () => {
-    const allProjects = getAllProjects();
+  const refreshProjects = async () => {
+    const allProjects = await getAllProjects();
     setProjects(allProjects);
   };
 

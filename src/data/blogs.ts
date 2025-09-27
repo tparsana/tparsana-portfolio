@@ -604,3 +604,8 @@ export const resetToDefaultPosts = () => {
   blogPosts = [...defaultBlogPosts];
   saveBlogPostsToStorage(blogPosts);
 };
+
+export const getFeaturedBlogPosts = () => {
+  const currentPosts = getAllBlogPosts();
+  return currentPosts.filter(post => post.featured);
+};

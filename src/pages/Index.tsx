@@ -14,7 +14,7 @@ import WordByWordText from "@/components/WordByWordText";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import { getHomePageProjects, Project } from "@/data/projects";
+import { getHomePageProjects, Project } from "@/data/projects-unified";
 
 const projects = [
   {
@@ -188,9 +188,9 @@ const Index = () => {
   const [homeProjects, setHomeProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    // Load projects from localStorage/data
-    const loadHomeProjects = () => {
-      const dynamicProjects = getHomePageProjects();
+    // Load projects from data source
+    const loadHomeProjects = async () => {
+      const dynamicProjects = await getHomePageProjects();
       if (dynamicProjects.length > 0) {
         setHomeProjects(dynamicProjects);
       } else {

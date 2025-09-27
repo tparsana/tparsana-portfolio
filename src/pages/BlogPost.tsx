@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SplitFlapText from "@/components/SplitFlapText";
 import SEO from "@/components/SEO";
-import { getBlogPostBySlug, updateBlogPostReads } from "@/data/blogs";
+import { getBlogPostBySlug, updateBlogPostReads } from "@/data/blogs-unified";
 import { Calendar, Clock, Eye, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -15,22 +15,25 @@ const BlogPost = () => {
   const [hasIncrementedReads, setHasIncrementedReads] = useState(false);
   
   useEffect(() => {
-    if (slug) {
-      const foundPost = getBlogPostBySlug(slug);
-      setPost(foundPost);
-      
-      // Increment read counter only once per visit
-      if (foundPost && !hasIncrementedReads) {
-        updateBlogPostReads(foundPost.id);
-        setHasIncrementedReads(true);
+    const loadPost = async () => {
+      if (slug) {
+        const foundPost = await getBlogPostBySlug(slug);
+        setPost(foundPost);
         
-        // Update the local post state with the new read count
-        setTimeout(() => {
-          const updatedPost = getBlogPostBySlug(slug);
-          setPost(updatedPost);
-        }, 100);
+        // Increment read counter only once per visit
+        if (foundPost && !hasIncrementedReads) {
+          await updateBlogPostReads(foundPost.id);
+          setHasIncrementedReads(true);
+          
+          // Update the local post state with the new read count
+          setTimeout(async () => {
+            const updatedPost = await getBlogPostBySlug(slug);
+            setPost(updatedPost);
+          }, 100);
+        }
       }
-    }
+    };
+    loadPost();
   }, [slug, hasIncrementedReads]);
 
   const formatDate = (dateString: string) => {

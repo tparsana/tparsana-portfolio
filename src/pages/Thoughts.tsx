@@ -48,9 +48,9 @@ const Thoughts = () => {
         <AnimatedBackground />
         
         {/* Hero Section */}
-        <section className="relative pt-48 pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
+        <section className="relative pt-20 sm:pt-32 md:pt-48 pb-12 sm:pb-16 md:pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
               <div className="flex justify-center items-center">
                 <SplitFlapText
                   text="Blogs, Thoughts And Reactions"
@@ -68,8 +68,8 @@ const Thoughts = () => {
             {years.map((year) => (
               <div key={year} className="mb-16">
                 {/* Year Header */}
-                <div className="mb-12">
-                  <h2 className="text-4xl md:text-5xl font-bold text-orange-400 font-mono">
+                <div className="mb-8 md:mb-12">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-400 font-mono">
                     {year}
                   </h2>
                 </div>
@@ -90,43 +90,48 @@ const Thoughts = () => {
                         to={`/thoughts/${post.slug}`}
                         className="block"
                       >
-                        <div className="border-b border-muted-foreground/20 pb-6 group-hover:border-orange-400/50 transition-colors">
+                        <div className="border-b border-muted-foreground/20 pb-4 md:pb-6 group-hover:border-orange-400/50 transition-colors">
                           {/* Post Title */}
-                          <h3 className="text-xl md:text-2xl font-semibold mb-3 group-hover:text-orange-400 transition-colors">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 md:mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">
                             {post.title}
                           </h3>
 
                           {/* Post Meta */}
-                          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
+                          <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground mb-2 md:mb-3">
                             <div className="flex items-center gap-1">
-                              <Calendar className="h-4 w-4" />
+                              <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                               <span>{formatDate(post.publishedAt)}</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <Clock className="h-4 w-4" />
+                              <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                               <span>{post.readTime} min read</span>
                             </div>
                             <div className="flex items-center gap-1">
-                              <Eye className="h-4 w-4" />
-                              <span>{post.totalReads} total reads</span>
+                              <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <span>{post.totalReads} reads</span>
                             </div>
                           </div>
 
                           {/* Post Excerpt */}
-                          <p className="text-muted-foreground mb-4 leading-relaxed">
+                          <p className="text-sm sm:text-base text-muted-foreground mb-3 md:mb-4 leading-relaxed line-clamp-3">
                             {post.excerpt}
                           </p>
 
                           {/* Tags */}
-                          <div className="flex items-center gap-2">
-                            {post.tags.map((tag) => (
+                          <div className="flex flex-wrap items-center gap-1 md:gap-2">
+                            {post.tags.slice(0, 3).map((tag) => (
                               <span
                                 key={tag}
-                                className="px-3 py-1 text-xs rounded-full border border-orange-400/30 text-orange-400 bg-orange-400/10"
+                                className="px-2 py-1 text-xs rounded-full border border-orange-400/30 text-orange-400 bg-orange-400/10"
                               >
                                 {tag}
                               </span>
                             ))}
+                            {post.tags.length > 3 && (
+                              <span className="px-2 py-1 text-xs rounded-full border border-orange-400/30 text-orange-400 bg-orange-400/10">
+                                +{post.tags.length - 3} more
+                              </span>
+                            )}
                           </div>
                         </div>
                       </Link>

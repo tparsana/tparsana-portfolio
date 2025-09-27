@@ -93,9 +93,9 @@ const Projects = () => {
         <AnimatedBackground />
         
         {/* Hero Section */}
-        <section className="relative pt-32 pb-16 flex flex-col items-center justify-center px-4 overflow-hidden">
+        <section className="relative pt-20 sm:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
               <div className="flex justify-center items-center">
                 <SplitFlapText
                   text="My Projects"
@@ -110,53 +110,64 @@ const Projects = () => {
         {/* Filters Section */}
         <section className="py-8 px-4 relative z-10">
           <div className="container mx-auto max-w-6xl">
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-              <div className="flex flex-wrap gap-4">
+            <div className="space-y-4 mb-8">
+              {/* Filters */}
+              <div className="space-y-4">
                 {/* Category Filter */}
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((category) => (
-                    <Button
-                      key={category.value}
-                      variant={selectedCategory === category.value ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setSelectedCategory(category.value)}
-                    >
-                      {category.label}
-                    </Button>
-                  ))}
+                <div>
+                  <h3 className="text-sm font-medium mb-2 text-muted-foreground">Category</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {categories.map((category) => (
+                      <Button
+                        key={category.value}
+                        variant={selectedCategory === category.value ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedCategory(category.value)}
+                        className="text-xs"
+                      >
+                        {category.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Status Filter */}
-                <div className="flex flex-wrap gap-2">
-                  {statuses.map((status) => (
-                    <Button
-                      key={status.value}
-                      variant={selectedStatus === status.value ? "secondary" : "ghost"}
-                      size="sm"
-                      onClick={() => setSelectedStatus(status.value)}
-                    >
-                      {status.label}
-                    </Button>
-                  ))}
+                <div>
+                  <h3 className="text-sm font-medium mb-2 text-muted-foreground">Status</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {statuses.map((status) => (
+                      <Button
+                        key={status.value}
+                        variant={selectedStatus === status.value ? "secondary" : "ghost"}
+                        size="sm"
+                        onClick={() => setSelectedStatus(status.value)}
+                        className="text-xs"
+                      >
+                        {status.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* View Mode Toggle */}
-              <div className="flex gap-2">
-                <Button
-                  variant={viewMode === "grid" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                >
-                  <Grid className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === "list" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
+              <div className="flex items-center justify-between">
+                <div className="flex gap-2">
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                  >
+                    <Grid className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -173,7 +184,7 @@ const Projects = () => {
         <section className="pb-20 px-4 relative z-10">
           <div className="container mx-auto max-w-6xl">
             {viewMode === "grid" ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {filteredProjects.map((project, index) => (
                   <div
                     key={project.id}
@@ -197,7 +208,7 @@ const Projects = () => {
                       { "animation-delay-100": index % 2 === 1 }
                     )}
                   >
-                    <div className="grid md:grid-cols-3 gap-6 items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
                       {/* Project Image */}
                       <div className="relative aspect-[16/10] rounded-lg overflow-hidden">
                         <img
@@ -208,11 +219,11 @@ const Projects = () => {
                       </div>
 
                       {/* Project Details */}
-                      <div className="md:col-span-2 space-y-4">
+                      <div className="md:col-span-2 space-y-3 md:space-y-4">
                         <div className="flex items-start justify-between">
                           <div>
-                            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                            <div className="flex items-center gap-2 mb-2">
+                            <h3 className="text-lg md:text-xl font-semibold mb-2">{project.title}</h3>
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
                               <Badge className={getStatusColor(project.status)}>
                                 {project.status.replace("-", " ")}
                               </Badge>
@@ -221,19 +232,19 @@ const Projects = () => {
                           </div>
                         </div>
 
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                           {project.description}
                         </p>
 
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.slice(0, 6).map((tag, tagIndex) => (
+                        <div className="flex flex-wrap gap-1 md:gap-2">
+                          {project.tags.slice(0, 4).map((tag, tagIndex) => (
                             <Badge key={tagIndex} variant="secondary" className="text-xs">
                               {tag}
                             </Badge>
                           ))}
-                          {project.tags.length > 6 && (
+                          {project.tags.length > 4 && (
                             <Badge variant="secondary" className="text-xs">
-                              +{project.tags.length - 6} more
+                              +{project.tags.length - 4} more
                             </Badge>
                           )}
                         </div>

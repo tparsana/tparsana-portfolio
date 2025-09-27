@@ -52,21 +52,26 @@ const ProjectCard: React.FC<ProjectProps> = ({
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      <div className="p-3">
-        <h3 className="text-base font-semibold mb-1">{title}</h3>
-        <p className="text-xs text-muted-foreground mb-2">{description}</p>
+      <div className="p-3 sm:p-4">
+        <h3 className="text-sm sm:text-base font-semibold mb-1 line-clamp-2">{title}</h3>
+        <p className="text-xs sm:text-sm text-muted-foreground mb-2 line-clamp-3">{description}</p>
         
         <div className="flex flex-wrap gap-1 mb-3">
-          {tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="text-xs px-1.5 py-0">
+          {tags.slice(0, 3).map((tag, index) => (
+            <Badge key={index} variant="secondary" className="text-xs px-1.5 py-0.5">
               {tag}
             </Badge>
           ))}
+          {tags.length > 3 && (
+            <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
+              +{tags.length - 3}
+            </Badge>
+          )}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           {githubUrl && (
-            <Button size="sm" variant="outline" asChild className="h-7 text-xs">
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs flex-1 sm:flex-none">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="h-3 w-3 mr-1" />
                 Code
@@ -74,7 +79,7 @@ const ProjectCard: React.FC<ProjectProps> = ({
             </Button>
           )}
           {liveUrl && (
-            <Button size="sm" variant="default" asChild className="h-7 text-xs">
+            <Button size="sm" variant="default" asChild className="h-8 text-xs flex-1 sm:flex-none">
               <a href={liveUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3 mr-1" />
                 Live

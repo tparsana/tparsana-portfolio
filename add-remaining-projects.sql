@@ -1,0 +1,155 @@
+-- Add remaining projects to Supabase
+-- This script adds 3 additional projects to your projects table
+
+-- Insert ACTV project
+INSERT INTO projects (
+  title,
+  slug,
+  description,
+  long_description,
+  image,
+  tags,
+  technologies,
+  challenges,
+  learnings,
+  github_url,
+  live_url,
+  featured,
+  status,
+  start_date,
+  end_date,
+  category,
+  meta_title,
+  meta_description,
+  meta_keywords,
+  created_at,
+  updated_at
+) VALUES (
+  'ACTV',
+  'actv',
+  'An AI-powered fitness & nutrition coach that builds adaptive workout routines and meal plans, using RAG-based guidance and progress tracking to deliver personalized recommendations that evolve with your goals.',
+  'ACTV is a comprehensive AI-powered fitness and nutrition coaching platform that leverages advanced RAG (Retrieval-Augmented Generation) technology to provide personalized workout routines and meal plans. The system continuously learns from user progress and preferences, adapting recommendations to help users achieve their fitness goals more effectively. Built with modern web technologies and integrated with multiple AI APIs, ACTV represents the future of personalized health coaching.',
+  'https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+  ARRAY['React', 'Node.js', 'Python', 'LangChain', 'LLMs', 'Vector DB', 'OpenAI API', 'Gemini API', 'MongoDB'],
+  ARRAY['React', 'Node.js', 'Python', 'LangChain', 'OpenAI API', 'Gemini API', 'MongoDB', 'Vector Database'],
+  ARRAY['Integrating multiple AI APIs', 'Building effective RAG system', 'Real-time progress tracking', 'User preference learning'],
+  ARRAY['Advanced AI integration techniques', 'RAG system optimization', 'User behavior analysis', 'Scalable recommendation engines'],
+  'https://github.com/tparsana/ACTV',
+  'https://example.com',
+  true,
+  'completed',
+  '2024-03-01',
+  '2024-06-30',
+  'ai',
+  'ACTV - AI-Powered Fitness Coach | Tanish Parsana',
+  'An AI-powered fitness & nutrition coach that builds adaptive workout routines and meal plans using RAG-based guidance.',
+  ARRAY['AI', 'fitness', 'nutrition', 'RAG', 'machine learning', 'health tech'],
+  NOW(),
+  NOW()
+);
+
+-- Insert UnionSky project
+INSERT INTO projects (
+  title,
+  slug,
+  description,
+  long_description,
+  image,
+  tags,
+  technologies,
+  challenges,
+  learnings,
+  github_url,
+  live_url,
+  featured,
+  status,
+  start_date,
+  end_date,
+  category,
+  meta_title,
+  meta_description,
+  meta_keywords,
+  created_at,
+  updated_at
+) VALUES (
+  'UnionSky',
+  'unionsky',
+  'A plane-spotting web app that streams live flight data from aircrafts outside my room window, displaying routes, airlines, and aircraft details in real time through a clean interface built for aviation enthusiasts.',
+  'UnionSky is a real-time flight tracking web application that provides live data about aircraft flying over a specific location. The app integrates with multiple aviation APIs to display comprehensive flight information including routes, airlines, aircraft types, and real-time positions. Built for aviation enthusiasts and plane spotters, UnionSky offers an intuitive interface to explore the fascinating world of aviation right from your browser.',
+  'https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+  ARRAY['Python', 'TypeScript', 'OpenSky API', 'FlightRadar API', 'REST API', 'Requests', 'React', 'Real-time Data', 'Data Visualization'],
+  ARRAY['Python', 'TypeScript', 'React', 'OpenSky API', 'FlightRadar API', 'REST API', 'Data Visualization'],
+  ARRAY['Real-time data processing', 'API rate limiting', 'Data visualization', 'Performance optimization'],
+  ARRAY['Real-time data handling', 'API integration best practices', 'Data visualization techniques', 'Performance optimization'],
+  'https://github.com/tparsana/unionsky-website',
+  'https://unionsky.vercel.app',
+  false,
+  'completed',
+  '2024-01-15',
+  '2024-03-15',
+  'web',
+  'UnionSky - Live Flight Tracking | Tanish Parsana',
+  'A plane-spotting web app that streams live flight data and displays routes, airlines, and aircraft details in real time.',
+  ARRAY['aviation', 'flight tracking', 'real-time data', 'plane spotting', 'web app'],
+  NOW(),
+  NOW()
+);
+
+-- Insert LaterTube project
+INSERT INTO projects (
+  title,
+  slug,
+  description,
+  long_description,
+  image,
+  tags,
+  technologies,
+  challenges,
+  learnings,
+  github_url,
+  live_url,
+  featured,
+  status,
+  start_date,
+  end_date,
+  category,
+  meta_title,
+  meta_description,
+  meta_keywords,
+  created_at,
+  updated_at
+) VALUES (
+  'LaterTube',
+  'latertube',
+  'A distraction-free YouTube watchlist that bypasses Youtube ad layer, lets you save and organize videos with tags and priorities to come back to later, and keeps everything in sync in real time with proper AUTH and DB.',
+  'LaterTube is a comprehensive YouTube video management platform designed to help users organize their video consumption more effectively. The app bypasses YouTube''s ad layer to provide a distraction-free viewing experience while allowing users to save, tag, and prioritize videos for later viewing. With real-time synchronization across devices and robust authentication, LaterTube transforms how users interact with YouTube content.',
+  'https://images.unsplash.com/photo-1625813948790-936f256faea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+  ARRAY['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Supabase Auth', 'Supabase Realtime', 'PostgreSQL', 'Youtube Data API'],
+  ARRAY['Next.js', 'React', 'TypeScript', 'Supabase', 'PostgreSQL', 'YouTube Data API', 'Tailwind CSS'],
+  ARRAY['YouTube API integration', 'Real-time synchronization', 'Ad blocking implementation', 'User authentication'],
+  ARRAY['Next.js full-stack development', 'Supabase integration', 'YouTube API usage', 'Real-time data synchronization'],
+  'https://github.com/tparsana/YourTube',
+  'https://latertube.vercel.app',
+  true,
+  'completed',
+  '2024-02-01',
+  '2024-05-31',
+  'web',
+  'LaterTube - Distraction-Free YouTube Watchlist | Tanish Parsana',
+  'A distraction-free YouTube watchlist that lets you save and organize videos with tags and priorities.',
+  ARRAY['YouTube', 'watchlist', 'productivity', 'video management', 'web app'],
+  NOW(),
+  NOW()
+);
+
+-- Verify the insertions
+SELECT 
+  title, 
+  slug, 
+  status, 
+  featured, 
+  category,
+  created_at 
+FROM projects 
+ORDER BY created_at DESC 
+LIMIT 5;

@@ -55,21 +55,21 @@ const BlogPost = () => {
       // Headers
       if (line.startsWith('# ')) {
         return (
-          <h1 key={index} className="text-3xl md:text-4xl font-bold mb-6 mt-8 first:mt-0">
+          <h1 key={index} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 mt-6 sm:mt-8 first:mt-0 break-words">
             {line.replace('# ', '')}
           </h1>
         );
       }
       if (line.startsWith('## ')) {
         return (
-          <h2 key={index} className="text-2xl md:text-3xl font-bold mb-4 mt-6">
+          <h2 key={index} className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 mt-4 sm:mt-6 break-words">
             {line.replace('## ', '')}
           </h2>
         );
       }
       if (line.startsWith('### ')) {
         return (
-          <h3 key={index} className="text-xl md:text-2xl font-bold mb-3 mt-5">
+          <h3 key={index} className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 mt-3 sm:mt-5 break-words">
             {line.replace('### ', '')}
           </h3>
         );
@@ -99,7 +99,7 @@ const BlogPost = () => {
         return (
           <p 
             key={index} 
-            className="mb-4 leading-relaxed text-lg"
+            className="mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base break-words"
             dangerouslySetInnerHTML={{ __html: formatBoldText(line) }}
           />
         );
@@ -152,9 +152,9 @@ const BlogPost = () => {
         <AnimatedBackground />
         
         {/* Back Navigation */}
-        <section className="relative pt-24 pb-8 px-4">
+        <section className="relative pt-20 sm:pt-24 pb-6 sm:pb-8 px-4">
           <div className="container mx-auto max-w-4xl z-10 relative">
-            <Button variant="ghost" asChild className="mb-8">
+            <Button variant="ghost" asChild className="mb-6 sm:mb-8">
               <Link to="/thoughts" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 back to blog
@@ -164,11 +164,11 @@ const BlogPost = () => {
         </section>
 
         {/* Blog Post Header */}
-        <section className="relative px-4 pb-12">
+        <section className="relative px-4 pb-8 sm:pb-12">
           <div className="container mx-auto max-w-4xl z-10 relative">
             <article>
               {/* Title */}
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight break-words">
                 <SplitFlapText
                   text={post.title}
                   className="font-mono"
@@ -176,27 +176,27 @@ const BlogPost = () => {
               </h1>
 
               {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8 pb-6 border-b border-muted-foreground/20">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
+              <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-muted-foreground/20">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>{formatDate(post.publishedAt)}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>{post.readTime} min read</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Eye className="h-4 w-4" />
-                  <span>{post.totalReads} total reads</span>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span>{post.totalReads} reads</span>
                 </div>
               </div>
 
               {/* Tags */}
-              <div className="flex items-center gap-2 mb-12">
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-8 sm:mb-12">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-sm rounded-full border border-orange-400/30 text-orange-400 bg-orange-400/10"
+                    className="px-2 py-1 text-xs sm:text-sm rounded-full border border-orange-400/30 text-orange-400 bg-orange-400/10"
                   >
                     {tag}
                   </span>
@@ -207,25 +207,25 @@ const BlogPost = () => {
         </section>
 
         {/* Blog Content */}
-        <section className="relative px-4 pb-20">
+        <section className="relative px-4 pb-16 sm:pb-20">
           <div className="container mx-auto max-w-4xl z-10 relative">
-            <div className="prose prose-lg prose-invert max-w-none">
-              <div className="space-y-4">
+            <div className="prose prose-sm sm:prose-base prose-invert max-w-none overflow-x-hidden">
+              <div className="space-y-3 sm:space-y-4">
                 {formatContent(post.content)}
               </div>
             </div>
 
             {/* Author Info */}
-            <div className="mt-16 pt-8 border-t border-muted-foreground/20">
-              <div className="flex items-center gap-4">
+            <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-muted-foreground/20">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <img
                   src={post.author.avatar}
                   alt={post.author.name}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
                 />
                 <div>
-                  <p className="font-semibold">{post.author.name}</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="font-semibold text-sm sm:text-base">{post.author.name}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Published on {formatDate(post.publishedAt)}
                   </p>
                 </div>
@@ -233,10 +233,10 @@ const BlogPost = () => {
             </div>
 
             {/* Back to Blog */}
-            <div className="mt-12 pt-8 border-t border-muted-foreground/20 text-center">
-              <Button asChild>
+            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-muted-foreground/20 text-center">
+              <Button asChild size="sm" className="sm:size-default">
                 <Link to="/thoughts" className="flex items-center gap-2 mx-auto">
-                  <ArrowLeft className="h-4 w-4" />
+                  <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
                   Back to All Thoughts
                 </Link>
               </Button>

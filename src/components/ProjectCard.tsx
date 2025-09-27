@@ -71,17 +71,17 @@ const ProjectCard: React.FC<ProjectProps> = ({
 
         <div className="flex flex-col sm:flex-row gap-2">
           {githubUrl && (
-            <Button size="sm" variant="outline" asChild className="h-8 text-xs flex-1 sm:flex-none">
+            <Button size="sm" variant="outline" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="h-3 w-3 mr-1" />
+                <Github className="h-4 w-4 mr-1" />
                 Code
               </a>
             </Button>
           )}
           {liveUrl && (
-            <Button size="sm" variant="default" asChild className="h-8 text-xs flex-1 sm:flex-none">
+            <Button size="sm" variant="default" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
               <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-3 w-3 mr-1" />
+                <ExternalLink className="h-4 w-4 mr-1" />
                 Live
               </a>
             </Button>

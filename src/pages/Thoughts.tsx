@@ -48,9 +48,9 @@ const Thoughts = () => {
         <AnimatedBackground />
         
         {/* Hero Section */}
-        <section className="relative pt-20 sm:pt-32 md:pt-48 pb-12 sm:pb-16 md:pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
-          <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
+        <section className="relative pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-20 md:pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
+          <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center min-h-[40vh] sm:min-h-[50vh]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center w-full">
               <div className="flex justify-center items-center">
                 <SplitFlapText
                   text="Blogs, Thoughts And Reactions"

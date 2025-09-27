@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllBlogPosts, getAllProjects } from '@/data/blogs-unified';
 import { getAllProjects as getAllProjectsUnified } from '@/data/projects-unified';
+import { createClient } from '@supabase/supabase-js';
 
 const TestData = () => {
   const [blogs, setBlogs] = useState([]);
@@ -24,19 +25,39 @@ const TestData = () => {
       console.log('Environment:', envData);
 
       try {
-        // Load blogs
-        console.log('Loading blogs...');
+        // Test direct Supabase connection
+        console.log('Testing direct Supabase connection...');
+        const supabase = createClient(
+          import.meta.env.VITE_SUPABASE_URL,
+          import.meta.env.VITE_SUPABASE_ANON_KEY
+        );
+        
+        const { data: directBlogs, error: directBlogError } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .limit(5);
+        
+        console.log('Direct Supabase blogs:', directBlogs);
+        console.log('Direct Supabase blog error:', directBlogError);
+
+        // Load blogs using unified layer
+        console.log('Loading blogs via unified layer...');
         const blogData = await getAllBlogPosts();
         console.log('Blogs loaded:', blogData);
+        console.log('Blog data type:', typeof blogData);
+        console.log('Blog data length:', blogData?.length);
         setBlogs(blogData);
 
         // Load projects
         console.log('Loading projects...');
         const projectData = await getAllProjectsUnified();
         console.log('Projects loaded:', projectData);
+        console.log('Project data type:', typeof projectData);
+        console.log('Project data length:', projectData?.length);
         setProjects(projectData);
       } catch (error) {
         console.error('Error loading data:', error);
+        console.error('Error details:', error);
       } finally {
         setLoading(false);
       }

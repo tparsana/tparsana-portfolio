@@ -110,9 +110,13 @@
     cursor: none;
   }
   
-  /* For elements that should always show cursor (inputs, textareas) */
-  input, textarea, select, button {
-    cursor: auto !important;
+  /* Force custom cursor everywhere */
+  *, *:hover, *:active, *:focus {
+    cursor: none !important;
+  }
+  
+  input, textarea, select, button, a, [role="button"] {
+    cursor: none !important;
   }
 }
 

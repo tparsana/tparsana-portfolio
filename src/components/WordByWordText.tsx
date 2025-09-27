@@ -1,24 +1,22 @@
-
 import React, { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface SplitFlapTextProps {
-  text: string;
+interface WordByWordTextProps {
+  words: string[];
   className?: string;
   delay?: number;
   speed?: number;
   onComplete?: () => void;
 }
 
-const SplitFlapText: React.FC<SplitFlapTextProps> = ({ 
-  text, 
+const WordByWordText: React.FC<WordByWordTextProps> = ({ 
+  words, 
   className, 
   delay = 0,
-  speed = 50,
+  speed = 300,
   onComplete 
 }) => {
-  const [displayedChars, setDisplayedChars] = useState<number>(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [displayedWordCount, setDisplayedWordCount] = useState<number>(0);
   const [hasStarted, setHasStarted] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -38,8 +36,7 @@ const SplitFlapText: React.FC<SplitFlapTextProps> = ({
     
     // Reset state only if not completed
     if (!hasCompleted) {
-      setDisplayedChars(0);
-      setIsAnimating(false);
+      setDisplayedWordCount(0);
       setHasStarted(false);
     }
     
@@ -48,16 +45,14 @@ const SplitFlapText: React.FC<SplitFlapTextProps> = ({
       if (hasCompleted) return; // Double check before starting
       
       setHasStarted(true);
-      setIsAnimating(true);
-      let currentIndex = 0;
+      let currentWordIndex = 0;
       
       intervalRef.current = setInterval(() => {
-        if (currentIndex <= text.length) {
-          setDisplayedChars(currentIndex);
-          currentIndex++;
+        if (currentWordIndex < words.length) {
+          setDisplayedWordCount(currentWordIndex + 1);
+          currentWordIndex++;
         } else {
           clearInterval(intervalRef.current!);
-          setIsAnimating(false);
           setHasCompleted(true);
           if (onComplete) onComplete();
         }
@@ -72,32 +67,24 @@ const SplitFlapText: React.FC<SplitFlapTextProps> = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [text, delay, speed]); // Removed onComplete from dependencies
-
+  }, [words, delay, speed]); // Removed onComplete from dependencies
 
   return (
     <div className={cn("inline-block", className)}>
-      {text.split("").map((char, index) => (
+      {words.map((word, index) => (
         <span
           key={index}
           className={cn(
-            "split-flap-char transition-all duration-300",
-            char === " " ? "space-char" : "",
-            !hasStarted && !hasCompleted ? "opacity-0" : "opacity-100"
+            "inline-block transition-all duration-300 mr-1",
+            !hasStarted && !hasCompleted ? "opacity-0 transform translate-y-2" : "",
+            (index < displayedWordCount || hasCompleted) ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-2"
           )}
         >
-          <span 
-            className={cn(
-              "char transition-opacity duration-150",
-              (index < displayedChars || hasCompleted) ? "opacity-100" : "opacity-0"
-            )}
-          >
-            {char === " " ? "\u00A0" : char}
-          </span>
+          {word}
         </span>
       ))}
     </div>
   );
 };
 
-export default SplitFlapText;
+export default WordByWordText;

@@ -8,11 +8,16 @@ const mapSupabaseToBlogPost = (row: any): BlogPost => ({
   slug: row.slug,
   content: row.content,
   excerpt: row.excerpt,
+  publishedAt: row.created_at, // Use created_at as publishedAt
   featured: row.featured,
   published: row.published,
   readTime: row.read_time,
   totalReads: row.total_reads,
   tags: row.tags || [],
+  author: {
+    name: "Tanish Parsana",
+    avatar: "/IMG_1241.jpeg"
+  },
   seo: {
     metaTitle: row.seo_title,
     metaDescription: row.seo_description,
@@ -173,22 +178,41 @@ export const deleteBlogPost = async (postId: string): Promise<boolean> => {
 // Update blog post read count
 export const updateBlogPostReads = async (postId: string): Promise<boolean> => {
   try {
+    console.log('🔍 updateBlogPostReads: Updating reads for post ID:', postId);
+    
+    // First get the current read count
+    const { data: currentPost, error: fetchError } = await supabase
+      .from('blog_posts')
+      .select('total_reads')
+      .eq('id', postId)
+      .single();
+
+    if (fetchError) {
+      console.error('❌ Error fetching current read count:', fetchError);
+      return false;
+    }
+
+    const newReadCount = (currentPost?.total_reads || 0) + 1;
+    console.log('🔍 updateBlogPostReads: New read count:', newReadCount);
+
+    // Update with the new count
     const { error } = await supabase
       .from('blog_posts')
       .update({ 
-        total_reads: supabase.raw('total_reads + 1'),
+        total_reads: newReadCount,
         updated_at: new Date().toISOString()
       })
       .eq('id', postId);
 
     if (error) {
-      console.error('Error updating blog post reads:', error);
+      console.error('❌ Error updating blog post reads:', error);
       return false;
     }
 
+    console.log('✅ updateBlogPostReads: Successfully updated read count');
     return true;
   } catch (error) {
-    console.error('Error updating blog post reads:', error);
+    console.error('❌ Error updating blog post reads:', error);
     return false;
   }
 };

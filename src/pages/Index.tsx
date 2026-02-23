@@ -56,7 +56,7 @@ const experiences = [
     date: "Apr 2025 - Present",
     title: "Vice President - Industry Relations",
     subtitle: "DevLabs Club at ASU",
-    description: "Promoted from Officer to Vice President to lead DevLabs' external partnerships with startups, venture capital firms, and industry leaders. Managing and mentoring the Industry Team to drive strategic outreach, secure sponsorships, and bring real-world connections to student-led projects. Spearheading initiatives that connect student founders with the broader tech ecosystem to build, launch, and scale impactful innovations.",
+    description: "As Vice President at DevLabs, ASU’s student-run startup incubator and innovation community, I led venture partnerships, startup support, and large-scale programming. I structured venture pipelines, mentorship programs, sponsorship strategies, and founder support frameworks that helped over a dozen early-stage student startups refine go-to-market strategies, validate product-market fit, and raise over $70K in funding. I also led the execution of large-scale hackathons, startup accelerators, and industry events with over 2,000+ participants, building long-term partnerships with venture capital firms, founders, and corporate leaders to create a strong campus-to-industry innovation pipeline.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
   },

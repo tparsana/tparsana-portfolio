@@ -171,14 +171,14 @@ ${largeText.toUpperCase()}
 };
 
 const facts = [
-  "Triathlete-in-training aiming for Ironman; logs everything on Notion.",
+  "Finished Ironman Arizona 2025, Yougest from the State of Gujarat, India.",
   "Accidentally became the tech support for family’s real estate biz.",
   "Believes “just one more API” is always the solution.",
   "I contribute to open-source projects in my free time",
-  "I've completed 8 half-marathons",
+  "I've completed 14 half-marathons",
   "Has more Notion dashboards than real-life responsibilities (almost).",
-  "I enjoy rock climbing and hiking",
-  "Trains for Ironman but cries cycling up small hills.",
+  "I enjoy filmmaking - currently shooting a Documentary.",
+  "Trains for Ironmans but cries cycling up small hills.",
 ];
 
 const Index = () => {
@@ -341,7 +341,7 @@ const Index = () => {
                       applications.
                     </p>
                     <p className="text-lg">
-                      When I'm not coding, you can find me training for an Ironman, or exploring new technologies,
+                      When I'm not coding, you can find me training for an Endureace Races, or exploring new technologies,
                       contributing to open-source projects, or enjoying outdoor activities.
                       I believe in continuous learning and staying updated with the latest
                       trends in technology.

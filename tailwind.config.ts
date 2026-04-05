@@ -159,8 +159,8 @@ export default {
 				"blob-float-reverse": "blob-float-reverse 18s ease-in-out infinite"
 			},
 			fontFamily: {
-				mono: ["JetBrains Mono", "monospace"],
-				sans: ["Inter", "sans-serif"],
+				mono: ["Elegant Display", "Questrial", "sans-serif"],
+				sans: ["Elegant Display", "Questrial", "sans-serif"],
 			},
 			transitionProperty: {
 				'flap': 'transform, opacity',

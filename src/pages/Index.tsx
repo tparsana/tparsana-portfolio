@@ -10,11 +10,10 @@ import ProjectCard from "@/components/ProjectCard";
 import TimelineItem from "@/components/TimelineItem";
 import ContactForm from "@/components/ContactForm";
 import TechStackCompact from "@/components/TechStackCompact";
-import WordByWordText from "@/components/WordByWordText";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import { getHomePageProjects, Project } from "@/data/projects-unified";
+import type { Project } from "@/data/projects-unified";
 
 const projects = [
   {
@@ -182,15 +181,19 @@ const facts = [
 ];
 
 const Index = () => {
-  const [introComplete, setIntroComplete] = useState(false);
-  const [subtitleComplete, setSubtitleComplete] = useState(false);
   const [randomFact, setRandomFact] = useState(facts[0]);
   const [homeProjects, setHomeProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    // Load projects from data source
+    let isCancelled = false;
+
+    // Load projects after first paint so hero content is not blocked by the data layer.
     const loadHomeProjects = async () => {
+      const { getHomePageProjects } = await import("@/data/projects-unified");
       const dynamicProjects = await getHomePageProjects();
+
+      if (isCancelled) return;
+
       if (dynamicProjects.length > 0) {
         setHomeProjects(dynamicProjects);
       } else {
@@ -214,7 +217,12 @@ const Index = () => {
         setHomeProjects(fallbackProjects);
       }
     };
+
     loadHomeProjects();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   const changeRandomFact = () => {
@@ -227,15 +235,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) {
-      setIntroComplete(true);
-      setSubtitleComplete(true);
-    }
-
     // Handle hash fragments in URL (e.g., /#experience)
     const handleHashNavigation = () => {
       const hash = window.location.hash;
@@ -273,39 +272,35 @@ const Index = () => {
             >
               <div className="text-center max-w-4xl space-y-6 z-10">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-                  <SplitFlapText
-                    text="Tanish Parsana"
-                    className="font-mono"
-                    onComplete={() => setIntroComplete(true)}
-                  />
+                  <span
+                    className="font-elegant-display inline-block opacity-0 animate-hero-fade-in"
+                  >
+                    Tanish Parsana
+                  </span>
                 </h1>
 
-                {introComplete && (
-                  <div className="animate-slide-up">
-                    <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                      <WordByWordText
-                        words={["Full", "Stack", "Developer,", "Data", "Science", "&", "AI", "Engineer"]}
-                        delay={50}
-                        speed={150}
-                        className="font-mono"
-                        onComplete={() => setSubtitleComplete(true)}
-                      />
-                    </p>
-                  </div>
-                )}
+                <div
+                  className="opacity-0 animate-hero-fade-in"
+                  style={{ animationDelay: "120ms" }}
+                >
+                  <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+                    Full Stack Developer, Data Science & AI Engineer
+                  </p>
+                </div>
 
-                {subtitleComplete && (
-                  <div className="animate-slide-up">
-                    <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-                      <Button asChild>
-                        <a href="#projects">View My Work</a>
-                      </Button>
-                      <Button variant="outline" asChild>
-                        <a href="#contact">Get In Touch</a>
-                      </Button>
-                    </div>
+                <div
+                  className="opacity-0 animate-hero-fade-in"
+                  style={{ animationDelay: "220ms" }}
+                >
+                  <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+                    <Button asChild>
+                      <a href="#projects">View My Work</a>
+                    </Button>
+                    <Button variant="outline" asChild>
+                      <a href="#contact">Get In Touch</a>
+                    </Button>
                   </div>
-                )}
+                </div>
 
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
                   <Button

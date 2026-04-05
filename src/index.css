@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+@font-face {
+  font-family: "Elegant Display";
+  src: local("Elegant Display"), local("ElegantDisplay");
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -30,6 +36,19 @@
     from { width: 0%; }
     to { width: var(--target-width, 100%); }
   }
+
+  @keyframes hero-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
   
   @keyframes blob-float {
     0%, 100% { transform: translateY(0); }
@@ -47,15 +66,19 @@
   }
   
   .animate-blob-float {
-    animation: blob-float 6s ease-in-out infinite;
+    animation: blob-float 2.8s ease-in-out infinite;
   }
   
   .animate-blob-float-slow {
-    animation: blob-float-slow 8s ease-in-out infinite;
+    animation: blob-float-slow 3.6s ease-in-out infinite;
   }
   
   .animate-blob-float-reverse {
-    animation: blob-float-reverse 7s ease-in-out infinite;
+    animation: blob-float-reverse 3.2s ease-in-out infinite;
+  }
+
+  .animate-hero-fade-in {
+    animation: hero-fade-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 }
 
@@ -112,6 +135,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Elegant Display", "Questrial", sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -119,17 +143,8 @@
     scroll-behavior: smooth;
   }
   
-  /* Hide default cursor for custom cursor */
-  .cursor-custom {
-    cursor: none;
-  }
-  
-  /* Force custom cursor everywhere */
-  *, *:hover, *:active, *:focus {
-    cursor: none !important;
-  }
-  
-  input, textarea, select, button, a, [role="button"] {
+  .has-custom-cursor,
+  .has-custom-cursor * {
     cursor: none !important;
   }
 }
@@ -151,6 +166,89 @@
 
 .split-flap-display {
   @apply bg-secondary text-foreground font-mono relative;
+}
+
+.font-elegant-display {
+  font-family: "Elegant Display", "Questrial", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.nav-island,
+.nav-mobile-panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 18%, rgba(17, 17, 19, 0.76) 36%, rgba(10, 10, 12, 0.9) 100%);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -18px 28px rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(24px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+}
+
+.nav-island::before,
+.nav-mobile-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.28), transparent 32%),
+    radial-gradient(circle at 82% 120%, rgba(255, 255, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 58%);
+  opacity: 0.85;
+}
+
+.nav-island::after,
+.nav-mobile-panel::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+.nav-brand-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Elegant Display", "Questrial", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.nav-link-button {
+  position: relative;
+}
+
+.nav-link-button::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 8px;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  transition: transform 220ms ease;
+}
+
+.nav-link-button:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade-in,
+  .animate-blob-float,
+  .animate-blob-float-slow,
+  .animate-blob-float-reverse {
+    animation: none !important;
+  }
 }
 
 .split-flap-display::before {

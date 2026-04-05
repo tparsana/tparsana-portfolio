@@ -1,10 +1,8 @@
-
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import SplitFlapText from "./SplitFlapText";
 import ResumeViewer from "./ResumeViewer";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -14,31 +12,45 @@ const Navigation = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isHomePage, setIsHomePage] = useState(true);
-  
-  // Check if we're on the home page
-  const isOnHomePage = location.pathname === '/';
+  const [isHeroActive, setIsHeroActive] = useState(true);
 
-  // Function to handle navigation to home page sections
+  const isOnHomePage = location.pathname === "/";
+
+  const navLinks = useMemo(
+    () => [
+      { name: "About", href: "#about" },
+      { name: "Projects", href: "#projects" },
+      { name: "Experience", href: "#experience" },
+      { name: "Thoughts", href: "/thoughts" },
+      { name: "Contact", href: "#contact" },
+    ],
+    []
+  );
+
   const handleSectionNavigation = (sectionId: string) => {
     if (isOnHomePage) {
-      // If already on home page, just scroll to section
       const element = document.querySelector(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Navigate to home page, then scroll to section
-      navigate('/');
-      // Use setTimeout to ensure page has loaded before scrolling
-      setTimeout(() => {
-        const element = document.querySelector(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+      navigate(`/${sectionId}`);
     }
-    // Close mobile menu if open
+
+    setMobileMenuOpen(false);
+  };
+
+  const handleBrandNavigation = () => {
+    if (isOnHomePage) {
+      const homeSection = document.querySelector("#home");
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: "smooth" });
+      }
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    navigate("/");
     setMobileMenuOpen(false);
   };
 
@@ -46,115 +58,133 @@ const Navigation = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-      // Only update isHomePage state when actually on the home page
-      if (isOnHomePage) {
-        setIsHomePage(window.scrollY < window.innerHeight * 0.5);
-      } else {
-        setIsHomePage(false);
-      }
+      setIsScrolled(window.scrollY > 12);
     };
 
-    // Set initial state based on current page
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
     if (!isOnHomePage) {
-      setIsHomePage(false);
+      setIsHeroActive(false);
+      return;
     }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const homeSection = document.getElementById("home");
+    if (!homeSection) {
+      setIsHeroActive(window.scrollY < window.innerHeight * 0.55);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroActive(entry.isIntersecting && entry.intersectionRatio > 0.35);
+      },
+      {
+        threshold: [0, 0.2, 0.35, 0.5, 0.75],
+        rootMargin: "-72px 0px 0px 0px",
+      }
+    );
+
+    observer.observe(homeSection);
+
+    return () => observer.disconnect();
   }, [isOnHomePage]);
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Thoughts", href: "/thoughts" },
-    { name: "Contact", href: "#contact" },
-  ];
+  const brandLabel = isOnHomePage && isHeroActive ? "Portfolio" : "Tanish Parsana";
+  const linkClassName =
+    "nav-link-button rounded-full px-4 py-2 text-sm font-medium text-white/74 transition-all duration-300 hover:bg-white/8 hover:text-white";
+  const iconButtonClassName =
+    "h-11 w-11 rounded-full border border-white/10 bg-white/[0.04] text-white/84 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.08] hover:text-white";
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b"
-          : "bg-transparent"
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="font-mono font-bold text-lg split-flap-display px-2">
-            {isOnHomePage ? (
-              <span>{isHomePage ? "Portfolio" : "Tanish Parsana"}</span>
-            ) : (
-              <Link to="/" className="hover:text-primary transition-colors">
-                Tanish Parsana
-              </Link>
-            )}
-          </div>
-          
-          <nav className="hidden md:flex space-x-4">
-            {navLinks.map((link) => {
-              const linkClass = "px-3 py-2 text-sm font-medium hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center";
-              
-              // Handle React Router links (start with /)
-              if (link.href.startsWith('/')) {
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className={linkClass}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              }
-              
-              // Handle home page section links (start with #)
-              if (link.href.startsWith('#')) {
-                return (
-                  <button
-                    key={link.name}
-                    onClick={() => handleSectionNavigation(link.href)}
-                    className={linkClass}
-                  >
-                    {link.name}
-                  </button>
-                );
-              }
-              
-              // Fallback for other types of links
-              return (
-                <a
+    <header className="fixed inset-x-0 top-4 z-50 px-4 md:top-5 pointer-events-none">
+      <div className="mx-auto max-w-7xl">
+        <div
+          className={cn(
+            "nav-island pointer-events-auto hidden items-center gap-4 rounded-[32px] px-5 py-3 md:grid md:grid-cols-[minmax(0,220px)_1fr_auto]",
+            isScrolled ? "translate-y-0 shadow-[0_30px_80px_rgba(0,0,0,0.48)]" : "shadow-[0_20px_60px_rgba(0,0,0,0.34)]"
+          )}
+        >
+          <button
+            type="button"
+            onClick={handleBrandNavigation}
+            className="group relative flex h-12 items-center rounded-full px-4 text-left transition-colors duration-300 hover:bg-white/8"
+          >
+            <span className="nav-brand-text min-w-[13ch] text-[1.02rem]">
+              {brandLabel}
+            </span>
+          </button>
+
+          <nav className="flex items-center justify-center gap-2">
+            {navLinks.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link key={link.name} to={link.href} className={linkClassName}>
+                  {link.name}
+                </Link>
+              ) : (
+                <button
                   key={link.name}
-                  href={link.href}
-                  className={linkClass}
+                  type="button"
+                  onClick={() => handleSectionNavigation(link.href)}
+                  className={linkClassName}
                 >
                   {link.name}
-                </a>
-              );
-            })}
-            <ResumeViewer />
+                </button>
+              )
+            )}
           </nav>
 
-          <div className="flex items-center">
+          <div className="flex items-center justify-end gap-2">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="mr-2"
+              className={iconButtonClassName}
             >
               {theme === "dark" ? (
-                <Sun className="h-[1.2rem] w-[1.2rem]" />
+                <Sun className="h-[1.05rem] w-[1.05rem]" />
               ) : (
-                <Moon className="h-[1.2rem] w-[1.2rem]" />
+                <Moon className="h-[1.05rem] w-[1.05rem]" />
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+
+            <ResumeViewer triggerVariant="pill" />
+          </div>
+        </div>
+
+        <div className="nav-island pointer-events-auto flex items-center justify-between gap-3 rounded-[28px] px-4 py-3 md:hidden">
+          <button
+            type="button"
+            onClick={handleBrandNavigation}
+            className="flex min-w-0 items-center rounded-full px-2 py-1 text-left"
+          >
+            <span className="nav-brand-text truncate text-base">
+              {brandLabel}
+            </span>
+          </button>
+
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className={iconButtonClassName}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-[1.05rem] w-[1.05rem]" />
+              ) : (
+                <Moon className="h-[1.05rem] w-[1.05rem]" />
               )}
               <span className="sr-only">Toggle theme</span>
             </Button>
@@ -162,72 +192,54 @@ const Navigation = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
-              onClick={toggleMobileMenu}
+              className={iconButtonClassName}
+              onClick={() => setMobileMenuOpen((open) => !open)}
             >
               {mobileMenuOpen ? (
-                <X className="h-[1.2rem] w-[1.2rem]" />
+                <X className="h-[1.1rem] w-[1.1rem]" />
               ) : (
-                <Menu className="h-[1.2rem] w-[1.2rem]" />
+                <Menu className="h-[1.1rem] w-[1.1rem]" />
               )}
               <span className="sr-only">Toggle menu</span>
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-b">
-          <div className="container mx-auto px-4 py-2">
-            <nav className="flex flex-col space-y-2">
-              {navLinks.map((link) => {
-                const linkClass = "px-3 py-2 text-sm font-medium hover:text-primary flex items-center";
-                
-                // Handle React Router links (start with /)
-                if (link.href.startsWith('/')) {
-                  return (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className={linkClass}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                }
-                
-                // Handle home page section links (start with #)
-                if (link.href.startsWith('#')) {
-                  return (
-                    <button
-                      key={link.name}
-                      onClick={() => handleSectionNavigation(link.href)}
-                      className={linkClass}
-                    >
-                      {link.name}
-                    </button>
-                  );
-                }
-                
-                // Fallback for other types of links
-                return (
-                  <a
+        {mobileMenuOpen && (
+          <div className="nav-mobile-panel pointer-events-auto mt-3 rounded-[28px] px-4 py-4 md:hidden">
+            <nav className="flex flex-col gap-2">
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
                     key={link.name}
-                    href={link.href}
-                    className={linkClass}
+                    to={link.href}
+                    className={cn(linkClassName, "justify-start px-4 py-3 text-base")}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
-                  </a>
-                );
-              })}
-              <ResumeViewer triggerClassName="justify-start" />
+                  </Link>
+                ) : (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => handleSectionNavigation(link.href)}
+                    className={cn(linkClassName, "justify-start px-4 py-3 text-base")}
+                  >
+                    {link.name}
+                  </button>
+                )
+              )}
+
+              <div className="pt-2">
+                <ResumeViewer
+                  triggerVariant="pill"
+                  triggerClassName="w-full justify-center"
+                />
+              </div>
             </nav>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 };

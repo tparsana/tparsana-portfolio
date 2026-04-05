@@ -1,60 +1,84 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface CursorPosition {
-  x: number;
-  y: number;
-}
+const CURSOR_EASE = 0.18;
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState<CursorPosition>({ x: 0, y: 0 });
-  const [isClicking, setIsClicking] = useState(false);
-  const [isHidden, setIsHidden] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = useRef({ x: 0, y: 0 });
+  const currentRef = useRef({ x: 0, y: 0 });
+  const scaleRef = useRef(1);
 
   useEffect(() => {
     const checkMobile = () => {
       const isTouchDevice =
         "ontouchstart" in window ||
         navigator.maxTouchPoints > 0 ||
-        (navigator as any).msMaxTouchPoints > 0;
+        "msMaxTouchPoints" in navigator;
+
       setIsMobile(isTouchDevice);
     };
 
     checkMobile();
+    window.addEventListener("resize", checkMobile);
 
-    if (isMobile) return;
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
-    const updateCursorPosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      setIsHidden(false);
+  useEffect(() => {
+    if (isMobile) {
+      document.body.classList.remove("has-custom-cursor");
+      return;
+    }
+
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    document.body.classList.add("has-custom-cursor");
+
+    const setCursorTransform = () => {
+      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * CURSOR_EASE;
+      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * CURSOR_EASE;
+
+      cursor.style.transform = `translate3d(${currentRef.current.x}px, ${currentRef.current.y}px, 0) translate(-50%, -50%) scale(${scaleRef.current})`;
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeave = () => setIsHidden(true);
-    const handleMouseEnter = () => setIsHidden(false);
+    const updateCursorPosition = (event: MouseEvent) => {
+      targetRef.current = { x: event.clientX, y: event.clientY };
+      cursor.style.opacity = "1";
+    };
 
-    window.addEventListener("mousemove", updateCursorPosition);
+    const handleMouseDown = () => {
+      scaleRef.current = 0.75;
+    };
+
+    const handleMouseUp = () => {
+      scaleRef.current = 1;
+    };
+
+    const handleMouseLeave = () => {
+      cursor.style.opacity = "0";
+    };
+
+    const handleMouseEnter = () => {
+      cursor.style.opacity = "1";
+    };
+
+    let animationFrameId = 0;
+    const animate = () => {
+      setCursorTransform();
+      animationFrameId = window.requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", updateCursorPosition, { passive: true });
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mouseenter", handleMouseEnter);
 
-    // Force cursor to be none everywhere
-    document.body.style.cursor = "none";
-    
-    // Override cursor style for all elements
-    const style = document.createElement('style');
-    style.textContent = `
-      *, *:hover, *:active, *:focus {
-        cursor: none !important;
-      }
-      a, button, [role="button"], input, textarea, select {
-        cursor: none !important;
-      }
-    `;
-    style.id = 'custom-cursor-override';
-    document.head.appendChild(style);
+    animationFrameId = window.requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("mousemove", updateCursorPosition);
@@ -62,33 +86,19 @@ const CustomCursor = () => {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
-
-      document.body.style.cursor = "auto";
-      
-      // Remove the cursor override styles
-      const existingStyle = document.getElementById('custom-cursor-override');
-      if (existingStyle) {
-        existingStyle.remove();
-      }
+      window.cancelAnimationFrame(animationFrameId);
+      document.body.classList.remove("has-custom-cursor");
     };
   }, [isMobile]);
 
-  if (isHidden || isMobile) return null;
+  if (isMobile) return null;
 
   return (
     <div
-      className={`fixed pointer-events-none z-50 rounded-full mix-blend-difference transition-transform duration-150 ${
-        isClicking ? "scale-75" : "scale-100"
-      }`}
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        transform: "translate(-50%, -50%)",
-      }}
+      ref={cursorRef}
+      className="fixed pointer-events-none z-50 rounded-full mix-blend-difference opacity-0 transition-opacity duration-150 will-change-transform"
     >
-      <div
-        className="w-4 h-4 bg-white rounded-full flex items-center justify-center transition-transform duration-200"
-      />
+      <div className="w-4 h-4 bg-white rounded-full" />
     </div>
   );
 };

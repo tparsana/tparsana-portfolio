@@ -96,7 +96,7 @@ const CustomCursor = () => {
   return (
     <div
       ref={cursorRef}
-      className="fixed pointer-events-none z-50 rounded-full mix-blend-difference opacity-0 transition-opacity duration-150 will-change-transform"
+      className="fixed pointer-events-none z-[100] rounded-full mix-blend-difference opacity-0 transition-opacity duration-150 will-change-transform"
     >
       <div className="w-4 h-4 bg-white rounded-full" />
     </div>

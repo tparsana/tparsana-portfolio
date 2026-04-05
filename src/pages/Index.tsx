@@ -327,41 +327,34 @@ const Index = () => {
                   <SplitFlapText text="About Me" className="font-mono" />
                 </h2>
 
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div className="space-y-6">
-                    <p className="text-lg">
-                      I'm a creative and ambitious developer with a strong foundation in full-stack development, AI
-                      integration, and modern web technologies. My work blends practical design with powerful
-                      functionality, using tools like React, Python, cloud platforms, React, TypeScript, and modern CSS frameworks to build smart, user-centered
-                      applications.
-                    </p>
-                    <p className="text-lg">
-                      When I'm not coding, you can find me training for an Endureace Races, or exploring new technologies,
-                      contributing to open-source projects, or enjoying outdoor activities.
-                      I believe in continuous learning and staying updated with the latest
-                      trends in technology.
-                    </p>
+                <div className="grid items-start gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
+                  <div className="flex h-full flex-col justify-between gap-6 md:gap-8">
+                    <div className="space-y-5 md:space-y-6">
+                      <p className="text-lg leading-[1.7]">
+                      I&apos;m an unusually strong problem solver with a very high pain tolerance for hard things, and that shows up in both my work and my life. While training 25 hours a week for Ironman Arizona, I was also building and shipping real products, helping lead a 2,000+ student startup community through DevLabs, supporting 25 student-led startups and $70K raised, partnering on events with groups like Google DeepMind and Cloudflare, working in technical roles at ASU, and staying on top of a full-time CS degree with a business minor.
+                      <br />
+                      <br />
+                      I do not quit easily, I do not need to be micromanaged, and when something matters, I will outwork, outlearn, and outlast most people in the room.
+                      </p>
+                    </div>
 
-                    <div className="pt-4">
+                    <div className="pt-2 md:pt-0">
                       <div 
-                        className="h-40 w-full cursor-pointer bg-card border rounded-lg shadow p-4 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                        className="min-h-[132px] w-full cursor-pointer rounded-lg border bg-card p-5 shadow transition-all duration-300 hover:scale-[1.02] hover:shadow-lg md:min-h-[118px]"
                         onClick={changeRandomFact}
                       >
-                        <div className="flex flex-col h-full items-center justify-center">
-                          <p className="text-lg font-semibold mb-2">Fun Fact:</p>
+                        <div className="flex h-full flex-col items-center justify-center">
+                          <p className="mb-2 text-lg font-semibold">Fun Fact:</p>
                           <p className="text-center text-muted-foreground">
                             {randomFact}
-                          </p>
-                          <p className="text-xs text-muted-foreground/60 mt-3">
-                            Click for another fact
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="relative">
-                    <div className="aspect-square rounded-2xl overflow-hidden split-flap-display bg-muted/20">
+                  <div className="relative h-full">
+                    <div className="aspect-square h-full rounded-2xl overflow-hidden split-flap-display bg-muted/20">
                       <img
                         src="/IMG_1241.jpeg"
                         alt="Tanish Parsana"

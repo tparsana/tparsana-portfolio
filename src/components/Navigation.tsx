@@ -102,30 +102,32 @@ const Navigation = () => {
 
   const brandLabel = isOnHomePage && isHeroActive ? "Portfolio" : "Tanish Parsana";
   const linkClassName =
-    "nav-link-button rounded-full px-4 py-2 text-sm font-medium text-white/74 transition-all duration-300 hover:bg-white/8 hover:text-white";
+    "nav-link-button rounded-full px-3.5 py-1.5 text-sm font-medium text-white/78 transition-all duration-300 hover:bg-white/6 hover:text-white";
+  const mobileLinkClassName =
+    "nav-link-button flex w-full items-center justify-center rounded-full px-4 py-3 text-base font-medium text-center text-white/84 transition-all duration-300 hover:bg-white/6 hover:text-white";
   const iconButtonClassName =
-    "h-11 w-11 rounded-full border border-white/10 bg-white/[0.04] text-white/84 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.08] hover:text-white";
+    "h-9 w-9 rounded-full border border-white/12 bg-white/[0.025] text-white/84 shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.05] hover:text-white";
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 md:top-5 pointer-events-none">
       <div className="mx-auto max-w-7xl">
         <div
           className={cn(
-            "nav-island pointer-events-auto hidden items-center gap-4 rounded-[32px] px-5 py-3 md:grid md:grid-cols-[minmax(0,220px)_1fr_auto]",
+            "nav-island pointer-events-auto hidden items-center gap-3 rounded-[32px] px-4 py-2 md:grid md:grid-cols-[minmax(0,220px)_1fr_auto]",
             isScrolled ? "translate-y-0 shadow-[0_30px_80px_rgba(0,0,0,0.48)]" : "shadow-[0_20px_60px_rgba(0,0,0,0.34)]"
           )}
         >
           <button
             type="button"
             onClick={handleBrandNavigation}
-            className="group relative flex h-12 items-center rounded-full px-4 text-left transition-colors duration-300 hover:bg-white/8"
+            className="group relative flex h-9 items-center rounded-full px-3.5 text-left transition-colors duration-300 hover:bg-white/6"
           >
             <span className="nav-brand-text min-w-[13ch] text-[1.02rem]">
               {brandLabel}
             </span>
           </button>
 
-          <nav className="flex items-center justify-center gap-2">
+          <nav className="flex items-center justify-center gap-1.5">
             {navLinks.map((link) =>
               link.href.startsWith("/") ? (
                 <Link key={link.name} to={link.href} className={linkClassName}>
@@ -144,7 +146,7 @@ const Navigation = () => {
             )}
           </nav>
 
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex items-center justify-end gap-1.5">
             <Button
               variant="ghost"
               size="icon"
@@ -163,7 +165,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        <div className="nav-island pointer-events-auto flex items-center justify-between gap-3 rounded-[28px] px-4 py-3 md:hidden">
+        <div className="nav-island pointer-events-auto flex items-center justify-between gap-3 rounded-[28px] px-3.5 py-2 md:hidden">
           <button
             type="button"
             onClick={handleBrandNavigation}
@@ -207,13 +209,13 @@ const Navigation = () => {
 
         {mobileMenuOpen && (
           <div className="nav-mobile-panel pointer-events-auto mt-3 rounded-[28px] px-4 py-4 md:hidden">
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col items-stretch gap-2">
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={cn(linkClassName, "justify-start px-4 py-3 text-base")}
+                    className={mobileLinkClassName}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -223,7 +225,7 @@ const Navigation = () => {
                     key={link.name}
                     type="button"
                     onClick={() => handleSectionNavigation(link.href)}
-                    className={cn(linkClassName, "justify-start px-4 py-3 text-base")}
+                    className={mobileLinkClassName}
                   >
                     {link.name}
                   </button>

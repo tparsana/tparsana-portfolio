@@ -379,16 +379,38 @@ const Index = () => {
             </section>
 
             <section
-              id="tech-stack"
+              id="experience"
               className="py-20 px-4"
             >
               <div className="container mx-auto max-w-6xl">
-                <h2 className="text-3xl font-bold mb-8 text-center">
-                  <SplitFlapText text="Tech Stack" className="font-mono" />
+                <h2 className="text-3xl font-bold mb-16 text-center">
+                  <SplitFlapText text="Experience" className="font-mono" />
                 </h2>
+
+                <div className="mb-16">
+                  {experiences.map((experience, index) => (
+                    <TimelineItem key={index} {...experience} />
+                  ))}
+                </div>
+
+                <h3 className="text-2xl font-bold mb-8 text-center">
+                  <SplitFlapText text="Education" className="font-mono" />
+                </h3>
+
+                <div className="mb-16">
+                  {education.map((edu, index) => (
+                    <TimelineItem key={index} {...edu} />
+                  ))}
+                </div>
                 
-                <div className="bg-card shadow-lg rounded-xl p-6">
-                  <TechStackCompact />
+                <h3 className="text-2xl font-bold mb-8 text-center">
+                  <SplitFlapText text="Interests" className="font-mono" />
+                </h3>
+
+                <div>
+                  {extracurricular.map((item, index) => (
+                    <TimelineItem key={index} {...item} />
+                  ))}
                 </div>
               </div>
             </section>
@@ -431,38 +453,16 @@ const Index = () => {
             </section>
 
             <section
-              id="experience"
+              id="tech-stack"
               className="py-20 px-4"
             >
               <div className="container mx-auto max-w-6xl">
-                <h2 className="text-3xl font-bold mb-16 text-center">
-                  <SplitFlapText text="Experience" className="font-mono" />
+                <h2 className="text-3xl font-bold mb-8 text-center">
+                  <SplitFlapText text="Tech Stack" className="font-mono" />
                 </h2>
-
-                <div className="mb-16">
-                  {experiences.map((experience, index) => (
-                    <TimelineItem key={index} {...experience} />
-                  ))}
-                </div>
-
-                <h3 className="text-2xl font-bold mb-8 text-center">
-                  <SplitFlapText text="Education" className="font-mono" />
-                </h3>
-
-                <div className="mb-16">
-                  {education.map((edu, index) => (
-                    <TimelineItem key={index} {...edu} />
-                  ))}
-                </div>
                 
-                <h3 className="text-2xl font-bold mb-8 text-center">
-                  <SplitFlapText text="Interests" className="font-mono" />
-                </h3>
-
-                <div>
-                  {extracurricular.map((item, index) => (
-                    <TimelineItem key={index} {...item} />
-                  ))}
+                <div className="bg-card shadow-lg rounded-xl p-6">
+                  <TechStackCompact />
                 </div>
               </div>
             </section>

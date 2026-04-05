@@ -25,7 +25,7 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({
           variant={isPillTrigger ? "ghost" : "link"}
           className={cn(
             isPillTrigger
-              ? "h-12 rounded-full bg-white px-5 text-sm font-semibold text-black shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_12px_24px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-[1.02] hover:bg-white/95 hover:text-black"
+              ? "h-9 rounded-full bg-white px-4 text-sm font-semibold text-black shadow-[0_1px_0_rgba(255,255,255,0.3)_inset,0_12px_24px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-[1.02] hover:bg-white/95 hover:text-black"
               : "px-3 py-2 text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full flex items-center",
             triggerClassName
           )}

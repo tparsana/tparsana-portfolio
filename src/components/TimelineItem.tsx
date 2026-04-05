@@ -57,7 +57,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           {date}
         </div>
         {logo && <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
-            <img src={logo} alt={title} className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100" />
+            <img src={logo} alt={title} loading="lazy" decoding="async" className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100" />
           </div>}
       </div>
 

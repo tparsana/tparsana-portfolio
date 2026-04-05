@@ -38,16 +38,15 @@ const ProjectCard: React.FC<ProjectProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative w-full aspect-[16/9] overflow-hidden">
-        <div
+        <img
+          src={image}
+          alt={`${title} preview`}
+          loading="lazy"
+          decoding="async"
           className={cn(
-            "absolute inset-0 transition-all duration-500 transform",
+            "absolute inset-0 h-full w-full object-cover transition-all duration-500 transform",
             isHovered ? "scale-105" : "scale-100"
           )}
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
         />
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>

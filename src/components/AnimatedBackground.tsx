@@ -219,21 +219,14 @@ const AnimatedBackground = () => {
     };
 
     let animationFrameId = 0;
-    let idleCallbackId: number | null = null;
     let timeoutId: number | null = null;
-    let hasStartedAnimation = false;
-    const speedFactor = 4;
 
     const animateBlobs = (time: number) => {
       const mouse = mouseRef.current;
       const isDesktop = isDesktopRef.current;
-      let blobPositions = blobStates.map((state) => ({
-        x: state.currentX,
-        y: state.currentY,
-      }));
 
       blobStates.forEach((state) => updateWander(state, time));
-      blobPositions = applyRepulsion(
+      const blobPositions = applyRepulsion(
         blobStates.map((state) => ({
           x: state.currentX,
           y: state.currentY,
@@ -284,43 +277,13 @@ const AnimatedBackground = () => {
       animationFrameId = window.requestAnimationFrame(animateBlobs);
     };
 
-    const startAnimation = () => {
-      if (hasStartedAnimation) return;
-      hasStartedAnimation = true;
-
-      window.addEventListener("mousemove", handleMouseMove, { passive: true });
-      desktopMediaQuery.addEventListener("change", handleViewportChange);
-
-      timeoutId = window.setTimeout(() => {
-        animationFrameId = window.requestAnimationFrame(animateBlobs);
-      }, 180);
-    };
-
-    const queueAnimationStart = () => {
-      if ("requestIdleCallback" in window) {
-        idleCallbackId = window.requestIdleCallback(startAnimation, {
-          timeout: 700,
-        });
-      } else {
-        timeoutId = window.setTimeout(startAnimation, 120);
-      }
-    };
-
-    const handlePageLoad = () => {
-      queueAnimationStart();
-    };
-
-    if (document.readyState === "complete") {
-      handlePageLoad();
-    } else {
-      window.addEventListener("load", handlePageLoad, { once: true });
-    }
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    desktopMediaQuery.addEventListener("change", handleViewportChange);
+    timeoutId = window.setTimeout(() => {
+      animationFrameId = window.requestAnimationFrame(animateBlobs);
+    }, 80);
 
     return () => {
-      window.removeEventListener("load", handlePageLoad);
-      if (idleCallbackId !== null && "cancelIdleCallback" in window) {
-        window.cancelIdleCallback(idleCallbackId);
-      }
       if (timeoutId !== null) {
         window.clearTimeout(timeoutId);
       }

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SplitFlapText from "@/components/SplitFlapText";
 import ProjectCard from "@/components/ProjectCard";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,8 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [introComplete, setIntroComplete] = useState(false);
+  const [activeCodeNoticeId, setActiveCodeNoticeId] = useState<string | null>(null);
+  const [activeLiveNoticeId, setActiveLiveNoticeId] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -80,12 +80,30 @@ const Projects = () => {
     });
   };
 
+  const showCodeNotice = (projectId: string) => {
+    setActiveCodeNoticeId(projectId);
+    window.setTimeout(() => {
+      setActiveCodeNoticeId((currentId) =>
+        currentId === projectId ? null : currentId
+      );
+    }, 5000);
+  };
+
+  const showLiveNotice = (projectId: string) => {
+    setActiveLiveNoticeId(projectId);
+    window.setTimeout(() => {
+      setActiveLiveNoticeId((currentId) =>
+        currentId === projectId ? null : currentId
+      );
+    }, 5000);
+  };
+
   return (
     <ThemeProvider defaultTheme="dark">
       <SEO
-        title="Projects - Tanish Parsana"
-        description="Explore my portfolio of web development, AI, and data science projects. From fitness apps to construction management platforms, see how I build innovative solutions."
-        keywords={["projects", "portfolio", "web development", "AI", "React", "TypeScript", "Tanish Parsana"]}
+        title="Products - Tanish Parsana"
+        description="Explore my portfolio of web development, AI, and data science products. From fitness apps to construction management platforms, see how I build innovative solutions."
+        keywords={["products", "portfolio", "web development", "AI", "React", "TypeScript", "Tanish Parsana"]}
         ogType="website"
       />
       <Navigation />
@@ -96,13 +114,7 @@ const Projects = () => {
         <section className="relative pt-20 sm:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
-              <div className="flex justify-center items-center">
-                <SplitFlapText
-                  text="My Projects"
-                  className="font-mono text-center"
-                  onComplete={() => setIntroComplete(true)}
-                />
-              </div>
+              <span className="font-mono">My Products</span>
             </h1>
           </div>
         </section>
@@ -174,7 +186,7 @@ const Projects = () => {
             {/* Projects Count */}
             <div className="mb-8">
               <p className="text-muted-foreground">
-                Showing {filteredProjects.length} of {projects.length} projects
+                Showing {filteredProjects.length} of {projects.length} products
               </p>
             </div>
           </div>
@@ -255,22 +267,60 @@ const Projects = () => {
                             {project.endDate && ` - ${formatDate(project.endDate)}`}
                           </div>
                           
-                          <div className="flex gap-2">
-                            {project.githubUrl && (
-                              <Button size="sm" variant="outline" asChild>
-                                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                  <Github className="h-4 w-4 mr-2" />
-                                  Code
-                                </a>
-                              </Button>
+                          <div className="relative flex gap-2">
+                            {(project.githubUrl || project.codeNotice) && (
+                              project.codeNotice ? (
+                                <div className="relative">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => showCodeNotice(project.id)}
+                                  >
+                                    <Github className="h-4 w-4 mr-2" />
+                                    Code
+                                  </Button>
+
+                                  {activeCodeNoticeId === project.id && (
+                                    <div className="absolute bottom-[calc(100%+0.5rem)] right-0 z-20 w-72 rounded-xl border border-white/12 bg-black/85 px-3 py-2 text-left text-xs leading-relaxed text-white shadow-xl backdrop-blur-md">
+                                      {project.codeNotice}
+                                    </div>
+                                  )}
+                                </div>
+                              ) : (
+                                <Button size="sm" variant="outline" asChild>
+                                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                    <Github className="h-4 w-4 mr-2" />
+                                    Code
+                                  </a>
+                                </Button>
+                              )
                             )}
-                            {project.liveUrl && (
-                              <Button size="sm" variant="default" asChild>
-                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                  <Filter className="h-4 w-4 mr-2" />
-                                  Live Demo
-                                </a>
-                              </Button>
+                            {(project.liveUrl || project.liveNotice) && (
+                              project.liveNotice ? (
+                                <div className="relative">
+                                  <Button
+                                    size="sm"
+                                    variant="default"
+                                    onClick={() => showLiveNotice(project.id)}
+                                  >
+                                    <Filter className="h-4 w-4 mr-2" />
+                                    Live Demo
+                                  </Button>
+
+                                  {activeLiveNoticeId === project.id && (
+                                    <div className="absolute bottom-[calc(100%+0.5rem)] right-0 z-20 w-72 rounded-xl border border-white/12 bg-black/85 px-3 py-2 text-left text-xs leading-relaxed text-white shadow-xl backdrop-blur-md">
+                                      {project.liveNotice}
+                                    </div>
+                                  )}
+                                </div>
+                              ) : (
+                                <Button size="sm" variant="default" asChild>
+                                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                                    <Filter className="h-4 w-4 mr-2" />
+                                    Live Demo
+                                  </a>
+                                </Button>
+                              )
                             )}
                           </div>
                         </div>
@@ -285,7 +335,7 @@ const Projects = () => {
             {filteredProjects.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-xl text-muted-foreground mb-4">
-                  No projects found matching your filters.
+                  No products found matching your filters.
                 </p>
                 <Button
                   variant="outline"
@@ -306,7 +356,7 @@ const Projects = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="text-center">
               <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} Tanish Parsana. Building the future, one project at a time.
+                © {new Date().getFullYear()} Tanish Parsana. Building the future, one product at a time.
               </p>
             </div>
           </div>

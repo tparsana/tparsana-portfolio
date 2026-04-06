@@ -8,62 +8,6 @@ const randomInRange = (min: number, max: number) =>
 const easeInOutSine = (progress: number) =>
   -(Math.cos(Math.PI * progress) - 1) / 2;
 
-const applyRepulsion = (
-  points: Array<{ x: number; y: number }>,
-  minDistance: number,
-  strength: number
-) => {
-  const adjustedPoints = points.map((point) => ({ ...point }));
-
-  for (let i = 0; i < adjustedPoints.length; i += 1) {
-    for (let j = i + 1; j < adjustedPoints.length; j += 1) {
-      const dx = adjustedPoints[i].x - adjustedPoints[j].x;
-      const dy = adjustedPoints[i].y - adjustedPoints[j].y;
-      const distance = Math.hypot(dx, dy);
-
-      if (distance === 0 || distance >= minDistance) {
-        continue;
-      }
-
-      const overlap = (minDistance - distance) / minDistance;
-      const offsetX = (dx / distance) * overlap * strength;
-      const offsetY = (dy / distance) * overlap * strength;
-
-      adjustedPoints[i].x += offsetX;
-      adjustedPoints[i].y += offsetY;
-      adjustedPoints[j].x -= offsetX;
-      adjustedPoints[j].y -= offsetY;
-    }
-  }
-
-  return adjustedPoints;
-};
-
-const pushAwayFromCenter = (
-  x: number,
-  y: number,
-  exclusionX: number,
-  exclusionY: number
-) => {
-  if (Math.abs(x) >= exclusionX || Math.abs(y) >= exclusionY) {
-    return { x, y };
-  }
-
-  const horizontalBias = Math.abs(x) > Math.abs(y);
-
-  if (horizontalBias) {
-    return {
-      x: x >= 0 ? exclusionX : -exclusionX,
-      y,
-    };
-  }
-
-  return {
-    x,
-    y: y >= 0 ? exclusionY : -exclusionY,
-  };
-};
-
 type BlobWanderState = {
   currentX: number;
   currentY: number;
@@ -73,30 +17,66 @@ type BlobWanderState = {
   targetY: number;
   startTime: number;
   duration: number;
-  routeCenterX: number;
-  routeCenterY: number;
   xRange: number;
   yRange: number;
   minDuration: number;
   maxDuration: number;
-  mouseXFactor: number;
-  mouseYFactor: number;
+};
+
+const pickSeparatedTarget = (
+  blobStates: BlobWanderState[],
+  blobIndex: number,
+  xRange: number,
+  yRange: number,
+  minimumDistance: number
+) => {
+  let bestTarget = {
+    x: randomInRange(-xRange, xRange),
+    y: randomInRange(-yRange, yRange),
+  };
+  let bestDistanceScore = -1;
+
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const candidate = {
+      x: randomInRange(-xRange, xRange),
+      y: randomInRange(-yRange, yRange),
+    };
+
+    let closestBlobDistance = Infinity;
+
+    blobStates.forEach((otherState, otherIndex) => {
+      if (otherIndex === blobIndex) {
+        return;
+      }
+
+      const referenceX = otherState.duration === 0 ? otherState.currentX : otherState.targetX;
+      const referenceY = otherState.duration === 0 ? otherState.currentY : otherState.targetY;
+      const deltaX = candidate.x - referenceX;
+      const deltaY = candidate.y - referenceY;
+      const distance = Math.hypot(deltaX, deltaY);
+
+      closestBlobDistance = Math.min(closestBlobDistance, distance);
+    });
+
+    if (closestBlobDistance > bestDistanceScore) {
+      bestTarget = candidate;
+      bestDistanceScore = closestBlobDistance;
+    }
+
+    if (closestBlobDistance >= minimumDistance) {
+      return candidate;
+    }
+  }
+
+  return bestTarget;
 };
 
 const AnimatedBackground = () => {
   const blob1Ref = useRef<HTMLDivElement | null>(null);
   const blob2Ref = useRef<HTMLDivElement | null>(null);
   const blob3Ref = useRef<HTMLDivElement | null>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current = {
-        x: event.clientX / 50,
-        y: event.clientY / 50,
-      };
-    };
-
     const desktopMediaQuery = window.matchMedia(
       `(min-width: ${DESKTOP_BREAKPOINT}px)`
     );
@@ -112,14 +92,10 @@ const AnimatedBackground = () => {
         targetY: 0,
         startTime: 0,
         duration: 0,
-        routeCenterX: -140,
-        routeCenterY: -90,
-        xRange: 360,
-        yRange: 260,
-        minDuration: 4200,
-        maxDuration: 9000,
-        mouseXFactor: -0.24,
-        mouseYFactor: -0.24,
+        xRange: 460,
+        yRange: 320,
+        minDuration: 3400,
+        maxDuration: 7600,
       },
       {
         currentX: 0,
@@ -130,14 +106,10 @@ const AnimatedBackground = () => {
         targetY: 0,
         startTime: 0,
         duration: 0,
-        routeCenterX: 150,
-        routeCenterY: 90,
-        xRange: 390,
-        yRange: 280,
-        minDuration: 4200,
-        maxDuration: 9000,
-        mouseXFactor: 0.2,
-        mouseYFactor: 0.2,
+        xRange: 500,
+        yRange: 360,
+        minDuration: 3400,
+        maxDuration: 7600,
       },
       {
         currentX: 0,
@@ -148,53 +120,54 @@ const AnimatedBackground = () => {
         targetY: 0,
         startTime: 0,
         duration: 0,
-        routeCenterX: 0,
-        routeCenterY: -130,
-        xRange: 320,
-        yRange: 240,
-        minDuration: 4200,
-        maxDuration: 9000,
-        mouseXFactor: 0.06,
-        mouseYFactor: -0.06,
+        xRange: 420,
+        yRange: 300,
+        minDuration: 3400,
+        maxDuration: 7600,
       },
     ];
 
-    const assignNewTarget = (state: BlobWanderState, time: number) => {
+    const assignNewTarget = (
+      state: BlobWanderState,
+      blobIndex: number,
+      time: number
+    ) => {
       const isDesktop = isDesktopRef.current;
       const responsiveXRange = Math.min(
         state.xRange,
-        window.innerWidth * (isDesktop ? 0.5 : 0.18)
+        window.innerWidth * (isDesktop ? 0.58 : 0.24)
       );
       const responsiveYRange = Math.min(
         state.yRange,
-        window.innerHeight * (isDesktop ? 0.4 : 0.14)
+        window.innerHeight * (isDesktop ? 0.46 : 0.22)
       );
-      const routeCenterX = isDesktop ? state.routeCenterX : 0;
-      const routeCenterY = isDesktop ? state.routeCenterY : 0;
-      const rawTargetX =
-        routeCenterX + randomInRange(-responsiveXRange, responsiveXRange);
-      const rawTargetY =
-        routeCenterY + randomInRange(-responsiveYRange, responsiveYRange);
-      const adjustedTarget = isDesktop
-        ? pushAwayFromCenter(
-            rawTargetX,
-            rawTargetY,
-            window.innerWidth * 0.18,
-            window.innerHeight * 0.14
-          )
-        : { x: rawTargetX, y: rawTargetY };
+      const minimumDistance = Math.min(
+        Math.hypot(responsiveXRange, responsiveYRange) * (isDesktop ? 0.3 : 0.24),
+        isDesktop ? 240 : 120
+      );
+      const nextTarget = pickSeparatedTarget(
+        blobStates,
+        blobIndex,
+        responsiveXRange,
+        responsiveYRange,
+        minimumDistance
+      );
 
       state.startX = state.currentX;
       state.startY = state.currentY;
-      state.targetX = adjustedTarget.x;
-      state.targetY = adjustedTarget.y;
+      state.targetX = nextTarget.x;
+      state.targetY = nextTarget.y;
       state.startTime = time;
       state.duration = randomInRange(state.minDuration, state.maxDuration);
     };
 
-    const updateWander = (state: BlobWanderState, time: number) => {
+    const updateWander = (
+      state: BlobWanderState,
+      blobIndex: number,
+      time: number
+    ) => {
       if (state.duration === 0) {
-        assignNewTarget(state, time);
+        assignNewTarget(state, blobIndex, time);
       }
 
       const elapsed = time - state.startTime;
@@ -207,7 +180,7 @@ const AnimatedBackground = () => {
         state.startY + (state.targetY - state.startY) * easedProgress;
 
       if (progress >= 1) {
-        assignNewTarget(state, time);
+        assignNewTarget(state, blobIndex, time);
       }
     };
 
@@ -222,62 +195,31 @@ const AnimatedBackground = () => {
     let timeoutId: number | null = null;
 
     const animateBlobs = (time: number) => {
-      const mouse = mouseRef.current;
       const isDesktop = isDesktopRef.current;
 
-      blobStates.forEach((state) => updateWander(state, time));
-      const blobPositions = applyRepulsion(
-        blobStates.map((state) => ({
-          x: state.currentX,
-          y: state.currentY,
-        })),
-        Math.min(window.innerWidth * (isDesktop ? 0.28 : 0.18), isDesktop ? 340 : 160),
-        isDesktop ? 36 : 18
-      );
+      blobStates.forEach((state, index) => updateWander(state, index, time));
 
       if (blob1Ref.current) {
-        const x = isDesktop
-          ? blobPositions[0].x + mouse.x * blobStates[0].mouseXFactor
-          : blobPositions[0].x;
-        const y = isDesktop
-          ? blobPositions[0].y + mouse.y * blobStates[0].mouseYFactor
-          : blobPositions[0].y;
-
         blob1Ref.current.style.transform = isDesktop
-          ? `translate(-50%, -50%) translate(${x}px, ${y}px)`
-          : `translate(${x}px, ${y}px)`;
+          ? `translate(-50%, -50%) translate(${blobStates[0].currentX}px, ${blobStates[0].currentY}px)`
+          : `translate(${blobStates[0].currentX}px, ${blobStates[0].currentY}px)`;
       }
 
       if (blob2Ref.current) {
-        const x = isDesktop
-          ? blobPositions[1].x + mouse.x * blobStates[1].mouseXFactor
-          : blobPositions[1].x;
-        const y = isDesktop
-          ? blobPositions[1].y + mouse.y * blobStates[1].mouseYFactor
-          : blobPositions[1].y;
-
         blob2Ref.current.style.transform = isDesktop
-          ? `translate(-50%, -50%) translate(${x}px, ${y}px)`
-          : `translate(${x}px, ${y}px)`;
+          ? `translate(-50%, -50%) translate(${blobStates[1].currentX}px, ${blobStates[1].currentY}px)`
+          : `translate(${blobStates[1].currentX}px, ${blobStates[1].currentY}px)`;
       }
 
       if (blob3Ref.current) {
-        const x = isDesktop
-          ? blobPositions[2].x + mouse.x * blobStates[2].mouseXFactor
-          : blobPositions[2].x;
-        const y = isDesktop
-          ? blobPositions[2].y + mouse.y * blobStates[2].mouseYFactor
-          : blobPositions[2].y;
-
         blob3Ref.current.style.transform = isDesktop
-          ? `translate(-50%, -50%) translate(${x}px, ${y}px)`
-          : `translate(${x}px, ${y}px)`;
+          ? `translate(-50%, -50%) translate(${blobStates[2].currentX}px, ${blobStates[2].currentY}px)`
+          : `translate(${blobStates[2].currentX}px, ${blobStates[2].currentY}px)`;
       }
 
       animationFrameId = window.requestAnimationFrame(animateBlobs);
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     desktopMediaQuery.addEventListener("change", handleViewportChange);
     timeoutId = window.setTimeout(() => {
       animationFrameId = window.requestAnimationFrame(animateBlobs);
@@ -287,7 +229,6 @@ const AnimatedBackground = () => {
       if (timeoutId !== null) {
         window.clearTimeout(timeoutId);
       }
-      window.removeEventListener("mousemove", handleMouseMove);
       desktopMediaQuery.removeEventListener("change", handleViewportChange);
       window.cancelAnimationFrame(animationFrameId);
     };

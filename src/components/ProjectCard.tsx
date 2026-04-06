@@ -11,7 +11,9 @@ export interface ProjectProps {
   image: string;
   tags: string[];
   githubUrl?: string;
+  codeNotice?: string;
   liveUrl?: string;
+  liveNotice?: string;
   className?: string;
 }
 
@@ -21,10 +23,36 @@ const ProjectCard: React.FC<ProjectProps> = ({
   image,
   tags,
   githubUrl,
+  codeNotice,
   liveUrl,
+  liveNotice,
   className,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isCodeNoticeVisible, setIsCodeNoticeVisible] = useState(false);
+  const [isLiveNoticeVisible, setIsLiveNoticeVisible] = useState(false);
+
+  const showCodeNotice = () => {
+    if (!codeNotice) {
+      return;
+    }
+
+    setIsCodeNoticeVisible(true);
+    window.setTimeout(() => {
+      setIsCodeNoticeVisible(false);
+    }, 5000);
+  };
+
+  const showLiveNotice = () => {
+    if (!liveNotice) {
+      return;
+    }
+
+    setIsLiveNoticeVisible(true);
+    window.setTimeout(() => {
+      setIsLiveNoticeVisible(false);
+    }, 5000);
+  };
 
   return (
     <div
@@ -68,22 +96,62 @@ const ProjectCard: React.FC<ProjectProps> = ({
           )}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2">
-          {githubUrl && (
-            <Button size="sm" variant="outline" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4 mr-1" />
-                Code
-              </a>
-            </Button>
+        <div className="relative flex flex-col gap-2 sm:flex-row">
+          {(githubUrl || codeNotice) && (
+            codeNotice ? (
+              <div className="relative flex-1 sm:flex-none">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-9 text-sm w-full sm:h-10"
+                  onClick={showCodeNotice}
+                >
+                  <Github className="h-4 w-4 mr-1" />
+                  Code
+                </Button>
+
+                {isCodeNoticeVisible && (
+                  <div className="absolute bottom-[calc(100%+0.5rem)] left-0 z-20 w-64 rounded-xl border border-white/12 bg-black/85 px-3 py-2 text-left text-xs leading-relaxed text-white shadow-xl backdrop-blur-md">
+                    {codeNotice}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Button size="sm" variant="outline" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github className="h-4 w-4 mr-1" />
+                  Code
+                </a>
+              </Button>
+            )
           )}
-          {liveUrl && (
-            <Button size="sm" variant="default" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
-              <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-4 w-4 mr-1" />
-                Live
-              </a>
-            </Button>
+          {(liveUrl || liveNotice) && (
+            liveNotice ? (
+              <div className="relative flex-1 sm:flex-none">
+                <Button
+                  size="sm"
+                  variant="default"
+                  className="h-9 text-sm w-full sm:h-10"
+                  onClick={showLiveNotice}
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Live
+                </Button>
+
+                {isLiveNoticeVisible && (
+                  <div className="absolute bottom-[calc(100%+0.5rem)] right-0 z-20 w-64 rounded-xl border border-white/12 bg-black/85 px-3 py-2 text-left text-xs leading-relaxed text-white shadow-xl backdrop-blur-md">
+                    {liveNotice}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Button size="sm" variant="default" asChild className="h-9 sm:h-10 text-sm flex-1 sm:flex-none">
+                <a href={liveUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Live
+                </a>
+              </Button>
+            )
           )}
         </div>
       </div>

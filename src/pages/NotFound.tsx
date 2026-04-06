@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SplitFlapText from "@/components/SplitFlapText";
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft } from "lucide-react";
 
@@ -16,11 +15,11 @@ const NotFound = () => {
         <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-4xl space-y-6 z-10">
             <h1 className="text-6xl md:text-8xl font-bold mb-6 text-red-400">
-              <SplitFlapText text="404" className="font-mono" />
+              <span className="font-mono">404</span>
             </h1>
             
             <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-              <SplitFlapText text="Page Not Found" className="font-mono" />
+              <span className="font-mono">Page Not Found</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
@@ -46,7 +45,7 @@ const NotFound = () => {
               <p>Popular pages:</p>
               <div className="flex flex-wrap justify-center gap-4 mt-2">
                 <Link to="/projects" className="hover:text-primary transition-colors">
-                  Projects
+                  Products
                 </Link>
                 <Link to="/thoughts" className="hover:text-primary transition-colors">
                   Thoughts

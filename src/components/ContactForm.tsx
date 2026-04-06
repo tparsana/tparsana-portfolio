@@ -149,7 +149,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         "Available sections:",
         "- home",
         "- about",
-        "- projects",
+        "- products",
         "- experience",
         "- contact"
       ]);

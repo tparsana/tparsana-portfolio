@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
-import SplitFlapText from "@/components/SplitFlapText";
 import TechStackCompact from "@/components/TechStackCompact";
 import TimelineItem from "@/components/TimelineItem";
 import { siteConfig } from "@/config/site";
@@ -73,7 +72,7 @@ const projects = [
       "Data Visualization",
     ],
     githubUrl: "https://github.com/tparsana/unionsky-website",
-    liveUrl: "https://unionsky.vercel.app",
+    liveUrl: "https://unionsky.tanishparsana.app",
   },
   {
     title: "LaterTube",
@@ -188,13 +187,13 @@ const extracurricular = [
 
 const facts = [
   "Finished Ironman Arizona 2025, Yougest from the State of Gujarat, India.",
-  "Accidentally became the tech support for family’s real estate biz.",
-  "Believes “just one more API” is always the solution.",
-  "I contribute to open-source projects in my free time",
-  "I've completed 14 half-marathons",
+  "I provide SaaS to my family real estate businesses.",
+  "Can romanticize both - startup chaos and 5 am long runs.",
+  "Hosted 4 Hackathons with 500+ participants each.",
+  "Has completed 22 half-marathons.",
   "Has more Notion dashboards than real-life responsibilities (almost).",
   "I enjoy filmmaking - currently shooting a Documentary.",
-  "Trains for Ironmans but cries cycling up small hills.",
+  "Believes great products, great stories, and great races are all won in the boring middle.",
 ];
 
 const HomeSections = () => {
@@ -257,7 +256,7 @@ const HomeSections = () => {
       <section id="about" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-16 text-center">
-            <SplitFlapText text="About Me" className="font-mono" />
+            <span className="font-mono">About Me</span>
           </h2>
 
           <div className="grid items-start gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
@@ -266,9 +265,9 @@ const HomeSections = () => {
                 <p className="text-lg leading-[1.7]">
                   I&apos;m an unusually strong problem solver with a very high pain tolerance for hard
                   things, and that shows up in both my work and my life. While training 25 hours a
-                  week for Ironman Arizona, I was also building and shipping real products, helping
-                  lead a 2,000+ student startup community through DevLabs, supporting 25 student-led
-                  startups and $70K raised, partnering on events with groups like Google DeepMind
+                  week for Ironman Arizona, I was also building and shipping real products, leading
+                  a 2,000+ student entrepreneur community through DevLabs. Helped incubate, mentor and support 25 student-led
+                  startups, and raise $70K in pre-seed funding, partnering on events with giants like Google DeepMind
                   and Cloudflare, working in technical roles at ASU, and staying on top of a
                   full-time CS degree with a business minor.
                   <br />
@@ -310,7 +309,7 @@ const HomeSections = () => {
       <section id="experience" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-16 text-center">
-            <SplitFlapText text="Experience" className="font-mono" />
+            <span className="font-mono">Experience</span>
           </h2>
 
           <div className="mb-16">
@@ -320,7 +319,7 @@ const HomeSections = () => {
           </div>
 
           <h3 className="text-2xl font-bold mb-8 text-center">
-            <SplitFlapText text="Education" className="font-mono" />
+            <span className="font-mono">Education</span>
           </h3>
 
           <div className="mb-16">
@@ -330,7 +329,7 @@ const HomeSections = () => {
           </div>
 
           <h3 className="text-2xl font-bold mb-8 text-center">
-            <SplitFlapText text="Interests" className="font-mono" />
+            <span className="font-mono">Interests</span>
           </h3>
 
           <div>
@@ -344,7 +343,7 @@ const HomeSections = () => {
       <section id="projects" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-16 text-center">
-            <SplitFlapText text="My Projects" className="font-mono" />
+            <span className="font-mono">My Products</span>
           </h2>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
@@ -366,7 +365,7 @@ const HomeSections = () => {
           <div className="text-center mt-12">
             <Button asChild variant="outline" size="lg">
               <Link to="/projects" className="flex items-center gap-2">
-                View All Projects
+                View All Products
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
@@ -377,7 +376,7 @@ const HomeSections = () => {
       <section id="tech-stack" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-8 text-center">
-            <SplitFlapText text="Tech Stack" className="font-mono" />
+            <span className="font-mono">Tech Stack</span>
           </h2>
 
           <div className="rounded-xl bg-card p-6 shadow-lg">
@@ -389,7 +388,7 @@ const HomeSections = () => {
       <section id="contact" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-16 text-center">
-            <SplitFlapText text="Get In Touch" className="font-mono" />
+            <span className="font-mono">Get In Touch</span>
           </h2>
 
           <div className="grid gap-8 md:grid-cols-2">

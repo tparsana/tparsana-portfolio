@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SplitFlapText from "@/components/SplitFlapText";
 import SEO from "@/components/SEO";
 import { getBlogPostBySlug, updateBlogPostReads } from "@/data/blogs-unified";
 import { Calendar, Clock, Eye, ArrowLeft } from "lucide-react";
@@ -169,10 +168,7 @@ const BlogPost = () => {
             <article>
               {/* Title */}
               <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight break-words">
-                <SplitFlapText
-                  text={post.title}
-                  className="font-mono"
-                />
+                <span className="font-mono">{post.title}</span>
               </h1>
 
               {/* Meta Information */}

@@ -7,7 +7,9 @@ export interface Project {
   image: string;
   tags: string[];
   githubUrl?: string;
+  codeNotice?: string;
   liveUrl?: string;
+  liveNotice?: string;
   featured?: boolean;
   status: "completed" | "in-progress" | "planned";
   startDate: string;
@@ -26,6 +28,54 @@ export interface Project {
 // Default projects (used as initial data)
 const defaultProjects: Project[] = [
   {
+    id: "samaya-group-website",
+    title: "Samaya Group Website",
+    slug: "samaya-group-real-estate-platform",
+    description: "Built and deployed Samaya's official website, a high-conversion real estate platform with strong storytelling, SEO, lead capture, and backend CRM automation.",
+    longDescription: "Samaya Group Website is the official digital platform built for Samaya's real estate presence, designed to combine brand storytelling with high-conversion lead capture. The site balances polished presentation with business performance, giving the company a strong digital front door while supporting practical sales and CRM workflows behind the scenes.\n\nThe product was built around clear narrative structure, search visibility, trust-building content, and conversion-focused page flows. Beyond the public-facing experience, the project also included backend CRM automation so inbound interest could move into a more structured operational pipeline.\n\nThis was not just a brochure site. It was built as a real estate growth platform where branding, performance, lead generation, and backend automation all worked together as one system.",
+    image: "https://www.dropbox.com/scl/fi/6nabcson393sf6ml7f3bm/Samaya-Group-Website-Content.png?rlkey=wcad1qtdsdc1fa9lov62cgea5&st=i89h45gp&raw=1",
+    tags: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "SEO", "CRM"],
+    technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Full-Stack Development", "Web Development", "Search Engine Optimization (SEO)", "Customer Relationship Management (CRM)", "API Development", "UIX", "Cloudflare", "Optimizing Performance"],
+    codeNotice: "I can't share the Samaya Group Website code because it is covered by NDA and client contract restrictions.",
+    liveUrl: "https://samayagroup.in",
+    featured: true,
+    status: "completed",
+    startDate: "2025-02-01",
+    endDate: "2025-05-01",
+    category: "web",
+    challenges: ["Balancing premium storytelling with conversion-focused real estate flows", "Implementing lead capture that connects cleanly into CRM automation", "Keeping a media-rich marketing site fast and SEO-strong"],
+    learnings: ["How to build real estate websites around conversion architecture", "Connecting frontend lead flows into backend CRM processes", "Driving performance and SEO without sacrificing visual storytelling"],
+    seo: {
+      metaTitle: "Samaya Group Website - High-Conversion Real Estate Platform",
+      metaDescription: "Official Samaya Group website built as a high-conversion real estate platform with storytelling, SEO, lead capture, and CRM automation.",
+      keywords: ["Samaya Group", "real estate website", "Next.js", "SEO", "CRM automation", "lead capture", "web development"]
+    }
+  },
+  {
+    id: "tasked",
+    title: "Tasked.",
+    slug: "tasked-ai-productivity-platform",
+    description: "An AI-powered productivity platform that transforms handwritten and unstructured inputs into organized tasks, planning tools, and actionable workflow insights.",
+    longDescription: "Tasked. is an AI-powered productivity platform built to bridge the gap between messy human input and clear execution. It takes handwritten notes, rough planning fragments, and unstructured thoughts, then converts them into organized tasks, planning systems, and practical workflow insights users can actually act on.\n\nThe product combines OCR, large language models, and modern frontend workflows to turn scattered information into structure. Instead of forcing users into rigid forms first, Tasked. starts from the way people naturally think and capture ideas, then applies intelligence on top to make that information useful.\n\nAt its core, Tasked. is about reducing friction between thought and action. By combining input parsing, planning assistance, and task generation in one product, it makes productivity feel less manual and more intelligent.",
+    image: "https://www.dropbox.com/scl/fi/kadxdfhulhapy8enm4u2q/Tasked.-Landing-Page.png?rlkey=7f2zwkplejps08imrpktt1ebz&st=nhfuc6xk&raw=1",
+    tags: ["React.js", "TypeScript", "Google Gemini", "OCR", "LLMs", "AI Productivity"],
+    technologies: ["React.js", "TypeScript", "Google Gemini", "Optical Character Recognition (OCR)", "LLMs", "Prompt Engineering", "Modern CSS"],
+    githubUrl: "https://github.com/tparsana/Tasked.",
+    liveUrl: "https://tasked.tanishparsana.com",
+    featured: true,
+    status: "completed",
+    startDate: "2026-03-01",
+    endDate: "2026-04-01",
+    category: "ai",
+    challenges: ["Turning unstructured handwritten input into reliable digital tasks", "Designing a workflow that feels fluid instead of rigid", "Combining OCR output with LLM reasoning cleanly"],
+    learnings: ["Practical OCR integration patterns", "How to structure LLM-assisted productivity flows", "Designing AI UX around real user messiness instead of perfect input"],
+    seo: {
+      metaTitle: "Tasked. - AI Productivity Platform for Handwritten and Unstructured Input",
+      metaDescription: "Tasked. transforms handwritten notes and messy inputs into organized tasks, planning tools, and actionable workflow insights using OCR and AI.",
+      keywords: ["Tasked", "AI productivity", "OCR", "Google Gemini", "LLMs", "task management", "workflow automation"]
+    }
+  },
+  {
     id: "actv",
     title: "ACTV",
     slug: "actv-ai-fitness-coach",
@@ -36,6 +86,7 @@ const defaultProjects: Project[] = [
     technologies: ["React", "Node.js", "Python", "LangChain", "OpenAI API", "Gemini API", "MongoDB", "Pinecone", "FastAPI", "TypeScript"],
     githubUrl: "https://github.com/tparsana/ACTV",
     liveUrl: "https://example.com",
+    liveNotice: "Deployed website has been turned off as of Strava API restrictions.",
     featured: true,
     status: "completed",
     startDate: "2024-06-01",
@@ -83,7 +134,7 @@ const defaultProjects: Project[] = [
     tags: ["Python", "TypeScript", "OpenSky API", "FlightRadar API", "REST API", "Requests", "React", "Real-time Data", "Data Visualization"],
     technologies: ["Python", "TypeScript", "React", "OpenSky API", "FlightRadar API", "FastAPI", "Requests", "Chart.js"],
     githubUrl: "https://github.com/tparsana/unionsky-website",
-    liveUrl: "https://unionsky.vercel.app",
+    liveUrl: "https://unionsky.tanishparsana.com",
     featured: false,
     status: "completed",
     startDate: "2024-01-15",
@@ -99,26 +150,26 @@ const defaultProjects: Project[] = [
   },
   {
     id: "latertube",
-    title: "LaterTube",
-    slug: "latertube-youtube-watchlist",
-    description: "A distraction-free YouTube watchlist that bypasses Youtube ad layer, lets you save and organize videos with tags and priorities to come back to later, and keeps everything in sync in real time with proper AUTH and DB.",
-    longDescription: "LaterTube addresses the common problem of YouTube's distracting interface by providing a clean, focused environment for managing your video watchlist. The platform allows users to save videos for later viewing, organize them with custom tags and priorities, and access them through a distraction-free interface.\n\nBuilt with Next.js and Supabase, LaterTube features real-time synchronization across devices, user authentication, and a clean PostgreSQL database design. The application bypasses YouTube's advertising and recommendation algorithms, letting users focus on the content they actually want to watch.\n\nKey features include video bookmarking, tag-based organization, priority queues, cross-device sync, and a minimal, distraction-free viewing interface that helps users be more intentional with their video consumption.",
-    image: "https://images.unsplash.com/photo-1625813948790-936f256faea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Supabase Auth", "Supabase Realtime", "PostgreSQL", "Youtube Data API"],
-    technologies: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "YouTube Data API", "Tailwind CSS"],
-    githubUrl: "https://github.com/tparsana/YourTube",
-    liveUrl: "https://latertube.vercel.app",
+    title: "Curio",
+    slug: "curio-youtube-management-platform",
+    description: "Distraction and ad-free YouTube management platform that replaces passive scrolling with intentional content consumption through smart categorization, priority tagging, and custom watchlists.",
+    longDescription: "Curio is a distraction and ad-free YouTube management platform built to make content consumption intentional instead of passive. Rather than letting users fall into endless algorithmic feeds, Curio creates a clean system for organizing, prioritizing, and returning to videos that actually matter.\n\nThe platform centers around smart categorization, priority tagging, and custom watchlists, giving users structure around what they want to watch and why. It turns YouTube from a reactive feed into a deliberate content management workflow.\n\nAt its core, Curio is about helping users consume with intent. By stripping away distractions and giving people control over categorization and priority, it creates a calmer, more focused experience around video-based learning and discovery.",
+    image: "https://www.dropbox.com/scl/fi/n6ll95vcguhuxquzew1rl/Curio-Dashboard-Feed.png?rlkey=46464xul5sy7an1r9rusff8nm&st=grztawbu&raw=1",
+    tags: ["React", "TypeScript", "YouTube Management", "Custom Watchlists", "Priority Tagging", "Productivity"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "YouTube Data API", "Custom Watchlists", "Priority Tagging", "Content Management"],
+    githubUrl: "https://github.com/tparsana/curio",
+    liveUrl: "https://curio.tanishparsana.com",
     featured: false,
     status: "completed",
     startDate: "2024-08-01",
     endDate: "2024-10-15",
     category: "web",
-    challenges: ["YouTube API integration", "Real-time data synchronization", "Distraction-free UI design"],
-    learnings: ["Next.js app router", "Supabase real-time features", "YouTube API optimization"],
+    challenges: ["Designing a YouTube workflow without passive-feed behavior", "Building clean organization patterns around saved video content", "Making categorization and priority feel lightweight instead of tedious"],
+    learnings: ["How to turn media consumption into a more intentional product flow", "Designing productivity systems around content rather than tasks", "Balancing calm UX with powerful organization features"],
     seo: {
-      metaTitle: "LaterTube - Distraction-Free YouTube Watchlist Manager",
-      metaDescription: "A clean, focused YouTube watchlist app with tagging, priorities, and real-time sync. Bypass distractions and focus on content that matters.",
-      keywords: ["YouTube", "watchlist", "productivity", "Next.js", "Supabase", "video management"]
+      metaTitle: "Curio - Distraction-Free YouTube Management Platform",
+      metaDescription: "Curio replaces passive scrolling with intentional YouTube consumption through smart categorization, priority tagging, and custom watchlists.",
+      keywords: ["Curio", "YouTube management", "watchlists", "priority tagging", "intentional content consumption", "productivity"]
     }
   },
   {
@@ -127,7 +178,7 @@ const defaultProjects: Project[] = [
     slug: "portfolio-website-react-typescript",
     description: "A modern, animated portfolio website built with React, TypeScript, and cutting-edge web technologies, featuring custom animations, blog system, and admin functionality.",
     longDescription: "This portfolio website represents the culmination of modern web development practices, showcasing both technical skills and design sensibility. Built with React and TypeScript, it features custom animations, a full blog management system, and sophisticated admin functionality.\n\nThe site includes advanced features like split-flap text animations, custom cursor implementation, theme switching, and a complete blog CMS with SEO optimization. Every interaction is carefully crafted to provide a smooth, engaging user experience while maintaining fast performance and accessibility.\n\nThe project demonstrates expertise in modern React patterns, TypeScript, responsive design, animation libraries, and full-stack thinking through its integrated admin and content management capabilities.",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    image: "https://www.dropbox.com/scl/fi/ejnc9id2fdesxxisrslmp/TParsana-Portfolio-Landing-Page.png?rlkey=ymg6eqvrqozr720cdki3fbl4g&st=5ap71o41&raw=1",
     tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Custom Animations", "Blog System", "Admin Portal"],
     technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Lucide Icons", "Framer Motion", "React Router"],
     githubUrl: "https://github.com/tparsana/tparsana-portfolio",
@@ -149,21 +200,14 @@ const defaultProjects: Project[] = [
 // localStorage key for projects
 const PROJECTS_KEY = 'tanish-portfolio-projects';
 
-// Get projects from localStorage or use defaults
-const getProjectsFromStorage = (): Project[] => {
-  if (typeof window === 'undefined') return defaultProjects;
-  
+const clearStoredProjects = () => {
+  if (typeof window === 'undefined') return;
+
   try {
-    const stored = localStorage.getItem(PROJECTS_KEY);
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      return Array.isArray(parsed) && parsed.length > 0 ? parsed : defaultProjects;
-    }
+    localStorage.removeItem(PROJECTS_KEY);
   } catch (error) {
-    console.error('Error loading projects from localStorage:', error);
+    console.error('Error clearing projects from localStorage:', error);
   }
-  
-  return defaultProjects;
 };
 
 // Save projects to localStorage
@@ -177,13 +221,10 @@ const saveProjectsToStorage = (projects: Project[]) => {
   }
 };
 
-// Initialize projects from storage
-let projects = getProjectsFromStorage();
+clearStoredProjects();
 
-// If localStorage is empty, save the default projects
-if (typeof window !== 'undefined' && !localStorage.getItem(PROJECTS_KEY)) {
-  saveProjectsToStorage(defaultProjects);
-}
+// Initialize projects from the source-defined defaults only.
+let projects = [...defaultProjects];
 
 // Project management functions
 export const getAllProjects = (): Project[] => {
@@ -234,7 +275,23 @@ export const getProjectBySlug = (slug: string) => {
 
 export const getHomePageProjects = () => {
   const currentProjects = getAllProjects();
-  // Return first 4 projects for home page display
+  const preferredHomeProjectIds = [
+    "samaya-group-website",
+    "tasked",
+    "latertube",
+    "portfolio-website",
+  ];
+
+  const preferredProjects = preferredHomeProjectIds
+    .map((projectId) =>
+      currentProjects.find((project) => project.id === projectId)
+    )
+    .filter((project): project is Project => Boolean(project));
+
+  if (preferredProjects.length > 0) {
+    return preferredProjects;
+  }
+
   return currentProjects.slice(0, 4);
 };
 

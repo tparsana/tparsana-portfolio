@@ -1,6 +1,6 @@
 # Tanish Parsana - Portfolio Website
 
-A modern, animated portfolio website built with React, TypeScript, and cutting-edge web technologies. Features a complete blog system, project showcase, and admin portal with real-time data persistence.
+A modern, animated portfolio website built with React, TypeScript, and cutting-edge web technologies. Features a complete blog system, project showcase, and admin portal backed by local browser storage.
 
 ## 🚀 **Live Demo**
 
@@ -37,10 +37,10 @@ Visit the live website: [tanishparsana.com](https://tanishparsana.com)
 - **Real-time data persistence**
 
 ### **🗄️ Data Persistence**
-- **Supabase integration** for production
-- **localStorage fallback** for development
-- **Automatic data synchronization**
-- **Real-time updates** across all users
+- **localStorage-backed content management**
+- **No external backend required**
+- **Fast local iteration** for projects and blog content
+- **Simple deployment setup**
 
 ## 🛠️ **Tech Stack**
 
@@ -51,12 +51,6 @@ Visit the live website: [tanishparsana.com](https://tanishparsana.com)
 - **Shadcn UI** for components
 - **React Router** for navigation
 - **Lucide React** for icons
-
-### **Backend & Database**
-- **Supabase** for production database
-- **PostgreSQL** with real-time capabilities
-- **Row Level Security** for data protection
-- **RESTful API** with automatic TypeScript types
 
 ### **Development Tools**
 - **ESLint** for code linting
@@ -69,7 +63,6 @@ Visit the live website: [tanishparsana.com](https://tanishparsana.com)
 ### **Prerequisites**
 - Node.js 18+ 
 - npm or yarn
-- Supabase account (for production)
 
 ### **Installation**
 
@@ -89,24 +82,17 @@ Visit the live website: [tanishparsana.com](https://tanishparsana.com)
    cp env.example .env.local
    ```
    
-   Edit `.env.local` with your Supabase credentials:
+   Edit `.env.local` as needed:
    ```bash
-   VITE_SUPABASE_URL=https://your-project-id.supabase.co
-   VITE_SUPABASE_ANON_KEY=your-anon-key-here
-   VITE_DATA_SOURCE=supabase
+   VITE_ADMIN_PASSWORD=4265
    ```
 
-4. **Set up Supabase database**
-   - Create a new Supabase project
-   - Run the SQL from `supabase-schema.sql` in the SQL Editor
-   - See [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) for detailed instructions
-
-5. **Start development server**
+4. **Start development server**
    ```bash
    npm run dev
    ```
 
-6. **Open your browser**
+5. **Open your browser**
    - Main site: `http://localhost:8080`
    - Admin portal: `http://localhost:8080/admin` (password: `4265`)
 
@@ -130,31 +116,19 @@ src/
 ├── data/               # Data layer
 │   ├── blogs-unified.ts    # Unified blog data
 │   ├── projects-unified.ts # Unified project data
-│   ├── blogs-supabase.ts   # Supabase blog functions
-│   └── projects-supabase.ts # Supabase project functions
-├── lib/                # Utilities and configurations
-│   └── supabase.ts     # Supabase client
+│   ├── blogs.ts            # Blog storage helpers
+│   └── projects.ts         # Project storage helpers
 └── config/             # App configuration
-    └── data-source.ts  # Data source switching
+    └── site.ts         # Site configuration
 ```
 
 ## 🔧 **Configuration**
 
-### **Data Source Switching**
-The app automatically switches between data sources based on environment variables:
-
-- **Development**: Uses localStorage (no backend needed)
-- **Production**: Uses Supabase (real database)
+### **Data Storage**
+The app uses browser `localStorage` for blog posts and projects in the admin UI. That keeps setup simple and removes the need for a separate database or API.
 
 ### **Environment Variables**
 ```bash
-# Required for Supabase
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key-here
-
-# Data source selection
-VITE_DATA_SOURCE=supabase  # or 'localStorage'
-
 # Optional
 VITE_ADMIN_PASSWORD=4265
 VITE_DEBUG=true
@@ -188,18 +162,18 @@ VITE_DEBUG=true
 1. Connect your GitHub repository
 2. Set build command: `npm run build`
 3. Set publish directory: `dist`
-4. Add environment variables in Netlify dashboard
+4. Add environment variables in Netlify dashboard if needed
 5. Deploy!
 
 ### **Vercel**
 1. Connect your GitHub repository
 2. Vercel will auto-detect Vite
-3. Add environment variables
+3. Add environment variables if needed
 4. Deploy!
 
 ### **Other Platforms**
 - See `DEPLOYMENT.md` for platform-specific instructions
-- Ensure environment variables are set
+- Ensure any optional environment variables are set
 - The `_redirects` and `vercel.json` files handle routing
 
 ## 🧪 **Testing**
@@ -229,18 +203,11 @@ npm run lint
 - Project view tracking
 - Admin activity monitoring
 
-### **Supabase Dashboard**
-- Real-time database monitoring
-- API usage analytics
-- Error tracking and logs
-
 ## 🔐 **Security**
 
 ### **Data Protection**
-- Row Level Security (RLS) enabled
-- Public read access for published content
 - Admin operations require authentication
-- API keys secured in environment variables
+- Admin password is configured via environment variables
 
 ### **Best Practices**
 - Never commit `.env.local` to version control

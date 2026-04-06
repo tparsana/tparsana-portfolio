@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SplitFlapText from "@/components/SplitFlapText";
 import SEO from "@/components/SEO";
 import { getBlogPostsByYear } from "@/data/blogs-unified";
 import { Calendar, Clock, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Thoughts = () => {
-  const [introComplete, setIntroComplete] = useState(false);
   const [postsByYear, setPostsByYear] = useState<Record<number, any[]>>({});
   const [years, setYears] = useState<number[]>([]);
 
@@ -51,13 +49,7 @@ const Thoughts = () => {
         <section className="relative pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-20 md:pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center min-h-[40vh] sm:min-h-[50vh]">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center w-full">
-              <div className="flex justify-center items-center">
-                <SplitFlapText
-                  text="Blogs, Thoughts And Reactions"
-                  className="font-mono text-center"
-                  onComplete={() => setIntroComplete(true)}
-                />
-              </div>
+              <span className="font-mono">Blogs, Thoughts And Reactions</span>
             </h1>
           </div>
         </section>

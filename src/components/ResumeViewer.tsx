@@ -15,7 +15,7 @@ const ResumeViewer: React.FC<ResumeViewerProps> = ({
   triggerVariant = "nav-link",
   triggerLabel = "Resume",
 }) => {
-  const dropboxUrl = "https://www.dropbox.com/scl/fi/giyf06z67js3d5zxuy2w9/TParsana-Resume-Mar26.pdf?rlkey=3dxgd96luyiqo30meua1zmhv8&st=rfkh9vq7&raw=1";
+  const dropboxUrl = "https://www.dropbox.com/scl/fi/twflbvynrueoh4zxcs0kv/TParsana-Resume-Apr26.pdf?rlkey=glkvr34566sl7ip4yrs290nkl&st=1dya08km&raw=1";
   const isPillTrigger = triggerVariant === "pill";
 
   return (

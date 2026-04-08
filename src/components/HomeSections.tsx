@@ -10,91 +10,6 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/projects-unified";
 
-const projects = [
-  {
-    title: "ACTV",
-    description:
-      "An AI-powered fitness & nutrition coach that builds adaptive workout routines and meal plans, using RAG-based guidance and progress tracking to deliver personalized recommendations that evolve with your goals.",
-    image:
-      "https://images.unsplash.com/photo-1534146789009-76ed5060ec70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: [
-      "React",
-      "Node.js",
-      "Python",
-      "LangChain",
-      "LLMs",
-      "Vector DB",
-      "OpenAI API",
-      "Gemini API",
-      "MongoDB",
-    ],
-    githubUrl: "https://github.com/tparsana/ACTV",
-    liveUrl: "https://example.com",
-  },
-  {
-    title: "Assigned",
-    description:
-      "A streamlined project management platform tailored to construction teams, combining task tracking, scheduling, and collaboration tools, with upcoming WhatsApp integration to keep projects moving forward in real time.",
-    image:
-      "https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: [
-      "TypeScript",
-      "React",
-      "Firebase",
-      "Supabase",
-      "Tailwind",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Redux",
-      "Material-UI",
-      "React Router",
-      "Axios",
-    ],
-    githubUrl: "https://github.com/tparsana/buildtrack-constructify",
-    liveUrl: "https://assigned-tasks.glide.page",
-  },
-  {
-    title: "UnionSky",
-    description:
-      "A plane-spotting web app that streams live flight data from aircrafts outside my room window, displaying routes, airlines, and aircraft details in real time through a clean interface built for aviation enthusiasts.",
-    image:
-      "https://images.unsplash.com/photo-1569839333583-7375336cde4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: [
-      "Python",
-      "TypeScript",
-      "OpenSky API",
-      "FlightRadar API",
-      "REST API",
-      "Requests",
-      "React",
-      "Real-time Data",
-      "Data Visualization",
-    ],
-    githubUrl: "https://github.com/tparsana/unionsky-website",
-    liveUrl: "https://unionsky.tanishparsana.app",
-  },
-  {
-    title: "LaterTube",
-    description:
-      "A distraction-free YouTube watchlist that bypasses Youtube ad layer, lets you save and organize videos with tags and priorities to come back to later, and keeps everything in sync in real time with proper AUTH and DB.",
-    image:
-      "https://images.unsplash.com/photo-1625813948790-936f256faea8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    tags: [
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "TypeScript",
-      "Supabase Auth",
-      "Supabase Realtime",
-      "PostgreSQL",
-      "Youtube Data API",
-    ],
-    githubUrl: "https://github.com/tparsana/YourTube",
-    liveUrl: "https://latertube.vercel.app",
-  },
-];
-
 const experiences = [
   {
     date: "Apr 2025 - Present",
@@ -116,25 +31,25 @@ const experiences = [
   },
   {
     date: "Aug 2025 - Present",
-    title: "Senior Creative Technology Consultant",
-    subtitle: "Zoom Innovation Lab at Enterprise Technology - ASU",
+    title: "Senior AI Tech Consultant",
+    subtitle: "Enterprise Technology, ASU",
     description:
-      "After being promoted into a leadership role at the ASU × Zoom Innovation Lab, I led technical operations for a team managing high-volume podcasting, streaming, and digital production studios. Beyond supporting creative production environments, I focused heavily on building internal systems to improve how the organization operates. I designed and deployed web-based tools including an asset tracking system for production equipment, a lightweight ERP and employee management platform, and workforce scheduling and automation workflows using Google Apps Script, Power Automate, Zapier, and custom integrations. These systems reduced manual overhead, improved operational efficiency, and allowed the team to scale support for both internal university users and external partners.",
+      "Promoted to lead a team of 5 engineers building internal AI workflow automation and operations tools, including asset management, ERP systems, and workforce scheduling applications using Python, SQL, and Azure workflows for a 50-person team. Contributed to CreateAI backend systems across model routing, document ingestion, retrieval, vector search, and access control, enabling configurable RAG workflows where users select LLMs, add knowledge bases, and generate document-grounded AI agents.",
     location: "Tempe, AZ, USA",
     logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
   },
   {
     date: "Aug 2023 - Aug 2025",
-    title: "Technology Consultant",
-    subtitle: "Tech Hub at Enterprise Technology - ASU",
+    title: "AI Tech Consultant",
+    subtitle: "Enterprise Technology, ASU",
     description:
-      "In my role as a Technology Consultant at ASU Enterprise Technology, I provided enterprise-level technical support across hardware, software, and network systems for over 1,000 students, staff, and faculty. While resolving complex system issues and improving resolution times, I also identified recurring failure patterns and built preventive solutions to reduce repeated support requests. I later designed and deployed an LLM-backed RAG web application using OpenAI APIs and ASU’s internal knowledge base to create a self-service technical support agent. This tool helped users troubleshoot issues independently through a chat interface and reduced repetitive support tickets by over 25%, improving both user experience and operational efficiency.",
+      "Built and deployed a full-stack AI support application using enterprise knowledge indexing, OpenAI APIs, Python, and vector embedding and search to deliver self-service troubleshooting, automate ticket deflection, and reduce repetitive support tickets by 40%. Developed backend retrieval and orchestration for ASU CreateAI Chat, supporting multi-model, prompt-configured workflows with knowledge-base ingestion, embeddings, and API integration for a university AI platform used by 10,000+ unique users.",
     location: "Tempe, AZ, USA",
     logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
   },
   {
     date: "May 2024 - Aug 2024",
-    title: "Data Science & AI Intern",
+    title: "AI Engineering Intern",
     subtitle: "York IE",
     description:
       "At York IE, I worked on the data science and AI team building intelligence systems for Fuel, a VC-backed SaaS analytics platform. I engineered and deployed a production Retrieval-Augmented Generation (RAG) system using AWS Bedrock, OpenAI GPT APIs, and Pinecone to power semantic search and cross-entity relationship mapping across millions of SaaS company records. The system helped surface hidden connections between companies, founders, and investors, enabling deeper market analysis and decision-making. I also built scalable embedding and vector search pipelines with optimized preprocessing, feature engineering, and retrieval evaluation, improving search relevance and query performance by 45% in production..",
@@ -143,7 +58,7 @@ const experiences = [
   },
   {
     date: "May 2023 - Aug 2023",
-    title: "Data Science Intern",
+    title: "Data Science & AI Intern",
     subtitle: "York IE",
     description:
       "During my first summer at York IE, I built production-scale data infrastructure to support pricing intelligence for their SaaS analytics product. I engineered a large-scale web scraping and data ingestion pipeline that processed over 3 million company records, extracting subscription and pricing data across the web. Using AWS services like S3, Glue, and Lambda, I designed scalable ETL workflows to clean, normalize, and integrate this data directly into the Fuel platform. My work significantly expanded pricing intelligence coverage and enabled more accurate benchmarking for SaaS companies, while ensuring the pipeline was reliable, efficient, and production-ready.",
@@ -186,7 +101,7 @@ const extracurricular = [
 ];
 
 const facts = [
-  "Finished Ironman Arizona 2025, Yougest from the State of Gujarat, India.",
+  "Finished Ironman Arizona 2025, Youngest from the State of Gujarat, India.",
   "I provide SaaS to my family real estate businesses.",
   "Can romanticize both - startup chaos and 5 am long runs.",
   "Hosted 4 Hackathons with 500+ participants each.",
@@ -205,33 +120,11 @@ const HomeSections = () => {
 
     const loadHomeProjects = async () => {
       const { getHomePageProjects } = await import("@/data/projects-unified");
-      const dynamicProjects = await getHomePageProjects();
+      const homePageProjects = await getHomePageProjects();
 
       if (isCancelled) return;
 
-      if (dynamicProjects.length > 0) {
-        setHomeProjects(dynamicProjects);
-        return;
-      }
-
-      const fallbackProjects: Project[] = projects.slice(0, 4).map((project, index) => ({
-        id: `static-${index}`,
-        slug: project.title.toLowerCase().replace(/\s+/g, "-"),
-        longDescription: project.description,
-        featured: index < 2,
-        status: "completed" as const,
-        startDate: "2024-01-01",
-        category: "web" as const,
-        technologies: project.tags,
-        seo: {
-          metaTitle: `${project.title} - Tanish Parsana`,
-          metaDescription: project.description.slice(0, 160),
-          keywords: project.tags,
-        },
-        ...project,
-      }));
-
-      setHomeProjects(fallbackProjects);
+      setHomeProjects(homePageProjects);
     };
 
     loadHomeProjects();

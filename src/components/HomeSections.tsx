@@ -112,7 +112,7 @@ const facts = [
 ];
 
 const aboutImages = [
-  "https://www.dropbox.com/scl/fi/za6ckhateobx7oqg3sqoa/IMG_0081.heic?rlkey=n5txakao498pldtybrih3dldn&st=zcgudw35&raw=1",
+  "https://www.dropbox.com/scl/fi/5wocl6h65l6nigijs1mzl/Tanish-Parsana.png?rlkey=eawemru440kd7aa9skuz6zpik&st=ytmukp9h&raw=1",
   "https://www.dropbox.com/scl/fi/kmfdrs0k39tadtgsd3e35/IM-Finish.JPG?rlkey=oanonj2wp7jgl6fbmz40bvsp5&st=oyvrmnb7&raw=1",
   "https://www.dropbox.com/scl/fi/7osklrppw74rb3cctl5l1/Cycling-cropped.png?rlkey=wevs4d6paxpe9r5kfaxjdejvu&st=1cl1i9pb&raw=1",
   "https://www.dropbox.com/scl/fi/th1rfnvlrx8hc6s2hyvry/Landscape.HEIC?rlkey=nerplofhtfgr54m89ddyzkck7&st=vwfraxyh&raw=1",

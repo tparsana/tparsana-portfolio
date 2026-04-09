@@ -111,9 +111,20 @@ const facts = [
   "Believes great products, great stories, and great races are all won in the boring middle.",
 ];
 
+const aboutImages = [
+  "https://www.dropbox.com/scl/fi/za6ckhateobx7oqg3sqoa/IMG_0081.heic?rlkey=n5txakao498pldtybrih3dldn&st=zcgudw35&raw=1",
+  "https://www.dropbox.com/scl/fi/kmfdrs0k39tadtgsd3e35/IM-Finish.JPG?rlkey=oanonj2wp7jgl6fbmz40bvsp5&st=oyvrmnb7&raw=1",
+  "https://www.dropbox.com/scl/fi/7osklrppw74rb3cctl5l1/Cycling-cropped.png?rlkey=wevs4d6paxpe9r5kfaxjdejvu&st=1cl1i9pb&raw=1",
+  "https://www.dropbox.com/scl/fi/th1rfnvlrx8hc6s2hyvry/Landscape.HEIC?rlkey=nerplofhtfgr54m89ddyzkck7&st=vwfraxyh&raw=1",
+  "https://www.dropbox.com/scl/fi/trn96mbsirtswrgttnvs7/YorkIE-cropped.JPG?rlkey=098xl1zno7j5ajyl9yyj9wtme&st=jy7ocg1t&raw=1",
+  "https://www.dropbox.com/scl/fi/q6rf6vg3a76ckhc5pt1fo/IM-Run-cropped.JPG?rlkey=hnk144ijnvqku1khyefm68a01&st=4wn263vg&raw=1",
+  "https://www.dropbox.com/scl/fi/mhlptmpqkauzdjvfah56a/TParsana-headshot.jpg?rlkey=nt8nznyuxbxom38ybw0bborvg&st=1zx0tag9&raw=1",
+];
+
 const HomeSections = () => {
   const [randomFact, setRandomFact] = useState(facts[0]);
   const [homeProjects, setHomeProjects] = useState<Project[]>([]);
+  const [activeAboutImageIndex, setActiveAboutImageIndex] = useState(0);
 
   useEffect(() => {
     let isCancelled = false;
@@ -132,6 +143,20 @@ const HomeSections = () => {
     return () => {
       isCancelled = true;
     };
+  }, []);
+
+  useEffect(() => {
+    if (aboutImages.length <= 1) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveAboutImageIndex((currentIndex) =>
+        (currentIndex + 1) % aboutImages.length
+      );
+    }, 4200);
+
+    return () => window.clearInterval(intervalId);
   }, []);
 
   const changeRandomFact = () => {
@@ -184,15 +209,22 @@ const HomeSections = () => {
             </div>
 
             <div className="relative h-full">
-              <div className="aspect-square h-full overflow-hidden rounded-2xl split-flap-display bg-muted/20">
-                <img
-                  src="https://www.dropbox.com/scl/fi/za6ckhateobx7oqg3sqoa/IMG_0081.heic?rlkey=n5txakao498pldtybrih3dldn&st=zcgudw35&&raw=1"
-                  alt="Tanish Parsana"
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                  className="h-full w-full object-cover object-center [object-position:center_30%]"
-                />
+              <div className="relative aspect-square h-full overflow-hidden rounded-2xl split-flap-display bg-muted/20">
+                {aboutImages.map((image, index) => (
+                  <img
+                    key={image}
+                    src={image}
+                    alt="Tanish Parsana"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    fetchPriority={index === 0 ? "high" : "low"}
+                    aria-hidden={index !== activeAboutImageIndex}
+                    className={cn(
+                      "absolute inset-0 h-full w-full object-cover object-center [object-position:center_30%] transition-opacity duration-1000 ease-in-out",
+                      index === activeAboutImageIndex ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                ))}
               </div>
             </div>
           </div>

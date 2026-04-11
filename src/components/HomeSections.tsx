@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { ArrowRight, CalendarDays, Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/ContactForm";
@@ -120,6 +120,19 @@ const aboutImages = [
   "https://www.dropbox.com/scl/fi/q6rf6vg3a76ckhc5pt1fo/IM-Run-cropped.JPG?rlkey=hnk144ijnvqku1khyefm68a01&st=4wn263vg&raw=1",
   "https://www.dropbox.com/scl/fi/mhlptmpqkauzdjvfah56a/TParsana-headshot.jpg?rlkey=nt8nznyuxbxom38ybw0bborvg&st=1zx0tag9&raw=1",
 ];
+
+const XLogo = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 1200 1227"
+    aria-hidden="true"
+    fill="currentColor"
+    className={className}
+  >
+    <path
+      d="M714.2 519.3 1160.9 0H1055L667.1 451.1 357.4 0H0l468.5 681.8L0 1226.4h105.9l409.6-476.2 327.1 476.2H1200L714.2 519.3Zm-145 168.6-47.5-67.9L144 79.7h162.7l304.8 435.7 47.5 67.9 396 566.4H892.3L569.2 687.9Z"
+    />
+  </svg>
+);
 
 const HomeSections = () => {
   const [randomFact, setRandomFact] = useState(facts[0]);
@@ -355,7 +368,7 @@ const HomeSections = () => {
                   </a>
                 </div>
                 <div className="flex items-center">
-                  <Twitter className="h-5 w-5 mr-3 text-muted-foreground" />
+                  <XLogo className="mr-3 h-5 w-5 text-muted-foreground" />
                   <a
                     href={siteConfig.urls.twitter}
                     target="_blank"
@@ -363,6 +376,17 @@ const HomeSections = () => {
                     className="hover:text-primary transition-colors"
                   >
                     {siteConfig.urls.twitter.replace("https://", "")}
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <CalendarDays className="h-5 w-5 mr-3 text-muted-foreground" />
+                  <a
+                    href="https://cal.com/tanishparsana/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    Book a meeting!
                   </a>
                 </div>
               </div>
@@ -399,8 +423,8 @@ const HomeSections = () => {
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a href={siteConfig.urls.twitter} target="_blank" rel="noopener noreferrer">
-                  <Twitter className="h-5 w-5" />
-                  <span className="sr-only">Twitter</span>
+                  <XLogo className="h-5 w-5" />
+                  <span className="sr-only">X</span>
                 </a>
               </Button>
             </div>

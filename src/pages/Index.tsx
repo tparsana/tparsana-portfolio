@@ -11,6 +11,22 @@ const Index = () => {
   const [shouldRenderHomeSections, setShouldRenderHomeSections] = useState(false);
 
   useEffect(() => {
+    let firstFrameId = 0;
+    let secondFrameId = 0;
+
+    firstFrameId = window.requestAnimationFrame(() => {
+      secondFrameId = window.requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("portfolio-app-ready"));
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrameId);
+      window.cancelAnimationFrame(secondFrameId);
+    };
+  }, []);
+
+  useEffect(() => {
     let rafId = 0;
     let idleCallbackId: number | null = null;
     let timeoutId: number | null = null;

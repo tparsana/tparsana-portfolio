@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ResumeViewer from "./ResumeViewer";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
-  const { theme, setTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,10 +50,6 @@ const Navigation = () => {
 
     navigate("/");
     setMobileMenuOpen(false);
-  };
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   useEffect(() => {
@@ -147,20 +141,6 @@ const Navigation = () => {
           </nav>
 
           <div className="flex items-center justify-end gap-1.5">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className={iconButtonClassName}
-            >
-              {theme === "dark" ? (
-                <Sun className="h-[1.05rem] w-[1.05rem]" />
-              ) : (
-                <Moon className="h-[1.05rem] w-[1.05rem]" />
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-
             <ResumeViewer triggerVariant="pill" />
           </div>
         </div>
@@ -177,20 +157,6 @@ const Navigation = () => {
           </button>
 
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className={iconButtonClassName}
-            >
-              {theme === "dark" ? (
-                <Sun className="h-[1.05rem] w-[1.05rem]" />
-              ) : (
-                <Moon className="h-[1.05rem] w-[1.05rem]" />
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-
             <Button
               variant="ghost"
               size="icon"

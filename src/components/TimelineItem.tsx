@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MapPin, ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import AdaptiveTone from "./AdaptiveTone";
 interface TimelineItemProps {
   date: string;
   title: string;
@@ -25,6 +26,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   const elementRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   useEffect(() => {
+    const observedElement = elementRef.current;
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -35,12 +37,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
     }, {
       threshold: 0.2
     });
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    if (observedElement) {
+      observer.observe(observedElement);
     }
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (observedElement) {
+        observer.unobserve(observedElement);
       }
     };
   }, []);
@@ -66,7 +68,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <div className="h-full w-[3px] bg-muted mt-[6px]" />
       </div>
 
-      <div className={cn("transform transition-all duration-500 group relative", isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0", "hover:bg-muted/10 rounded-lg p-2 -m-2")} onMouseEnter={() => !isMobile && setIsExpanded(true)} onMouseLeave={() => !isMobile && setIsExpanded(false)} onClick={toggleExpand}>
+      <AdaptiveTone
+        className={cn("transform transition-all duration-500 group relative", isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0", "hover:bg-muted/10 rounded-lg p-2 -m-2")}
+        onMouseEnter={() => !isMobile && setIsExpanded(true)}
+        onMouseLeave={() => !isMobile && setIsExpanded(false)}
+        onClick={toggleExpand}
+      >
         <h3 className="font-semibold text-lg">{title}</h3>
         <p className="text-muted-foreground mb-1 text-sm">{subtitle}</p>
 
@@ -86,7 +93,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <div className={cn("overflow-hidden transition-all duration-500 ease-in-out", isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0")}>
           <p className="text-sm pt-2">{description}</p>
         </div>
-      </div>
+      </AdaptiveTone>
     </div>;
 };
 export default TimelineItem;

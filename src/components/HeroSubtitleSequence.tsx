@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AdaptiveTone from "@/components/AdaptiveTone";
 import { TextEffect } from "@/components/core/text-effect";
 import { cn } from "@/lib/utils";
 
@@ -68,7 +69,7 @@ const HeroSubtitleSequence = ({ className }: HeroSubtitleSequenceProps) => {
         className
       )}
     >
-      <div
+      <AdaptiveTone
         className={cn(
           "transition-opacity duration-300 ease-out",
           isLineVisible ? "opacity-100" : "opacity-0"
@@ -79,11 +80,11 @@ const HeroSubtitleSequence = ({ className }: HeroSubtitleSequenceProps) => {
           preset="fade-in-blur"
           speedReveal={TEXT_EFFECT_REVEAL_S}
           speedSegment={TEXT_EFFECT_SEGMENT_S}
-          className="text-xl font-normal leading-relaxed tracking-normal text-white/70 md:text-2xl"
+          className="text-xl font-normal leading-relaxed tracking-normal md:text-2xl"
         >
           {heroLines[activeLineIndex]}
         </TextEffect>
-      </div>
+      </AdaptiveTone>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import TimelineItem from "@/components/TimelineItem";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/projects-unified";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const experiences = [
   {
@@ -186,13 +187,15 @@ const HomeSections = () => {
     <>
       <section id="about" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-16 text-center">
-            <span className="font-mono">About Me</span>
-          </h2>
+          <AdaptiveTone className="mb-16 text-center">
+            <h2 className="text-3xl font-bold">
+              <span className="font-mono">About Me</span>
+            </h2>
+          </AdaptiveTone>
 
           <div className="grid items-start gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
             <div className="flex h-full flex-col justify-between gap-6 md:gap-8">
-              <div className="space-y-5 md:space-y-6">
+              <AdaptiveTone className="space-y-5 md:space-y-6">
                 <p className="text-lg leading-[1.7]">
                   I&apos;m an unusually strong problem solver with a very high pain tolerance for hard
                   things, and that shows up in both my work and my life. While training 25 hours a
@@ -206,7 +209,7 @@ const HomeSections = () => {
                   I do not quit easily, I do not need to be micromanaged, and when something
                   matters, I will outwork, outlearn, and outlast most people in the room.
                 </p>
-              </div>
+              </AdaptiveTone>
 
               <div className="pt-2 md:pt-0">
                 <div
@@ -246,9 +249,11 @@ const HomeSections = () => {
 
       <section id="experience" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-16 text-center">
-            <span className="font-mono">Experience</span>
-          </h2>
+          <AdaptiveTone className="mb-16 text-center">
+            <h2 className="text-3xl font-bold">
+              <span className="font-mono">Experience</span>
+            </h2>
+          </AdaptiveTone>
 
           <div className="mb-16">
             {experiences.map((experience, index) => (
@@ -256,9 +261,11 @@ const HomeSections = () => {
             ))}
           </div>
 
-          <h3 className="text-2xl font-bold mb-8 text-center">
-            <span className="font-mono">Education</span>
-          </h3>
+          <AdaptiveTone className="mb-8 text-center">
+            <h3 className="text-2xl font-bold">
+              <span className="font-mono">Education</span>
+            </h3>
+          </AdaptiveTone>
 
           <div className="mb-16">
             {education.map((edu, index) => (
@@ -266,9 +273,11 @@ const HomeSections = () => {
             ))}
           </div>
 
-          <h3 className="text-2xl font-bold mb-8 text-center">
-            <span className="font-mono">Interests</span>
-          </h3>
+          <AdaptiveTone className="mb-8 text-center">
+            <h3 className="text-2xl font-bold">
+              <span className="font-mono">Interests</span>
+            </h3>
+          </AdaptiveTone>
 
           <div>
             {extracurricular.map((item, index) => (
@@ -280,9 +289,11 @@ const HomeSections = () => {
 
       <section id="projects" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-16 text-center">
-            <span className="font-mono">My Products</span>
-          </h2>
+          <AdaptiveTone className="mb-16 text-center">
+            <h2 className="text-3xl font-bold">
+              <span className="font-mono">My Products</span>
+            </h2>
+          </AdaptiveTone>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
             {homeProjects.map((project, index) => (
@@ -313,9 +324,11 @@ const HomeSections = () => {
 
       <section id="tech-stack" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            <span className="font-mono">Tech Stack</span>
-          </h2>
+          <AdaptiveTone className="mb-8 text-center">
+            <h2 className="text-3xl font-bold">
+              <span className="font-mono">Tech Stack</span>
+            </h2>
+          </AdaptiveTone>
 
           <div className="rounded-xl bg-card p-6 shadow-lg">
             <TechStackCompact />
@@ -325,12 +338,14 @@ const HomeSections = () => {
 
       <section id="contact" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-16 text-center">
-            <span className="font-mono">Get In Touch</span>
-          </h2>
+          <AdaptiveTone className="mb-16 text-center">
+            <h2 className="text-3xl font-bold">
+              <span className="font-mono">Get In Touch</span>
+            </h2>
+          </AdaptiveTone>
 
           <div className="grid gap-8 md:grid-cols-2">
-            <div>
+            <AdaptiveTone>
               <h3 className="text-xl font-semibold mb-4">Let&apos;s Connect</h3>
               <p className="mb-6">
                 I&apos;m currently available for full-time and co-op positions. If you have a
@@ -341,7 +356,7 @@ const HomeSections = () => {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 mr-3 text-muted-foreground" />
-                  <a href={`mailto:${siteConfig.email}`} className="hover:text-primary transition-colors">
+                  <a href={`mailto:${siteConfig.email}`} className="adaptive-link transition-colors">
                     {siteConfig.email}
                   </a>
                 </div>
@@ -351,7 +366,7 @@ const HomeSections = () => {
                     href={siteConfig.urls.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
+                    className="adaptive-link transition-colors"
                   >
                     {siteConfig.urls.github.replace("https://", "")}
                   </a>
@@ -362,7 +377,7 @@ const HomeSections = () => {
                     href={siteConfig.urls.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
+                    className="adaptive-link transition-colors"
                   >
                     {siteConfig.urls.linkedin.replace("https://", "")}
                   </a>
@@ -373,7 +388,7 @@ const HomeSections = () => {
                     href={siteConfig.urls.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
+                    className="adaptive-link transition-colors"
                   >
                     {siteConfig.urls.twitter.replace("https://", "")}
                   </a>
@@ -384,13 +399,13 @@ const HomeSections = () => {
                     href="https://cal.com/tanishparsana/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
+                    className="adaptive-link transition-colors"
                   >
                     Book a meeting!
                   </a>
                 </div>
               </div>
-            </div>
+            </AdaptiveTone>
 
             <div>
               <ContactForm />
@@ -402,11 +417,11 @@ const HomeSections = () => {
       <footer className="py-8 px-4 border-t">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col items-center justify-between md:flex-row">
-            <div className="mb-4 md:mb-0">
+            <AdaptiveTone className="mb-4 md:mb-0">
               <p className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} Tanish Parsana. All rights reserved.
               </p>
-            </div>
+            </AdaptiveTone>
 
             <div className="flex space-x-4">
               <Button variant="ghost" size="icon" asChild>

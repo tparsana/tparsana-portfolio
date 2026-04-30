@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { getAllProjects, getProjectsByCategory, getProjectsByStatus, Project } from "@/data/projects-unified";
 import { Filter, Grid, List } from "lucide-react";
 import { cn } from "@/lib/utils";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -112,11 +113,11 @@ const Projects = () => {
         
         {/* Hero Section */}
         <section className="relative pt-20 sm:pt-32 pb-12 sm:pb-16 flex flex-col items-center justify-center px-4 overflow-hidden">
-          <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
+          <AdaptiveTone className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center w-full">
               <span className="font-mono">My Products</span>
             </h1>
-          </div>
+          </AdaptiveTone>
         </section>
 
         {/* Filters Section */}
@@ -127,7 +128,9 @@ const Projects = () => {
               <div className="space-y-4">
                 {/* Category Filter */}
                 <div>
-                  <h3 className="text-sm font-medium mb-2 text-muted-foreground">Category</h3>
+                  <AdaptiveTone className="mb-2">
+                    <h3 className="text-sm font-medium text-muted-foreground">Category</h3>
+                  </AdaptiveTone>
                   <div className="flex flex-wrap gap-2">
                     {categories.map((category) => (
                       <Button
@@ -145,7 +148,9 @@ const Projects = () => {
 
                 {/* Status Filter */}
                 <div>
-                  <h3 className="text-sm font-medium mb-2 text-muted-foreground">Status</h3>
+                  <AdaptiveTone className="mb-2">
+                    <h3 className="text-sm font-medium text-muted-foreground">Status</h3>
+                  </AdaptiveTone>
                   <div className="flex flex-wrap gap-2">
                     {statuses.map((status) => (
                       <Button
@@ -184,11 +189,11 @@ const Projects = () => {
             </div>
 
             {/* Projects Count */}
-            <div className="mb-8">
+            <AdaptiveTone className="mb-8">
               <p className="text-muted-foreground">
                 Showing {filteredProjects.length} of {projects.length} products
               </p>
-            </div>
+            </AdaptiveTone>
           </div>
         </section>
 
@@ -334,9 +339,11 @@ const Projects = () => {
             {/* Empty State */}
             {filteredProjects.length === 0 && (
               <div className="text-center py-20">
+                <AdaptiveTone className="mb-4">
                 <p className="text-xl text-muted-foreground mb-4">
                   No products found matching your filters.
                 </p>
+                </AdaptiveTone>
                 <Button
                   variant="outline"
                   onClick={() => {
@@ -354,11 +361,11 @@ const Projects = () => {
         {/* Footer */}
         <footer className="py-8 px-4 border-t relative z-10">
           <div className="container mx-auto max-w-6xl">
-            <div className="text-center">
+            <AdaptiveTone className="text-center">
               <p className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} Tanish Parsana. Building the future, one product at a time.
               </p>
-            </div>
+            </AdaptiveTone>
           </div>
         </footer>
       </main>

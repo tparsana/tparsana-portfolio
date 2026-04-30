@@ -1,5 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Mesh, Program, Renderer, Triangle } from "ogl";
+import {
+  readAdaptiveTextPixel,
+  setAdaptiveTextSampler,
+  syncAdaptiveTextTargets,
+} from "@/lib/adaptive-text";
 import "./Grainient.css";
 
 type GrainientProps = {
@@ -188,6 +193,18 @@ const Grainient = ({
     canvas.setAttribute("aria-hidden", "true");
     container.appendChild(canvas);
 
+    const sampleLuminance = (viewportX: number, viewportY: number) =>
+      readAdaptiveTextPixel(
+        gl,
+        gl.drawingBufferWidth,
+        gl.drawingBufferHeight,
+        canvas.getBoundingClientRect(),
+        viewportX,
+        viewportY
+      );
+
+    setAdaptiveTextSampler(sampleLuminance);
+
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
       vertex,
@@ -232,6 +249,7 @@ const Grainient = ({
       resolution[1] = gl.drawingBufferHeight;
 
       renderer?.render({ scene: mesh });
+      syncAdaptiveTextTargets(true);
     };
 
     ro = new ResizeObserver(setSize);
@@ -242,6 +260,7 @@ const Grainient = ({
     const loop = (time: number) => {
       program.uniforms.iTime.value = (time - startedAt) * 0.001;
       renderer?.render({ scene: mesh });
+      syncAdaptiveTextTargets();
       raf = window.requestAnimationFrame(loop);
     };
 
@@ -255,6 +274,7 @@ const Grainient = ({
         container.removeChild(canvas);
       }
 
+      setAdaptiveTextSampler(null);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, [

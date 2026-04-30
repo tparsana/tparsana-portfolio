@@ -5,11 +5,13 @@ import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SEO from "@/components/SEO";
 import { getBlogPostsByYear } from "@/data/blogs-unified";
+import type { BlogPost } from "@/data/blogs";
 import { Calendar, Clock, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const Thoughts = () => {
-  const [postsByYear, setPostsByYear] = useState<Record<number, any[]>>({});
+  const [postsByYear, setPostsByYear] = useState<Record<number, BlogPost[]>>({});
   const [years, setYears] = useState<number[]>([]);
 
   // Load posts from localStorage on component mount
@@ -47,11 +49,11 @@ const Thoughts = () => {
         
         {/* Hero Section */}
         <section className="relative pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-20 md:pb-24 flex flex-col items-center justify-center px-4 overflow-hidden">
-          <div className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center min-h-[40vh] sm:min-h-[50vh]">
+          <AdaptiveTone className="text-center max-w-6xl space-y-6 z-10 flex items-center justify-center min-h-[40vh] sm:min-h-[50vh]">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center w-full">
               <span className="font-mono">Blogs, Thoughts And Reactions</span>
             </h1>
-          </div>
+          </AdaptiveTone>
         </section>
 
         {/* Blog Posts Section */}
@@ -60,11 +62,11 @@ const Thoughts = () => {
             {years.map((year) => (
               <div key={year} className="mb-16">
                 {/* Year Header */}
-                <div className="mb-8 md:mb-12">
+                <AdaptiveTone className="mb-8 md:mb-12">
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-400 font-mono">
                     {year}
                   </h2>
-                </div>
+                </AdaptiveTone>
 
                 {/* Posts for this year */}
                 <div className="space-y-8">
@@ -82,7 +84,7 @@ const Thoughts = () => {
                         to={`/thoughts/${post.slug}`}
                         className="block"
                       >
-                        <div className="border-b border-muted-foreground/20 pb-4 md:pb-6 group-hover:border-orange-400/50 transition-colors">
+                        <AdaptiveTone className="adaptive-border border-b pb-4 md:pb-6 group-hover:border-orange-400/50 transition-colors">
                           {/* Post Title */}
                           <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 md:mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">
                             {post.title}
@@ -125,7 +127,7 @@ const Thoughts = () => {
                               </span>
                             )}
                           </div>
-                        </div>
+                        </AdaptiveTone>
                       </Link>
                     </article>
                   ))}
@@ -135,11 +137,11 @@ const Thoughts = () => {
 
             {/* Empty State */}
             {years.length === 0 && (
-              <div className="text-center py-20">
+              <AdaptiveTone className="text-center py-20">
                 <p className="text-xl text-muted-foreground">
                   No thoughts shared yet. Check back soon!
                 </p>
-              </div>
+              </AdaptiveTone>
             )}
           </div>
         </section>
@@ -147,11 +149,11 @@ const Thoughts = () => {
         {/* Footer */}
         <footer className="py-8 px-4 border-t relative z-10">
           <div className="container mx-auto max-w-4xl">
-            <div className="text-center">
+            <AdaptiveTone className="text-center">
               <p className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} Tanish Parsana. All thoughts and reactions.
               </p>
-            </div>
+            </AdaptiveTone>
           </div>
         </footer>
       </main>

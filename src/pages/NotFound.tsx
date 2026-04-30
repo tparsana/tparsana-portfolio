@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft } from "lucide-react";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const NotFound = () => {
   return (
@@ -14,6 +15,7 @@ const NotFound = () => {
         
         <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
           <div className="text-center max-w-4xl space-y-6 z-10">
+            <AdaptiveTone>
             <h1 className="text-6xl md:text-8xl font-bold mb-6 text-red-400">
               <span className="font-mono">404</span>
             </h1>
@@ -26,6 +28,7 @@ const NotFound = () => {
               The page you're looking for doesn't exist or has been moved. 
               Don't worry, even the best developers encounter 404s!
             </p>
+            </AdaptiveTone>
             
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Button asChild size="lg">
@@ -43,20 +46,20 @@ const NotFound = () => {
             
             <div className="mt-12 text-sm text-muted-foreground">
               <p>Popular pages:</p>
-              <div className="flex flex-wrap justify-center gap-4 mt-2">
-                <Link to="/projects" className="hover:text-primary transition-colors">
+              <AdaptiveTone className="flex flex-wrap justify-center gap-4 mt-2">
+                <Link to="/projects" className="adaptive-link transition-colors">
                   Products
                 </Link>
-                <Link to="/thoughts" className="hover:text-primary transition-colors">
+                <Link to="/thoughts" className="adaptive-link transition-colors">
                   Thoughts
                 </Link>
-                <Link to="/#about" className="hover:text-primary transition-colors">
+                <Link to="/#about" className="adaptive-link transition-colors">
                   About
                 </Link>
-                <Link to="/#contact" className="hover:text-primary transition-colors">
+                <Link to="/#contact" className="adaptive-link transition-colors">
                   Contact
                 </Link>
-              </div>
+              </AdaptiveTone>
             </div>
           </div>
         </section>

@@ -4,13 +4,15 @@ import Navigation from "@/components/Navigation";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SEO from "@/components/SEO";
 import { getBlogPostBySlug, updateBlogPostReads } from "@/data/blogs-unified";
+import type { BlogPost as BlogPostType } from "@/data/blogs";
 import { Calendar, Clock, Eye, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<BlogPostType | null>(null);
   const [hasIncrementedReads, setHasIncrementedReads] = useState(false);
   
   useEffect(() => {
@@ -83,7 +85,7 @@ const BlogPost = () => {
       if (line.startsWith('• ') || line.startsWith('- ')) {
         return (
           <li key={index} className="mb-2 ml-4">
-            {line.replace(/^[•\-] /, '')}
+            {line.replace(/^[•-] /, '')}
           </li>
         );
       }
@@ -116,12 +118,14 @@ const BlogPost = () => {
           <AnimatedBackground />
           <section className="relative min-h-screen flex flex-col items-center justify-center px-4">
             <div className="text-center max-w-4xl space-y-6 z-10">
+              <AdaptiveTone>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Post Not Found
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 The blog post you're looking for doesn't exist.
               </p>
+              </AdaptiveTone>
               <Button asChild>
                 <Link to="/thoughts">
                   <ArrowLeft className="h-4 w-4 mr-2" />
@@ -165,14 +169,15 @@ const BlogPost = () => {
         {/* Blog Post Header */}
         <section className="relative px-4 pb-8 sm:pb-12">
           <div className="container mx-auto max-w-4xl z-10 relative">
-            <article>
+            <AdaptiveTone>
+              <article>
               {/* Title */}
               <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight break-words">
                 <span className="font-mono">{post.title}</span>
               </h1>
 
               {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-muted-foreground/20">
+              <div className="adaptive-border flex flex-wrap items-center gap-3 sm:gap-6 text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 pb-4 sm:pb-6 border-b">
                 <div className="flex items-center gap-1 sm:gap-2">
                   <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>{formatDate(post.publishedAt)}</span>
@@ -198,21 +203,21 @@ const BlogPost = () => {
                   </span>
                 ))}
               </div>
-            </article>
+              </article>
+            </AdaptiveTone>
           </div>
         </section>
 
         {/* Blog Content */}
         <section className="relative px-4 pb-16 sm:pb-20">
           <div className="container mx-auto max-w-4xl z-10 relative">
-            <div className="prose prose-sm sm:prose-base prose-invert max-w-none overflow-x-hidden">
+            <AdaptiveTone className="prose prose-sm sm:prose-base prose-invert max-w-none overflow-x-hidden">
               <div className="space-y-3 sm:space-y-4">
                 {formatContent(post.content)}
               </div>
-            </div>
 
             {/* Author Info */}
-            <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-muted-foreground/20">
+            <div className="adaptive-border mt-12 sm:mt-16 pt-6 sm:pt-8 border-t">
               <div className="flex items-center gap-3 sm:gap-4">
                 <img
                   src={post.author.avatar}
@@ -229,7 +234,7 @@ const BlogPost = () => {
             </div>
 
             {/* Back to Blog */}
-            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-muted-foreground/20 text-center">
+            <div className="adaptive-border mt-8 sm:mt-12 pt-6 sm:pt-8 border-t text-center">
               <Button asChild size="sm" className="sm:size-default">
                 <Link to="/thoughts" className="flex items-center gap-2 mx-auto">
                   <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -237,17 +242,18 @@ const BlogPost = () => {
                 </Link>
               </Button>
             </div>
+            </AdaptiveTone>
           </div>
         </section>
 
         {/* Footer */}
         <footer className="py-8 px-4 border-t relative z-10">
           <div className="container mx-auto max-w-4xl">
-            <div className="text-center">
+            <AdaptiveTone className="text-center">
               <p className="text-sm text-muted-foreground">
                 © {new Date().getFullYear()} Tanish Parsana. All thoughts and reactions.
               </p>
-            </div>
+            </AdaptiveTone>
           </div>
         </footer>
       </main>

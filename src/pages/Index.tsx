@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import DeferredAnimatedBackground from "@/components/DeferredAnimatedBackground";
 import HeroSubtitleSequence from "@/components/HeroSubtitleSequence";
+import AdaptiveTone from "@/components/AdaptiveTone";
 
 const HomeSections = lazy(() => import("@/components/HomeSections"));
 
@@ -99,13 +100,15 @@ const Index = () => {
               className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
             >
               <div className="text-center max-w-4xl space-y-5 z-10">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-4">
-                  <span
-                    className="font-elegant-display inline-block opacity-0 animate-hero-fade-in"
-                  >
-                    Tanish Parsana
-                  </span>
-                </h1>
+                <AdaptiveTone className="mb-3 md:mb-4">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">
+                    <span
+                      className="font-elegant-display inline-block opacity-0 animate-hero-fade-in"
+                    >
+                      Tanish Parsana
+                    </span>
+                  </h1>
+                </AdaptiveTone>
 
                 <div
                   className="opacity-0 animate-hero-fade-in"

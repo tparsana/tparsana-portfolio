@@ -4,27 +4,12 @@ import { ChevronDown } from "lucide-react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import DeferredAnimatedBackground from "@/components/DeferredAnimatedBackground";
+import HeroSubtitleSequence from "@/components/HeroSubtitleSequence";
 
 const HomeSections = lazy(() => import("@/components/HomeSections"));
 
 const Index = () => {
   const [shouldRenderHomeSections, setShouldRenderHomeSections] = useState(false);
-
-  useEffect(() => {
-    let firstFrameId = 0;
-    let secondFrameId = 0;
-
-    firstFrameId = window.requestAnimationFrame(() => {
-      secondFrameId = window.requestAnimationFrame(() => {
-        window.dispatchEvent(new Event("portfolio-app-ready"));
-      });
-    });
-
-    return () => {
-      window.cancelAnimationFrame(firstFrameId);
-      window.cancelAnimationFrame(secondFrameId);
-    };
-  }, []);
 
   useEffect(() => {
     let rafId = 0;
@@ -113,8 +98,8 @@ const Index = () => {
               id="home"
               className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
             >
-              <div className="text-center max-w-4xl space-y-6 z-10">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+              <div className="text-center max-w-4xl space-y-5 z-10">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-4">
                   <span
                     className="font-elegant-display inline-block opacity-0 animate-hero-fade-in"
                   >
@@ -126,9 +111,9 @@ const Index = () => {
                   className="opacity-0 animate-hero-fade-in"
                   style={{ animationDelay: "120ms" }}
                 >
-                  <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                    Full Stack Developer, Data Science & AI Engineer
-                  </p>
+                  <div className="mb-8 md:mb-7">
+                    <HeroSubtitleSequence />
+                  </div>
                 </div>
 
                 <div

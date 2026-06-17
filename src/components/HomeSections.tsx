@@ -20,6 +20,8 @@ const experiences = [
       "As Vice President at DevLabs, ASU’s student-run startup incubator and innovation community, I led venture partnerships, startup support, and large-scale programming. I structured venture pipelines, mentorship programs, sponsorship strategies, and founder support frameworks that helped over a dozen early-stage student startups refine go-to-market strategies, validate product-market fit, and raise over $70K in funding. I also led the execution of large-scale hackathons, startup accelerators, and industry events with over 2,000+ participants, building long-term partnerships with venture capital firms, founders, and corporate leaders to create a strong campus-to-industry innovation pipeline.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
+    logoLink: "https://www.devlabs.club",
+    subtitleLink: "https://www.devlabs.club",
   },
   {
     date: "Aug 2024 - Apr 2025",
@@ -29,6 +31,8 @@ const experiences = [
       "Before stepping into VP, I served as an Industry Relations Officer at DevLabs, where I focused on building relationships between students and the tech/startup ecosystem. I worked with founders, investors, and industry professionals to secure sponsorships, bring in speakers and mentors, and create meaningful opportunities for students to engage with real-world innovation. I helped organize networking events, startup showcases, and workshops that connected students with companies, enabling career opportunities, internships, and early exposure to the startup ecosystem.",
     location: "Tempe, AZ, USA",
     logo: "https://se-images.campuslabs.com/clink/images/6a2c4d9c-80b5-43ff-8fa5-a52d88b6f87c7e6dae53-2d5e-48ad-ba03-a59bd359a9b3.jpeg?preset=med-sq",
+    logoLink: "https://www.devlabs.club",
+    subtitleLink: "https://www.devlabs.club",
   },
   {
     date: "Aug 2025 - Present",
@@ -38,6 +42,8 @@ const experiences = [
       "Promoted to lead a team of 5 engineers building internal AI workflow automation and operations tools, including asset management, ERP systems, and workforce scheduling applications using Python, SQL, and Azure workflows for a 50-person team. Contributed to CreateAI backend systems across model routing, document ingestion, retrieval, vector search, and access control, enabling configurable RAG workflows where users select LLMs, add knowledge bases, and generate document-grounded AI agents.",
     location: "Tempe, AZ, USA",
     logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
+    logoLink: "https://tech.asu.edu",
+    subtitleLink: "https://tech.asu.edu",
   },
   {
     date: "Aug 2023 - Aug 2025",
@@ -47,6 +53,8 @@ const experiences = [
       "Built and deployed a full-stack AI support application using enterprise knowledge indexing, OpenAI APIs, Python, and vector embedding and search to deliver self-service troubleshooting, automate ticket deflection, and reduce repetitive support tickets by 40%. Developed backend retrieval and orchestration for ASU CreateAI Chat, supporting multi-model, prompt-configured workflows with knowledge-base ingestion, embeddings, and API integration for a university AI platform used by 10,000+ unique users.",
     location: "Tempe, AZ, USA",
     logo: "https://aci.az.gov/sites/default/files/media/ASU-logo.png",
+    logoLink: "https://tech.asu.edu",
+    subtitleLink: "https://tech.asu.edu",
   },
   {
     date: "May 2024 - Aug 2024",
@@ -56,6 +64,8 @@ const experiences = [
       "At York IE, I worked on the data science and AI team building intelligence systems for Fuel, a VC-backed SaaS analytics platform. I engineered and deployed a production Retrieval-Augmented Generation (RAG) system using AWS Bedrock, OpenAI GPT APIs, and Pinecone to power semantic search and cross-entity relationship mapping across millions of SaaS company records. The system helped surface hidden connections between companies, founders, and investors, enabling deeper market analysis and decision-making. I also built scalable embedding and vector search pipelines with optimized preprocessing, feature engineering, and retrieval evaluation, improving search relevance and query performance by 45% in production..",
     location: "Manchester, NH, USA",
     logo: "https://avatars.slack-edge.com/2021-06-16/2178256167170_381b8dc0864c2ff691e3_512.png",
+    logoLink: "https://york.ie",
+    subtitleLink: "https://york.ie",
   },
   {
     date: "May 2023 - Aug 2023",
@@ -65,6 +75,8 @@ const experiences = [
       "During my first summer at York IE, I built production-scale data infrastructure to support pricing intelligence for their SaaS analytics product. I engineered a large-scale web scraping and data ingestion pipeline that processed over 3 million company records, extracting subscription and pricing data across the web. Using AWS services like S3, Glue, and Lambda, I designed scalable ETL workflows to clean, normalize, and integrate this data directly into the Fuel platform. My work significantly expanded pricing intelligence coverage and enabled more accurate benchmarking for SaaS companies, while ensuring the pipeline was reliable, efficient, and production-ready.",
     location: "Manchester, NH, USA",
     logo: "https://avatars.slack-edge.com/2021-06-16/2178256167170_381b8dc0864c2ff691e3_512.png",
+    logoLink: "https://york.ie",
+    subtitleLink: "https://york.ie",
   },
 ];
 
@@ -98,6 +110,7 @@ const extracurricular = [
       "Competed and Finished the Ironman Arizona triathlon, in November 2025. The preparation involves rigorous swimming, cycling, and running regimens, along with nutrition planning and mental conditioning for this ultimate test of endurance. Race includes Swim - 2.4 miles, Bike - 112 miles, and Run - 26.2 miles. Finish time - 14:22:34 hrs.",
     location: "Tempe, AZ, USA",
     logo: "https://yt3.googleusercontent.com/ytc/AIdro_mTtApPEGx_zR-2hiGgDKuI8jlbrhiTngwOY4wveB5-cxA=s900-c-k-c0x00ffffff-no-rj",
+    logoLink: "https://www.ironman.com",
   },
 ];
 

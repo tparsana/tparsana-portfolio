@@ -10,6 +10,8 @@ interface TimelineItemProps {
   description: string;
   location?: string;
   logo?: string;
+  logoLink?: string;
+  subtitleLink?: string;
   className?: string;
 }
 const TimelineItem: React.FC<TimelineItemProps> = ({
@@ -19,6 +21,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description,
   location,
   logo,
+  logoLink,
+  subtitleLink,
   className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -58,9 +62,23 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <div className="split-flap-display py-1 px-2 rounded-sm text-sm md:text-base font-mono bg-transparent">
           {date}
         </div>
-        {logo && <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
-            <img src={logo} alt={title} loading="lazy" decoding="async" className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100" />
-          </div>}
+        {logo && (
+          logoLink ? (
+            <a
+              href={logoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${subtitle}`}
+              className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              <img src={logo} alt={`${subtitle} logo`} loading="lazy" decoding="async" className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100" />
+            </a>
+          ) : (
+            <div className="mt-2 h-10 w-10 rounded-md bg-secondary flex items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
+              <img src={logo} alt={`${subtitle} logo`} loading="lazy" decoding="async" className="h-8 w-8 object-contain filter grayscale opacity-60 transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:opacity-100" />
+            </div>
+          )
+        )}
       </div>
 
       <div className="relative flex justify-center">
@@ -75,7 +93,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         onClick={toggleExpand}
       >
         <h3 className="font-semibold text-lg">{title}</h3>
-        <p className="text-muted-foreground mb-1 text-sm">{subtitle}</p>
+        {subtitleLink ? (
+          <a
+            href={subtitleLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="adaptive-link mb-1 inline-block text-sm text-muted-foreground underline-offset-4 transition-colors hover:underline"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {subtitle}
+          </a>
+        ) : (
+          <p className="text-muted-foreground mb-1 text-sm">{subtitle}</p>
+        )}
 
         {location && <div className="flex flex-col text-xs text-muted-foreground mb-2">
             <div className="flex items-center">

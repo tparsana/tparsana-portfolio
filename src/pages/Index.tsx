@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
-import DeferredAnimatedBackground from "@/components/DeferredAnimatedBackground";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import HeroSubtitleSequence from "@/components/HeroSubtitleSequence";
 import AdaptiveTone from "@/components/AdaptiveTone";
 
@@ -93,7 +93,7 @@ const Index = () => {
     <ThemeProvider defaultTheme="dark">
       <Navigation />
       <main className="min-h-screen">
-            <DeferredAnimatedBackground />
+            <AnimatedBackground />
             
             <section
               id="home"

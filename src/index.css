@@ -130,6 +130,13 @@
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    background: #1c373e;
+  }
+
   * {
     @apply border-border;
   }
@@ -147,6 +154,16 @@
   .has-custom-cursor * {
     cursor: none !important;
   }
+}
+
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+main > :not(.viewport-background) {
+  position: relative;
+  z-index: 1;
 }
 
 .split-flap-display {
@@ -201,6 +218,26 @@
 
 .adaptive-tone--dark .adaptive-link:hover {
   color: rgba(15, 23, 42, 1);
+}
+
+.viewport-background {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) * -1);
+  right: calc(env(safe-area-inset-right, 0px) * -1);
+  bottom: calc(env(safe-area-inset-bottom, 0px) * -1);
+  left: calc(env(safe-area-inset-left, 0px) * -1);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .viewport-background {
+    top: calc(max(72px, env(safe-area-inset-top, 0px)) * -1);
+    right: -32px;
+    bottom: calc(max(168px, env(safe-area-inset-bottom, 0px)) * -1);
+    left: -32px;
+  }
 }
 
 .nav-island,

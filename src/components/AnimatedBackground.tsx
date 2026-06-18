@@ -2,9 +2,8 @@ import Grainient from "./Grainient";
 
 const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]" aria-hidden="true">
+    <div className="viewport-background" aria-hidden="true">
       <Grainient
-        className="absolute inset-0"
         color1="#98B5AF"
         color2="#1c373e"
         color3="#425d64"

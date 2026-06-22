@@ -270,7 +270,11 @@ const HomeSections = () => {
 
           <div className="mb-16">
             {experiences.map((experience, index) => (
-              <TimelineItem key={index} {...experience} />
+              <TimelineItem
+                key={index}
+                {...experience}
+                descriptionClassName="text-left text-pretty md:text-justify md:[hyphens:auto] md:[text-align-last:left]"
+              />
             ))}
           </div>
 

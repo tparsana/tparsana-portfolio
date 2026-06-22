@@ -12,6 +12,7 @@ interface TimelineItemProps {
   logo?: string;
   logoLink?: string;
   subtitleLink?: string;
+  descriptionClassName?: string;
   className?: string;
 }
 const TimelineItem: React.FC<TimelineItemProps> = ({
@@ -23,6 +24,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   logo,
   logoLink,
   subtitleLink,
+  descriptionClassName,
   className
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -121,7 +123,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           </div>}
 
         <div className={cn("overflow-hidden transition-all duration-500 ease-in-out", isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0")}>
-          <p className="text-sm pt-2">{description}</p>
+          <p className={cn("text-sm pt-2", descriptionClassName)}>{description}</p>
         </div>
       </AdaptiveTone>
     </div>;

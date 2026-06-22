@@ -209,7 +209,7 @@ const HomeSections = () => {
           <div className="grid items-start gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
             <div className="flex h-full flex-col justify-between gap-6 md:gap-8">
               <AdaptiveTone className="space-y-5 md:space-y-6">
-                <p className="text-lg leading-[1.7]">
+                <p className="text-lg leading-[1.7] text-left text-pretty md:text-justify md:[hyphens:auto] md:[text-align-last:left]">
                   I&apos;m an unusually strong problem solver with a very high pain tolerance for hard
                   things, and that shows up in both my work and my life. While training 25 hours a
                   week for Ironman Arizona, I was also building and shipping real products, leading

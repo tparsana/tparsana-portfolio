@@ -84,7 +84,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       </div>
 
       <div className="relative flex justify-center">
-        <div className={cn("absolute top-0 w-3 h-3 rounded-full bg-primary", isVisible ? "animate-flap-flip" : "")} />
         <div className="h-full w-[3px] bg-muted mt-[6px]" />
       </div>
 
